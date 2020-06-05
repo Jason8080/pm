@@ -80,6 +80,10 @@
         </where>
     </update>
 
+    <delete id="deleteById">
+        delete from tb_project where id=#{id}
+    </delete>
+
     <select id="selectList" resultMap="proMap">
         select * from tb_project
         <where>

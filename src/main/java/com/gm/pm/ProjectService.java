@@ -41,4 +41,8 @@ public class ProjectService {
         StageKit.setCurrentTime(project);
         projectMapper.update(project);
     }
+
+    public void del(Long id) {
+        projectMapper.deleteById(id);
+    }
 }

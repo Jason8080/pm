@@ -54,4 +54,12 @@ public interface ProjectMapper {
      * @return the integer
      */
     Integer update(Project project);
+
+    /**
+     * Delete by id integer.
+     *
+     * @param id the id
+     * @return the integer
+     */
+    Integer deleteById(Long id);
 }

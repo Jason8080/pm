@@ -1,5 +1,5 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <head>
     <th:block th:include="common/head_meta::head_meta"/>
     <th:block th:include="common/css::css"/>
@@ -30,7 +30,32 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">项目列表</h3>
-                                <a href="/project/add" class="btn btn-success float-right">添加</a>
+                                <div class="card-tools">
+                                    <form action="/project/list" method="post">
+                                        <input type="hidden" name="start" th:value="${page.getPageNum()}"/>
+                                        <input type="hidden" name="size" th:value="${page.getPageSize()}"/>
+                                        <div class="input-group" style="width: 100%;">
+                                            <div class="input-group-append">
+                                                <a href="/project/add" class="btn btn-success float-left">添加</a>
+                                            </div>
+                                            <!--
+                                            <div class="input-group-append">
+                                                <a href="/project/update" class="btn btn-secondary float-left">修改</a>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <a href="/project/del" class="btn btn-danger float-left">删除</a>
+                                            </div>
+                                            -->
+                                            <input type="text" name="pmName" class="form-control float-right"
+                                                   placeholder="项目经理">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered">
@@ -42,7 +67,6 @@
                                         <th style="width: 60%;">需求</th>
                                         <th style="width: 5%;">剩余</th>
                                         <th style="width: 10%">进度</th>
-                                        <th style="width: 5%">Lab</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -54,26 +78,27 @@
                                             <pre>[[${project.demand}]]</pre>
                                         </td>
                                         <td>10天</td>
-                                        <td>
-                                            <div class="progress progress-xs">
+                                        <td class="project_progress">
+                                            <div class="progress progress-sm">
                                                 <div th:class="'progress-bar ' + ${project.currentSlider>80?'bg-success':(project.currentSlider>60?'bg-primary':(project.currentSlider>40?'bg-warning':'bg-danger'))}"
-                                                     th:style="'width: '+ ${project.currentSlider}+'%'"/>
+                                                     role="progressbar"
+                                                     aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"
+                                                     th:style="'width: '+ ${project.currentSlider}+'%'">
+                                                </div>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <span th:class="'badge ' + ${project.currentSlider>80?'bg-success':(project.currentSlider>60?'bg-primary':(project.currentSlider>40?'bg-warning':'bg-danger'))}">
-                                                [[${project.currentSlider}]]%
-                                            </span>
+                                            <small>
+                                                [[${project.currentStage}]]: [[${project.currentSlider}]]%
+                                            </small>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="card-footer clearfix" th:include="common/page::page">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 

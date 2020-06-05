@@ -46,12 +46,12 @@
                                             <div class="form-group col-sm-2">
                                                 <label>所在阶段</label>
                                                 <select name="currentStage" class="custom-select">
-                                                    <option value="0">计划</option>
-                                                    <option value="1">调研</option>
-                                                    <option value="2">编码</option>
-                                                    <option value="3">测试</option>
-                                                    <option value="4">上线</option>
-                                                    <option value="5">验收</option>
+                                                    <option value="计划">计划</option>
+                                                    <option value="调研">调研</option>
+                                                    <option value="编码">编码</option>
+                                                    <option value="测试">测试</option>
+                                                    <option value="上线">上线</option>
+                                                    <option value="验收">验收</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-sm-10">
@@ -174,16 +174,18 @@
             rules: {
                 name: {
                     required: true,
-                    minlength: 6
+                    minlength: 6,
+                    maxlength: 10,
                 },
                 pmName: {
                     required: true,
-                    minlength: 2
+                    minlength: 2,
+                    maxlength: 6,
                 },
                 currentStage: {
                     required: true,
-                    min: 0,
-                    max: 5
+                    minlength: 2,
+                    maxlength: 6,
                 },
                 currentSlider: {
                     required: true,
@@ -223,8 +225,8 @@
             messages: {
                 name: {
                     required: "请填写项目名称",
-                    minlength: "项目名称为6-18个字符",
-                    maxlength: "项目名称为6-18个字符",
+                    minlength: "项目名称为6-10个字符",
+                    maxlength: "项目名称为6-10个字符",
                 },
                 pmName: {
                     required: "请填写项目经理名称",
@@ -233,8 +235,8 @@
                 },
                 currentStage: {
                     required: "请选择当前所在阶段",
-                    min: "当前阶段为计划~验收",
-                    max: "当前阶段为计划~验收",
+                    minlength: "所在阶段为2-6个字符",
+                    maxlength: "所在阶段2-6个字符",
                 },
                 currentSlider: {
                     required: "请选择当前阶段完成进度",

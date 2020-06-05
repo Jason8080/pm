@@ -44,7 +44,7 @@
         select * from tb_project
         <where>
             <if test="pmName!=null and pmName!=''">
-                pm_name=#{pmName}
+                pm_name like concat('%', #{pmName}, '%')
             </if>
         </where>
     </select>

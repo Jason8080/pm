@@ -18,9 +18,9 @@ public class ProjectService {
     @Autowired
     ProjectMapper projectMapper;
 
-    public PageInfo findAll(Integer start, Integer size) {
+    public PageInfo findAll(Project project, Integer start, Integer size) {
         PageHelper.startPage(start, size);
-        Page page = projectMapper.selectList(new Project());
+        Page page = projectMapper.selectList(project);
         return new PageInfo(page);
     }
 

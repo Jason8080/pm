@@ -13,7 +13,7 @@ public class Project {
     private Long id;
     private String name;
     private String pmName;
-    private Integer currentStage;
+    private String currentStage;
     private Integer currentSlider;
     private String demand;
     /**

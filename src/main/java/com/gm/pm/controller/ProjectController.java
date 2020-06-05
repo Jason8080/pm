@@ -22,12 +22,12 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
-    @GetMapping(value = "list")
-    public String list(Model model,
+    @RequestMapping(value = "list")
+    public String list(Model model, Project project,
                        @RequestParam(defaultValue = "1") Integer start,
                        @RequestParam(defaultValue = "5") Integer size
     ) {
-        PageInfo page = projectService.findAll(start, size);
+        PageInfo page = projectService.findAll(project, start, size);
         model.addAttribute("page", page);
         return "project/list";
     }

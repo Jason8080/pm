@@ -7,6 +7,6 @@ import lombok.Data;
  */
 @Data
 public class ProjectCondition {
-    private Integer overdue;
+    private Boolean overdue;
     private String pmName;
 }

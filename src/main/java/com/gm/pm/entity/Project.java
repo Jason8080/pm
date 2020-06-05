@@ -15,12 +15,13 @@ public class Project {
     private String name;
     private String pmName;
     private String currentStage;
+    private Date currentTime;
     private Integer currentSlider;
     private String demand;
     private Long residualDay;
 
     public Long getResidualDay() {
-        return this.currentStage!=null?StageKit.getResidualDay(this, this.currentStage):this.residualDay;
+        return this.currentStage!=null?StageKit.getResidualDay(this):this.residualDay;
     }
 
     /**

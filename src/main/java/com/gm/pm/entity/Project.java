@@ -1,5 +1,6 @@
 package com.gm.pm.entity;
 
+import com.gm.pm.kit.StageKit;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,6 +17,12 @@ public class Project {
     private String currentStage;
     private Integer currentSlider;
     private String demand;
+    private Long residualDay;
+
+    public Long getResidualDay() {
+        return this.currentStage!=null?StageKit.getResidualDay(this, this.currentStage):this.residualDay;
+    }
+
     /**
      * 计划时间
      */
@@ -37,7 +44,7 @@ public class Project {
      */
     private Date onlineTime;
     /**
-     * 上线时间
+     * 验收时间
      */
     private Date acceptTime;
 }

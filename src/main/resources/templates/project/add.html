@@ -1,0 +1,273 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="common/head_meta::head_meta"/>
+    <th:block th:include="common/css::css"/>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/side_head::side_head"/>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:include="common/side::side"/>
+
+
+    <div class="content-wrapper">
+        <div class="content-header" th:include="common/content_head::content_head"/>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <form action="/project/add" method="post" role="form" id="addForm">
+                        <div class="col-md-12">
+                            <div class="card card-warning">
+                                <div class="card-header">
+                                    <h3 class="card-title">项目信息</h3>
+                                </div>
+                                <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                                <label>项目经理</label>
+                                                <input name="pmName" type="text" class="form-control" placeholder="Enter ...">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>项目名称</label>
+                                                <input name="name" type="text" class="form-control" placeholder="Enter ...">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>需求简述</label>
+                                                    <textarea name="demand" class="form-control" rows="3"
+                                                              placeholder="Enter ..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                                <label>所在阶段</label>
+                                                <select name="currentStage" class="custom-select">
+                                                    <option value="0">计划</option>
+                                                    <option value="1">调研</option>
+                                                    <option value="2">编码</option>
+                                                    <option value="3">测试</option>
+                                                    <option value="4">上线</option>
+                                                    <option value="5">验收</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-10">
+                                                <label>当前进度</label>
+                                                <div class="slider-blue">
+                                                    <input name="currentSlider" type="text" value="100" class="slider form-control"
+                                                           data-slider-min="0" data-slider-max="100" data-slider-step="5"
+                                                           data-slider-value="100" data-slider-orientation="horizontal"
+                                                           data-slider-selection="before" data-slider-tooltip="show"
+                                                           data-value="100" style="display: none;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card card-success">
+                                <div class="card-header">
+                                    <h3 class="card-title">预期时间</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
+                                            <label>计划启动</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input name="planTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>调研完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input name="surveyTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>编码完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input name="executeTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>测试完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input name="verifyTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>上线完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input name="onlineTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>验收完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input name="acceptTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer">
+                                <input type="reset" value="重置" class="btn btn-default float-left"/>
+                                <input type="submit" value="提交" class="btn btn-primary float-right"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <footer class="main-footer" th:include="common/footer::footer"/>
+    <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
+</div>
+<th:block th:include="common/js::js"/>
+
+<script>
+    $(function () {
+        $.validator.setDefaults({
+            submitHandler: function () {
+                return true;
+            }
+        });
+        $('#addForm').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 6
+                },
+                pmName: {
+                    required: true,
+                    minlength: 2
+                },
+                currentStage: {
+                    required: true,
+                    min: 0,
+                    max: 5
+                },
+                currentSlider: {
+                    required: true,
+                    min: 0,
+                    max: 100
+                },
+                demand: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 2000,
+                },
+                planTime: {
+                    required: true,
+                    date: true,
+                },
+                surveyTime: {
+                    required: true,
+                    date: true,
+                },
+                executeTime: {
+                    required: true,
+                    date: true,
+                },
+                verifyTime: {
+                    required: true,
+                    date: true,
+                },
+                onlineTime: {
+                    required: true,
+                    date: true,
+                },
+                acceptTime: {
+                    required: true,
+                    date: true,
+                },
+            },
+            messages: {
+                name: {
+                    required: "请填写项目名称",
+                    minlength: "项目名称为6-18个字符",
+                    maxlength: "项目名称为6-18个字符",
+                },
+                pmName: {
+                    required: "请填写项目经理名称",
+                    minlength: "项目经理为2-6个字符",
+                    maxlength: "项目经理为2-6个字符",
+                },
+                currentStage: {
+                    required: "请选择当前所在阶段",
+                    min: "当前阶段为计划~验收",
+                    max: "当前阶段为计划~验收",
+                },
+                currentSlider: {
+                    required: "请选择当前阶段完成进度",
+                    min: "完成进度为0-100",
+                    max: "完成进度为0-100",
+                },
+                demand: {
+                    required: "请简诉项目需求",
+                    minlength: "需求描述为10-2000个字符",
+                    maxlength: "需求描述为10-2000个字符",
+                },
+                planTime: "请填写计划时间",
+                surveyTime: "请填写调研时间",
+                executeTime: "请填写执行时间",
+                verifyTime: "请填写验收时间",
+                onlineTime: "请填写上线时间",
+                acceptTime: "请填写验收时间",
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+        $('.slider').bootstrapSlider();
+        $('[data-mask]').inputmask();
+    })
+</script>
+</body>
+</html>

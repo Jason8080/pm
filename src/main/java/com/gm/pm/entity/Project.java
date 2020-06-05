@@ -1,4 +1,4 @@
-package com.gm.pm.vo;
+package com.gm.pm.entity;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Jason
  */
 @Data
-public class ProjectVo {
+public class Project {
     private Long id;
     private String name;
     private String pmName;

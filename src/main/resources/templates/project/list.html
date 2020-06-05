@@ -32,7 +32,6 @@
                                 <h3 class="card-title">项目列表</h3>
                                 <a href="/project/add" class="btn btn-success float-right">添加</a>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
@@ -47,73 +46,29 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>李清</td>
-                                        <td>广州市特种机电设备检测研究院</td>
+                                    <tr th:each="project,stat:${page.list}">
+                                        <td>[[${stat.count}]]</td>
+                                        <td>[[${project.pmName}]]</td>
+                                        <td>[[${project.name}]]</td>
                                         <td>
-<pre>
-  客户的HR系统与M3集成，实现需求如下:
-    1、M3工作台列表中，增加HR系统图标，接收HR系统待办，点击可跳转到HR系统app处理
-    2、M3消息列表，接收HR系统代办消息，点击可跳转到HR系统app处理
-  支持内容：
-    1、与HR系统开发人员、业主技术人员沟通评估方案,前期已经提供接口资料及开发平台
-</pre>
+                                            <pre>[[${project.demand}]]</pre>
                                         </td>
                                         <td>10天</td>
                                         <td>
                                             <div class="progress progress-xs">
-                                                <div class="progress-bar bg-danger" style="width: 10%"></div>
+                                                <div th:class="'progress-bar ' + ${project.currentSlider>90?'bg-success':(project.currentSlider>30?'bg-warning':'bg-danger')}"
+                                                     th:style="'width: '+ ${project.currentSlider}+'%'"/>
                                             </div>
                                         </td>
-                                        <td><span class="badge bg-danger">10%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>李清</td>
-                                        <td>广州市特种机电设备检测研究院</td>
                                         <td>
-<pre>
-  客户的HR系统与M3集成，实现需求如下:
-    1、M3工作台列表中，增加HR系统图标，接收HR系统待办，点击可跳转到HR系统app处理
-    2、M3消息列表，接收HR系统代办消息，点击可跳转到HR系统app处理
-  支持内容：
-    1、与HR系统开发人员、业主技术人员沟通评估方案,前期已经提供接口资料及开发平台
-</pre>
+                                            <span th:class="'badge ' + ${project.currentSlider>90?'bg-success':(project.currentSlider>30?'bg-warning':'bg-danger')}">
+                                                [[${project.currentSlider}]]%
+                                            </span>
                                         </td>
-                                        <td>10天</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-warning">50%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>李清</td>
-                                        <td>广州市特种机电设备检测研究院</td>
-                                        <td>
-<pre>
-  客户的HR系统与M3集成，实现需求如下:
-    1、M3工作台列表中，增加HR系统图标，接收HR系统待办，点击可跳转到HR系统app处理
-    2、M3消息列表，接收HR系统代办消息，点击可跳转到HR系统app处理
-  支持内容：
-    1、与HR系统开发人员、业主技术人员沟通评估方案,前期已经提供接口资料及开发平台
-</pre>
-                                        </td>
-                                        <td>10天</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar bg-success" style="width: 100%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-success">100%</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- /.card-body -->
                             <div class="card-footer clearfix">
                                 <ul class="pagination pagination-sm m-0 float-right">
                                     <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>

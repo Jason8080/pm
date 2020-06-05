@@ -26,11 +26,11 @@
                                         <div class="row">
                                             <div class="form-group col-sm-2">
                                                 <label>项目经理</label>
-                                                <input name="pmName" type="text" class="form-control" placeholder="Enter ...">
+                                                <input name="pmName" type="text" class="form-control" placeholder="项目经理">
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <label>项目名称</label>
-                                                <input name="name" type="text" class="form-control" placeholder="Enter ...">
+                                                <input name="name" type="text" class="form-control" placeholder="项目名称">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -38,14 +38,14 @@
                                                 <div class="form-group">
                                                     <label>需求简述</label>
                                                     <textarea name="demand" class="form-control" rows="3"
-                                                              placeholder="Enter ..."></textarea>
+                                                              placeholder="需求简述; 注意排版哦.."></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-2">
                                                 <label>所在阶段</label>
-                                                <select name="currentStage" class="custom-select">
+                                                <select id="currentStage" name="currentStage" class="custom-select">
                                                     <option value="计划">计划</option>
                                                     <option value="调研">调研</option>
                                                     <option value="编码">编码</option>
@@ -57,11 +57,11 @@
                                             <div class="form-group col-sm-10">
                                                 <label>当前进度</label>
                                                 <div class="slider-blue">
-                                                    <input name="currentSlider" type="text" value="100" class="slider form-control"
-                                                           data-slider-min="0" data-slider-max="100" data-slider-step="5"
-                                                           data-slider-value="100" data-slider-orientation="horizontal"
+                                                    <input name="currentSlider" type="text" value="50" class="slider form-control"
+                                                           data-slider-min="0" data-slider-max="100" data-slider-step="2"
+                                                           data-slider-value="50" data-slider-orientation="horizontal"
                                                            data-slider-selection="before" data-slider-tooltip="show"
-                                                           data-value="100" style="display: none;">
+                                                           data-value="50" style="display: none;">
                                                 </div>
                                             </div>
                                         </div>
@@ -75,69 +75,69 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="form-group col-sm-2">
+                                            <div class="form-group col-sm-2">
                                             <label>计划启动</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i
                                                             class="far fa-calendar-alt"></i></span>
                                                 </div>
-                                                <input name="planTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                <input id="planTime" name="planTime" type="text" class="form-control" data-inputmask-alias="datetime"
                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                             </div>
                                         </div>
-                                        <div class="form-group col-sm-2">
-                                            <label>调研完成</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="far fa-calendar-alt"></i></span>
+                                            <div class="form-group col-sm-2">
+                                                <label>调研完成</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="far fa-calendar-alt"></i></span>
+                                                    </div>
+                                                    <input id="surveyTime" name="surveyTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                           data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                                 </div>
-                                                <input name="surveyTime" type="text" class="form-control" data-inputmask-alias="datetime"
-                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                             </div>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                            <label>编码完成</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="far fa-calendar-alt"></i></span>
+                                            <div class="form-group col-sm-2">
+                                                <label>编码完成</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="far fa-calendar-alt"></i></span>
+                                                    </div>
+                                                    <input id="executeTime" name="executeTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                           data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                                 </div>
-                                                <input name="executeTime" type="text" class="form-control" data-inputmask-alias="datetime"
-                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                             </div>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                            <label>测试完成</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="far fa-calendar-alt"></i></span>
+                                            <div class="form-group col-sm-2">
+                                                <label>测试完成</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="far fa-calendar-alt"></i></span>
+                                                    </div>
+                                                    <input id="verifyTime" name="verifyTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                           data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                                 </div>
-                                                <input name="verifyTime" type="text" class="form-control" data-inputmask-alias="datetime"
-                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                             </div>
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                            <label>上线完成</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="far fa-calendar-alt"></i></span>
+                                            <div class="form-group col-sm-2">
+                                                <label>上线完成</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="far fa-calendar-alt"></i></span>
+                                                    </div>
+                                                    <input id="onlineTime" name="onlineTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                           data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                                 </div>
-                                                <input name="onlineTime" type="text" class="form-control" data-inputmask-alias="datetime"
-                                                       data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                             </div>
-                                        </div>
-                                        <div class="form-group col-sm-2">
+                                            <div class="form-group col-sm-2">
                                             <label>验收完成</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i
                                                             class="far fa-calendar-alt"></i></span>
                                                 </div>
-                                                <input name="acceptTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                <input id="acceptTime" name="acceptTime" type="text" class="form-control" data-inputmask-alias="datetime"
                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                             </div>
                                         </div>
@@ -170,6 +170,17 @@
                 return true;
             }
         });
+        jQuery.validator.addMethod("compareDate", function(value, ele, param) {
+            let currentStage = $("#currentStage").val();
+            if(currentStage=='计划'){
+                return true;
+            }
+            var date = jQuery(param).val();
+            var before = new Date(Date.parse(date));
+            var after = new Date(Date.parse(value));
+            return before < after;
+        });
+
         $('#addForm').validate({
             rules: {
                 name: {
@@ -202,24 +213,24 @@
                     date: true,
                 },
                 surveyTime: {
-                    required: true,
                     date: true,
+                    compareDate: "#planTime",
                 },
                 executeTime: {
-                    required: true,
                     date: true,
+                    compareDate: "#surveyTime",
                 },
                 verifyTime: {
-                    required: true,
                     date: true,
+                    compareDate: "#executeTime",
                 },
                 onlineTime: {
-                    required: true,
                     date: true,
+                    compareDate: "#verifyTime",
                 },
                 acceptTime: {
-                    required: true,
                     date: true,
+                    compareDate: "#onlineTime",
                 },
             },
             messages: {
@@ -249,11 +260,21 @@
                     maxlength: "需求描述为10-2000个字符",
                 },
                 planTime: "请填写计划时间",
-                surveyTime: "请填写调研时间",
-                executeTime: "请填写执行时间",
-                verifyTime: "请填写验收时间",
-                onlineTime: "请填写上线时间",
-                acceptTime: "请填写验收时间",
+                surveyTime: {
+                    compareDate: "调研时间应大于计划时间",
+                },
+                executeTime: {
+                    compareDate: "编码时间应大于调研时间",
+                },
+                verifyTime: {
+                    compareDate: "测试时间应大于编码时间",
+                },
+                onlineTime: {
+                    compareDate: "上线时间应大于测试时间",
+                },
+                acceptTime: {
+                    compareDate: "验收时间应大于上线时间",
+                },
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {

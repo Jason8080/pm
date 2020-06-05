@@ -38,14 +38,6 @@
                                             <div class="input-group-append">
                                                 <a href="/project/add" class="btn btn-success float-left">添加</a>
                                             </div>
-                                            <!--
-                                            <div class="input-group-append">
-                                                <a href="/project/update" class="btn btn-secondary float-left">修改</a>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <a href="/project/del" class="btn btn-danger float-left">删除</a>
-                                            </div>
-                                            -->
                                             <input type="text" name="pmName" class="form-control float-right"
                                                    placeholder="项目经理">
                                             <div class="input-group-append">
@@ -64,9 +56,10 @@
                                         <th style="width: 5%">#</th>
                                         <th style="width: 5%">人员</th>
                                         <th style="width: 10%">项目名称</th>
-                                        <th style="width: 60%;">需求</th>
+                                        <th style="width: 48%;">需求</th>
                                         <th style="width: 5%;">剩余</th>
                                         <th style="width: 10%">进度</th>
+                                        <th style="width: 12%;">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -89,6 +82,12 @@
                                             <small>
                                                 [[${project.currentStage}]]: [[${project.currentSlider}]]%
                                             </small>
+                                        </td>
+                                        <td>
+                                            <a th:href="@{'/project/update/'+${project.id}}"
+                                               class="btn btn-secondary float-left">修改</a>
+                                            <a th:href="@{'/project/del/'+${project.id}}"
+                                               class="btn btn-danger float-left">删除</a>
                                         </td>
                                     </tr>
                                     </tbody>

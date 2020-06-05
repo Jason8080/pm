@@ -25,7 +25,7 @@ public class ProjectController {
     @GetMapping(value = "list")
     public String list(Model model,
                        @RequestParam(defaultValue = "1") Integer start,
-                       @RequestParam(defaultValue = "10") Integer size
+                       @RequestParam(defaultValue = "5") Integer size
     ) {
         PageInfo page = projectService.findAll(start, size);
         model.addAttribute("page", page);

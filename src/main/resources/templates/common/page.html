@@ -1,0 +1,18 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="panelBar" th:fragment="page">
+    <ul class="pagination pagination-sm m-0 float-right">
+        <li class="page-item">
+            <a class="page-link" th:href="@{'?start='+ ${page.getPrePage()+1}+'&size=5'}">上页</a>
+        </li>
+        <li th:each="i:${page.navigatepageNums}" class="page-item">
+            <a class="page-link" th:href="@{'?start=1&size=5'}">[[${i}]]</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:href="@{'?start='+ ${page.getNextPage()+1}+'&size=5'}">下页</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

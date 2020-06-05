@@ -56,12 +56,12 @@
                                         <td>10天</td>
                                         <td>
                                             <div class="progress progress-xs">
-                                                <div th:class="'progress-bar ' + ${project.currentSlider>90?'bg-success':(project.currentSlider>30?'bg-warning':'bg-danger')}"
+                                                <div th:class="'progress-bar ' + ${project.currentSlider>80?'bg-success':(project.currentSlider>60?'bg-primary':(project.currentSlider>40?'bg-warning':'bg-danger'))}"
                                                      th:style="'width: '+ ${project.currentSlider}+'%'"/>
                                             </div>
                                         </td>
                                         <td>
-                                            <span th:class="'badge ' + ${project.currentSlider>90?'bg-success':(project.currentSlider>30?'bg-warning':'bg-danger')}">
+                                            <span th:class="'badge ' + ${project.currentSlider>80?'bg-success':(project.currentSlider>60?'bg-primary':(project.currentSlider>40?'bg-warning':'bg-danger'))}">
                                                 [[${project.currentSlider}]]%
                                             </span>
                                         </td>
@@ -69,15 +69,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
-                            </div>
+                            <div class="card-footer clearfix" th:include="common/page::page">
                         </div>
                     </div>
                 </div>

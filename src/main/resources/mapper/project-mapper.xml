@@ -41,6 +41,45 @@
         )
     </insert>
 
+    <update id="update" parameterType="Project">
+        update tb_project
+        <set>
+            <if test="currentStage!=null and currentStage!=''">
+                current_stage=#{currentStage},
+            </if>
+            <if test="currentTime!=null">
+                `current_time`=#{currentTime},
+            </if>
+            <if test="currentSlider!=null">
+                current_slider=#{currentSlider},
+            </if>
+            <if test="demand!=null and demand!=''">
+                demand=#{demand},
+            </if>
+            <if test="planTime!=null">
+                plan_time=#{planTime},
+            </if>
+            <if test="surveyTime!=null">
+                survey_time=#{surveyTime},
+            </if>
+            <if test="executeTime!=null">
+                execute_time=#{executeTime},
+            </if>
+            <if test="verifyTime!=null">
+                verify_time=#{verifyTime},
+            </if>
+            <if test="onlineTime!=null">
+                online_time=#{onlineTime},
+            </if>
+            <if test="acceptTime!=null">
+                accept_time=#{acceptTime},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
     <select id="selectList" resultMap="proMap">
         select * from tb_project
         <where>
@@ -60,5 +99,9 @@
                 and (current_stage &lt; 100 and `current_time` &lt; now())
             </if>
         </where>
+    </select>
+
+    <select id="selectById" resultMap="proMap">
+        select * from tb_project where id = #{id}
     </select>
 </mapper>

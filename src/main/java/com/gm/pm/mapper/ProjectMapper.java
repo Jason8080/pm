@@ -38,4 +38,20 @@ public interface ProjectMapper {
             @Param("project") Project project,
             @Param("pc") ProjectCondition pc
     );
+
+    /**
+     * Select by id project.
+     *
+     * @param id the id
+     * @return the project
+     */
+    Project selectById(Long id);
+
+    /**
+     * Update integer.
+     *
+     * @param project the project
+     * @return the integer
+     */
+    Integer update(Project project);
 }

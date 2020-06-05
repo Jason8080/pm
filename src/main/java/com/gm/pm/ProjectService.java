@@ -32,4 +32,13 @@ public class ProjectService {
         StageKit.setCurrentTime(project);
         projectMapper.insert(project);
     }
+
+    public Project findById(Long id) {
+        return projectMapper.selectById(id);
+    }
+
+    public void update(Project project) {
+        StageKit.setCurrentTime(project);
+        projectMapper.update(project);
+    }
 }

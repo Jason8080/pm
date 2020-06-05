@@ -7,10 +7,7 @@ import com.gm.pm.entity.ProjectCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Jason
@@ -42,6 +39,19 @@ public class ProjectController {
     @PostMapping(value = "add")
     public String add(Project project) {
         projectService.add(project);
+        return "redirect:/project/list";
+    }
+
+    @GetMapping(value = "update/{id}")
+    public String update(Model model, @PathVariable Long id) {
+        Project project = projectService.findById(id);
+        model.addAttribute("project", project);
+        return "project/update";
+    }
+
+    @PostMapping(value = "update")
+    public String update(Project project) {
+        projectService.update(project);
         return "redirect:/project/list";
     }
 }

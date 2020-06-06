@@ -1,8 +1,7 @@
 package com.gm.pm.entity;
 
 import lombok.Data;
-
-import java.util.Arrays;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Jason
@@ -13,7 +12,7 @@ public class ProjectCondition {
     private String likes;
 
     public void likeEndless() {
-        if(this.likes!=null){
+        if(!StringUtils.isEmpty(this.likes)){
             char[] chars = this.likes.toCharArray();
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < chars.length; i++) {
@@ -25,7 +24,7 @@ public class ProjectCondition {
         }
     }
     public ProjectCondition likeRecover() {
-        if(this.likes!=null){
+        if(!StringUtils.isEmpty(this.likes)){
             this.likes = this.likes.replaceAll("%", "");
         }
         return this;

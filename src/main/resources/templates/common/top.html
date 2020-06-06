@@ -1,11 +1,10 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="common/css::css"/>
+    <th:block th:include="/common/css::css"/>
 </head>
 <body>
-<div class="panelBar" th:fragment="content_head">
-    <!-- Content Header (Page header) -->
+<div class="panelBar" th:fragment="top">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -24,9 +23,6 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 </div>
-
-<th:block th:include="common/js::js"/>
 </body>
 </html>

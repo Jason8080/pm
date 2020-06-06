@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <head>
-    <th:block th:include="common/head_meta::head_meta"/>
-    <th:block th:include="common/css::css"/>
+    <th:block th:include="/common/head::head"/>
 </head>
 <style>
     table {
@@ -17,11 +16,11 @@
 </style>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/side_head::side_head"/>
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/logo::logo"/>
     <aside class="main-sidebar sidebar-dark-primary elevation-4" th:include="common/side::side(currentPage='项目管理')"/>
 
     <div class="content-wrapper">
-        <div class="content-header" th:include="common/content_head::content_head(menu='', menuUrl='', currentPage='项目管理')"/>
+        <div class="content-header" th:include="common/top::top(menu='', menuUrl='', currentPage='项目管理')"/>
 
         <section class="content">
 <!--            <div class="container-fluid">-->

@@ -24,9 +24,9 @@
         <div class="content-header" th:include="common/content_head::content_head"/>
 
         <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
+<!--            <div class="container-fluid">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-12">-->
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">项目列表</h3>
@@ -45,8 +45,8 @@
                                                 </select>
                                             </div>
                                             <div class="input-group-append">
-                                                <input type="text" name="pmName" th:value="${pc.pmName}"
-                                                       class="form-control float-right" placeholder="项目经理">
+                                                <input type="text" name="likes" th:value="${pc.likes}"
+                                                       class="form-control float-right" placeholder="项目经理或客户名称..">
                                             </div>
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default">
@@ -63,7 +63,7 @@
                                     <tr>
                                         <th style="width: 30px;">#</th>
                                         <th style="width: 70px;">人员</th>
-                                        <th style="width: 10%">项目名称</th>
+                                        <th style="width: 10%">客户名称</th>
                                         <th style="width: 47%;">需求</th>
                                         <th style="width: 5%;">剩余</th>
                                         <th style="width: 10%">进度</th>
@@ -113,8 +113,9 @@
                             </div>
                             <div class="card-footer clearfix" th:include="common/page::page"/>
                         </div>
-                    </div>
-                </div>
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </section>
     </div>
 

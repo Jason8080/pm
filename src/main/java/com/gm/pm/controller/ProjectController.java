@@ -27,7 +27,7 @@ public class ProjectController {
     ) {
         PageInfo page = projectService.findAll(project, pc, start, size);
         model.addAttribute("page", page);
-        model.addAttribute("pc", pc);
+        model.addAttribute("pc", pc.likeRecover());
         model.addAttribute("start", start);
         model.addAttribute("size", size);
         return "project/list";

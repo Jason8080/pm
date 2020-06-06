@@ -10,6 +10,7 @@ import com.gm.pm.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -24,6 +25,7 @@ public class ProjectService {
 
     public PageInfo findAll(Project project, ProjectCondition pc, Integer start, Integer size) {
         PageHelper.startPage(start, size);
+        pc.likeEndless();
         Page page = projectMapper.selectBy(project, pc);
         return new PageInfo(page);
     }

@@ -16,11 +16,11 @@
 </style>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/logo::logo"/>
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/top::top"/>
     <aside class="main-sidebar sidebar-dark-primary elevation-4" th:include="common/side::side(currentPage='项目管理')"/>
 
     <div class="content-wrapper">
-        <div class="content-header" th:include="common/top::top(menu='', menuUrl='', currentPage='项目管理')"/>
+        <div class="content-header" th:include="common/navbar::navbar(menu='', menuUrl='', currentPage='项目管理')"/>
 
         <section class="content">
 <!--            <div class="container-fluid">-->

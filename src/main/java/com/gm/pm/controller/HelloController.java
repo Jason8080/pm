@@ -2,6 +2,7 @@ package com.gm.pm.controller;
 
 import com.gm.pm.entity.Login;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -12,16 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class HelloController {
 
     @GetMapping(value = "/")
-    public String index() {
+    public String index(Model model) {
         return "index";
-    }
-    @GetMapping(value = "/404")
-    public String four() {
-        return "404";
-    }
-    @GetMapping(value = "/500")
-    public String five() {
-        return "500";
     }
     @GetMapping(value = "/lock")
     public String lockscreen() {

@@ -59,6 +59,25 @@
     <!-- Bootstrap slider -->
     <script src="/static/plugins/bootstrap-slider/bootstrap-slider.min.js"></script>
 
+    <!-- SweetAlert2 -->
+    <script src="/static/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="/static/plugins/toastr/toastr.min.js"></script>
+    <script th:if="${!#strings.isEmpty(msg)}">
+        switch("[[${type}]]") {
+            case 'info':
+                toastr.info("[[${msg}]]");
+                break;
+            case 'warning':
+                toastr.warning("[[${msg}]]");
+                break;
+            case 'error':
+                toastr.error("[[${msg}]]");
+                break;
+            default:
+                toastr.success("[[${msg}]]");
+        }
+    </script>
 </div>
 </body>
 </html>

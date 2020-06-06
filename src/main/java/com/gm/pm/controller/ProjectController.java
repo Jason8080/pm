@@ -2,6 +2,7 @@ package com.gm.pm.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.gm.pm.ProjectService;
+import com.gm.pm.base.controller.BaseController;
 import com.gm.pm.entity.Project;
 import com.gm.pm.entity.ProjectCondition;
 import com.gm.pm.entity.Toa;
@@ -19,7 +20,7 @@ import java.net.URLEncoder;
  */
 @Controller
 @RequestMapping("project")
-public class ProjectController {
+public class ProjectController extends BaseController {
 
 
     @Autowired

@@ -1,6 +1,7 @@
 package com.gm.pm.controller;
 
 import com.gm.pm.entity.Login;
+import com.gm.pm.entity.Toa;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,8 @@ public class HelloController {
         return "lockscreen";
     }
     @GetMapping(value = "/login")
-    public String login() {
+    public String login(Model model, Toa toa) {
+        model.addAttribute("toa", toa);
         return "login";
     }
     @PostMapping(value = "/login")

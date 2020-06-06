@@ -39,9 +39,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/project/list" class="nav-link active">
+                            <a href="/project/list" th:class="'nav-link ' + ${currentPage=='项目管理'?'active':''}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>项目列表</p>
+                                <p>项目管理</p>
                             </a>
                         </li>
                     </ul>

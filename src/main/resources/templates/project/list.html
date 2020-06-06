@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <head>
-    <th:block th:include="/common/head::head"/>
+    <th:block th:include="common/head::head"/>
 </head>
 <style>
     table {
@@ -119,7 +119,7 @@
     <footer class="main-footer" th:include="common/footer::footer"/>
     <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
 </div>
-<th:block th:include="/common/js::js"/>
+<th:block th:include="common/js::js"/>
 <script>
     $("input[data-bootstrap-switch]").each(function(){
         $(this).bootstrapSwitch('state', $(this).prop('checked'));

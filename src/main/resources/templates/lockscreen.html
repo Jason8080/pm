@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:include="/common/head::head"/>
+</head>
+<body class="hold-transition lockscreen">
+<!-- Automatic element centering -->
+<div class="lockscreen-wrapper">
+  <div class="lockscreen-logo">
+    <a href="/"><b>GM</b>LTE</a>
+  </div>
+  <div class="lockscreen-name">Jason.lee</div>
+
+  <div class="lockscreen-item">
+    <div class="lockscreen-image">
+      <img src="/static/dist/img/user1-128x128.jpg" alt="User Image">
+    </div>
+
+    <form class="lockscreen-credentials">
+      <div class="input-group">
+        <input type="password" class="form-control" placeholder="password">
+
+        <div class="input-group-append">
+          <button type="button" class="btn"><i class="fas fa-arrow-right text-muted"></i></button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="help-block text-center">
+    输入你的密码唤醒系统
+  </div>
+  <div class="text-center">
+    <a href="/login">或者以另外身份登录</a>
+  </div>
+</div>
+
+<th:block th:include="/common/js::js"/>
+</body>
+</html>

@@ -17,6 +17,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <form action="/project/add" method="post" role="form" id="addForm">
+                        <input type="hidden" name="start" th:value="${start}"/>
+                        <input type="hidden" name="size" th:value="${size}"/>
                         <div class="col-md-12">
                             <div class="card card-warning">
                                 <div class="card-header">
@@ -29,8 +31,8 @@
                                                 <input name="pmName" type="text" class="form-control" placeholder="项目经理">
                                             </div>
                                             <div class="form-group col-sm-2">
-                                                <label>项目名称</label>
-                                                <input name="name" type="text" class="form-control" placeholder="项目名称">
+                                                <label>客户名称</label>
+                                                <input name="name" type="text" class="form-control" placeholder="客户名称">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -82,7 +84,10 @@
                                                     <span class="input-group-text"><i
                                                             class="far fa-calendar-alt"></i></span>
                                                 </div>
-                                                <input id="planTime" name="planTime" type="text" class="form-control" data-inputmask-alias="datetime"
+                                                <input id="planTime" name="planTime"
+                                                       th:value="${'2019/04/01'}"
+                                                       type="text" class="form-control"
+                                                       data-inputmask-alias="datetime"
                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                             </div>
                                         </div>
@@ -245,9 +250,9 @@
             },
             messages: {
                 name: {
-                    required: "请填写项目名称",
-                    minlength: "项目名称为6-20个字符",
-                    maxlength: "项目名称为6-20个字符",
+                    required: "请填写客户名称",
+                    minlength: "客户名称为6-20个字符",
+                    maxlength: "客户名称为6-20个字符",
                 },
                 pmName: {
                     ato: "请填写项目经理名称",

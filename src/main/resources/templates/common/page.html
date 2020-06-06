@@ -4,13 +4,19 @@
 <div class="panelBar" th:fragment="page">
     <ul class="pagination pagination-sm m-0 float-right">
         <li class="page-item">
+            <a class="page-link" th:href="@{'?start=1&size=5'}">首页</a>
+        </li>
+        <li class="page-item">
             <a class="page-link" th:href="@{'?start='+ ${page.prePage}+'&size=5'}">上页</a>
         </li>
-        <li th:each="i:${page.navigatepageNums}" class="page-item">
+        <li th:each="i:${page.navigatepageNums}" th:class="'page-item '+ ${page.pageNum==i?'active':''}">
             <a class="page-link" th:href="@{'?start='+${i}+'&size=5'}">[[${i}]]</a>
         </li>
         <li class="page-item">
             <a class="page-link" th:href="@{'?start='+ ${page.nextPage}+'&size=5'}">下页</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:href="@{'?start='+ ${page.pages}+'&size=5'}">尾页</a>
         </li>
     </ul>
 </div>

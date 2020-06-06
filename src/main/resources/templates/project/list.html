@@ -36,7 +36,7 @@
                                         <input type="hidden" name="size" th:value="${page.getPageSize()}"/>
                                         <div class="input-group" style="width: 100%;">
                                             <div class="input-group-append">
-                                                <a href="/project/add" class="btn btn-success float-left">添加</a>
+                                                <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}" class="btn btn-success float-left">添加</a>
                                             </div>
                                             <div class="input-group-append">
                                                 <select name="overdue" class="btn btn-default float-left">
@@ -61,13 +61,13 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th style="width: 35px;">#</th>
-                                        <th style="width: 5%">人员</th>
+                                        <th style="width: 30px;">#</th>
+                                        <th style="width: 70px;">人员</th>
                                         <th style="width: 10%">项目名称</th>
                                         <th style="width: 47%;">需求</th>
                                         <th style="width: 5%;">剩余</th>
                                         <th style="width: 10%">进度</th>
-                                        <th style="width: 13%;">操作</th>
+                                        <th style="width: 150px;">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>

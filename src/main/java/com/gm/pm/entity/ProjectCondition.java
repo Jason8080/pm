@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
  */
 @Data
 public class ProjectCondition {
-    private Boolean overdue;
+    private Integer choose;
     private String likes;
 
     public void likeEndless() {

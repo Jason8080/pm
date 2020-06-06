@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
@@ -74,10 +73,10 @@ public class ProjectController {
                          @RequestParam(defaultValue = "5") Integer size
     ) throws Exception {
         projectService.update(project);
-        String overdueParam = pc.getOverdue() != null ? ("&overdue=" + pc.getOverdue()) : "";
+        String chooseParam = pc.getChoose() != null ? ("&choose=" + pc.getChoose()) : "";
         String encode = URLEncoder.encode(pc.getLikes(), "UTF-8");
         String likesParam = !StringUtils.isEmpty(pc.getLikes())? ("&likes=" + encode) : "";
-        return "redirect:/project/list?start=" + start + "&size=" + size + overdueParam + likesParam;
+        return "redirect:/project/list?start=" + start + "&size=" + size + chooseParam + likesParam;
     }
 
 

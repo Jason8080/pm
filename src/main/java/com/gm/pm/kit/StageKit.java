@@ -14,7 +14,7 @@ public class StageKit {
     public static final Map<String, String> stageMap = new HashMap();
 
     static {
-        stageMap.put("计划", "planTime");
+        stageMap.put("分配", "planTime");
         stageMap.put("调研", "surveyTime");
         stageMap.put("编码", "executeTime");
         stageMap.put("测试", "verifyTime");

@@ -46,7 +46,7 @@
                                             <div class="form-group col-sm-2">
                                                 <label>所在阶段</label>
                                                 <select id="currentStage" name="currentStage" class="custom-select">
-                                                    <option value="计划">计划</option>
+                                                    <option value="分配">分配</option>
                                                     <option value="调研">调研</option>
                                                     <option value="编码">编码</option>
                                                     <option value="测试">测试</option>
@@ -76,7 +76,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                             <div class="form-group col-sm-2">
-                                            <label>计划启动</label>
+                                            <label>分配完成</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i
@@ -115,8 +115,11 @@
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt"></i></span>
                                                     </div>
-                                                    <input id="verifyTime" name="verifyTime" type="text" class="form-control" data-inputmask-alias="datetime"
-                                                           data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                                    <input id="verifyTime" name="verifyTime"
+                                                           type="text" class="form-control"
+                                                           data-inputmask-alias="datetime"
+                                                           data-inputmask-inputformat="yyyy/mm/dd"
+                                                           data-mask>
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-2">
@@ -172,13 +175,20 @@
         });
         jQuery.validator.addMethod("compareDate", function(value, ele, param) {
             let currentStage = $("#currentStage").val();
-            if(currentStage=='计划'){
+            if(currentStage=='分配'){
                 return true;
             }
             var date = jQuery(param).val();
             var before = new Date(Date.parse(date));
             var after = new Date(Date.parse(value));
             return before < after;
+        });
+        jQuery.validator.addMethod("ato", function(value, ele, param) {
+            let currentStage = $(param).val();
+            if(currentStage=='分配'){
+                return true;
+            }
+            return value!=undefined && value!='';
         });
 
         $('#addForm').validate({
@@ -189,7 +199,7 @@
                     maxlength: 20,
                 },
                 pmName: {
-                    required: true,
+                    ato: "#currentStage",
                     minlength: 2,
                     maxlength: 6,
                 },
@@ -240,7 +250,7 @@
                     maxlength: "项目名称为6-20个字符",
                 },
                 pmName: {
-                    required: "请填写项目经理名称",
+                    ato: "请填写项目经理名称",
                     minlength: "项目经理为2-6个字符",
                     maxlength: "项目经理为2-6个字符",
                 },
@@ -259,9 +269,9 @@
                     minlength: "需求描述为10-2000个字符",
                     maxlength: "需求描述为10-2000个字符",
                 },
-                planTime: "请填写计划时间",
+                planTime: "请填写分配时间",
                 surveyTime: {
-                    compareDate: "调研时间应大于计划时间",
+                    compareDate: "调研时间应大于分配时间",
                 },
                 executeTime: {
                     compareDate: "编码时间应大于调研时间",

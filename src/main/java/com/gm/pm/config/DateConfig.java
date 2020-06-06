@@ -15,7 +15,7 @@ import java.util.Date;
  * @author Jason
  */
 @Configuration
-public class CustomDateConfig{
+public class DateConfig{
  
     @Bean
     public ConfigurableWebBindingInitializer configurableWebBindingInitializer(
@@ -24,7 +24,7 @@ public class CustomDateConfig{
         ConfigurableWebBindingInitializer initializer = new ConfigurableWebBindingInitializer();
         initializer.setConversionService(mvcConversionService);
         initializer.setValidator(mvcValidator);
-        DateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         //装配自定义属性编辑器
         initializer.setPropertyEditorRegistrar(propertyEditorRegistry -> {
             propertyEditorRegistry.registerCustomEditor(Date.class,

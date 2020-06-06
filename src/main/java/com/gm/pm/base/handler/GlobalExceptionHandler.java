@@ -1,4 +1,4 @@
-package com.gm.pm.base.controller;
+package com.gm.pm.base.handler;
 
 import com.gm.pm.entity.Toa;
 import com.gm.pm.kit.TokenKit;

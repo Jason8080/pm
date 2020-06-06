@@ -1,4 +1,4 @@
-package com.gm.pm.controller;
+package com.gm.pm.base.controller;
 
 import com.gm.pm.entity.Login;
 import com.gm.pm.entity.Toa;

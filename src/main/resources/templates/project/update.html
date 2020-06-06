@@ -89,7 +89,7 @@
                                                             class="far fa-calendar-alt"></i></span>
                                                 </div>
                                                 <input id="planTime" name="planTime"
-                                                       th:value="${#dates.format(project.planTime, 'yyyy-MM-dd')}"
+                                                       th:value="${#dates.format(project.planTime, 'yyyy/MM/dd')}"
                                                        type="text" class="form-control"
                                                        data-inputmask-alias="datetime"
                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask>
@@ -103,7 +103,7 @@
                                                                 class="far fa-calendar-alt"></i></span>
                                                     </div>
                                                     <input id="surveyTime" name="surveyTime"
-                                                           th:value="${#dates.format(project.surveyTime, 'yyyy-MM-dd')}"
+                                                           th:value="${#dates.format(project.surveyTime, 'yyyy/MM/dd')}"
                                                            type="text" class="form-control"
                                                            data-inputmask-alias="datetime"
                                                            data-inputmask-inputformat="yyyy/mm/dd" data-mask>
@@ -117,7 +117,7 @@
                                                                 class="far fa-calendar-alt"></i></span>
                                                     </div>
                                                     <input id="executeTime" name="executeTime"
-                                                           th:value="${#dates.format(project.executeTime, 'yyyy-MM-dd')}"
+                                                           th:value="${#dates.format(project.executeTime, 'yyyy/MM/dd')}"
                                                            type="text" class="form-control"
                                                            data-inputmask-alias="datetime"
                                                            data-inputmask-inputformat="yyyy/mm/dd" data-mask>
@@ -131,7 +131,7 @@
                                                                 class="far fa-calendar-alt"></i></span>
                                                     </div>
                                                     <input id="verifyTime" name="verifyTime"
-                                                           th:value="${#dates.format(project.verifyTime, 'yyyy-MM-dd')}"
+                                                           th:value="${#dates.format(project.verifyTime, 'yyyy/MM/dd')}"
                                                            type="text" class="form-control"
                                                            data-inputmask-alias="datetime"
                                                            data-inputmask-inputformat="yyyy/mm/dd" data-mask>
@@ -145,7 +145,7 @@
                                                                 class="far fa-calendar-alt"></i></span>
                                                     </div>
                                                     <input id="onlineTime" name="onlineTime"
-                                                           th:value="${#dates.format(project.onlineTime, 'yyyy-MM-dd')}"
+                                                           th:value="${#dates.format(project.onlineTime, 'yyyy/MM/dd')}"
                                                            type="text" class="form-control"
                                                            data-inputmask-alias="datetime"
                                                            data-inputmask-inputformat="yyyy/mm/dd" data-mask>
@@ -159,7 +159,7 @@
                                                             class="far fa-calendar-alt"></i></span>
                                                 </div>
                                                 <input id="acceptTime" name="acceptTime"
-                                                       th:value="${#dates.format(project.acceptTime, 'yyyy-MM-dd')}"
+                                                       th:value="${#dates.format(project.acceptTime, 'yyyy/MM/dd')}"
                                                        type="text" class="form-control"
                                                        data-inputmask-alias="datetime"
                                                        data-inputmask-inputformat="yyyy/mm/dd" data-mask>
@@ -185,6 +185,7 @@
     <footer class="main-footer" th:include="common/footer::footer"/>
     <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
 </div>
+<th:block th:include="common/js::js"/>
 <script>
     $(function () {
         $.validator.setDefaults({
@@ -321,6 +322,5 @@
         $('[data-mask]').inputmask();
     })
 </script>
-<th:block th:include="common/js::js"/>
 </body>
 </html>

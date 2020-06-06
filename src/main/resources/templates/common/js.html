@@ -63,19 +63,24 @@
     <script src="/static/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="/static/plugins/toastr/toastr.min.js"></script>
-    <script th:if="${!#strings.isEmpty(msg)}">
-        switch("[[${type}]]") {
+    <script th:if="${!#strings.isEmpty(toa.msg)}">
+        var title = "温馨提示";
+        switch("[[${toa.type}]]") {
             case 'info':
-                toastr.info("[[${msg}]]");
+                toastr.info("[[${toa.msg}]]");
+                // toastr.info("[[${toa.msg}]]", title);
                 break;
             case 'warning':
-                toastr.warning("[[${msg}]]");
+                toastr.warning("[[${toa.msg}]]");
+                // toastr.warning("[[${toa.msg}]]", title);
                 break;
             case 'error':
-                toastr.error("[[${msg}]]");
+                toastr.error("[[${toa.msg}]]");
+                // toastr.error("[[${toa.msg}]]", title);
                 break;
             default:
-                toastr.success("[[${msg}]]");
+                toastr.success("[[${toa.msg}]]");
+                // toastr.success("[[${toa.msg}]]", title);
         }
     </script>
 </div>

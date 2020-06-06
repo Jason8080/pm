@@ -30,7 +30,8 @@ public class StageKit {
         long target = time.getTime();
         long current = System.currentTimeMillis();
         long diffDays = (target - current) / (1000 * 3600 * 24);
-        return diffDays == 0 ? (target - current < 0 ? -1 : diffDays) : diffDays;
+//        return diffDays == 0 ? (target - current < 0 ? -1 : diffDays) : diffDays;
+        return diffDays-1;
     }
 
     public static void setCurrentTime(Project project) {

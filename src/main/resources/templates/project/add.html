@@ -167,6 +167,7 @@
     <footer class="main-footer" th:include="common/footer::footer"/>
     <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
 </div>
+<th:block th:include="common/js::js"/>
 <script>
     $(function () {
         $.validator.setDefaults({
@@ -303,6 +304,5 @@
         $('[data-mask]').inputmask();
     })
 </script>
-<th:block th:include="common/js::js"/>
 </body>
 </html>

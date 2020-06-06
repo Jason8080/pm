@@ -119,7 +119,7 @@
     <footer class="main-footer" th:include="common/footer::footer"/>
     <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
 </div>
-<th:block th:include="common/js::js"/>
+<th:block th:include="/common/js::js"/>
 <script>
     $("input[data-bootstrap-switch]").each(function(){
         $(this).bootstrapSwitch('state', $(this).prop('checked'));

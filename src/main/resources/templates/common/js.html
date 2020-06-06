@@ -63,7 +63,7 @@
     <script src="/static/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="/static/plugins/toastr/toastr.min.js"></script>
-    <script th:if="${!#strings.isEmpty(toa.msg)}">
+    <script th:if="${toa!=null and !#strings.isEmpty(toa.msg)}">
         var title = "温馨提示";
         switch("[[${toa.type}]]") {
             case 'info':

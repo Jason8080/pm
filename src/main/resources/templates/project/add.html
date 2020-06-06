@@ -167,9 +167,12 @@
     <footer class="main-footer" th:include="common/footer::footer"/>
     <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
 </div>
-<th:block th:include="common/js::js"/>
+<th:block th:include="/common/js::js"/>
 <script>
     $(function () {
+        $('.slider').bootstrapSlider();
+        $('[data-mask]').inputmask();
+
         $.validator.setDefaults({
             submitHandler: function () {
                 return true;
@@ -192,7 +195,6 @@
             }
             return value!=undefined && value!='';
         });
-
         $('#addForm').validate({
             rules: {
                 name: {
@@ -300,8 +302,6 @@
                 $(element).removeClass('is-invalid');
             }
         });
-        $('.slider').bootstrapSlider();
-        $('[data-mask]').inputmask();
     })
 </script>
 </body>

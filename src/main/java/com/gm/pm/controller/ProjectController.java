@@ -55,8 +55,9 @@ public class ProjectController {
                       @RequestParam(defaultValue = "5") Integer size
     ) {
         projectService.add(project);
-        model.addAttribute("msg", "添加成功");
-        return "redirect:/project/list?start=" + start + "&size=" + size;
+        model.addAttribute("start", start);
+        model.addAttribute("size", size);
+        return "redirect:/project/list";
     }
 
     @GetMapping(value = "update/{id}")
@@ -78,11 +79,11 @@ public class ProjectController {
                          @RequestParam(defaultValue = "5") Integer size
     ) throws Exception {
         projectService.update(project);
-        model.addAttribute("msg", "修改成功");
-        String chooseParam = pc.getChoose() != null ? ("&choose=" + pc.getChoose()) : "";
-        String encode = URLEncoder.encode(pc.getLikes(), "UTF-8");
-        String likesParam = !StringUtils.isEmpty(pc.getLikes()) ? ("&likes=" + encode) : "";
-        return "redirect:/project/list?start=" + start + "&size=" + size + chooseParam + likesParam;
+        model.addAttribute("start", start);
+        model.addAttribute("size", size);
+        model.addAttribute("choose", pc.getChoose());
+        model.addAttribute("likes", pc.getLikes());
+        return "redirect:/project/list";
     }
 
 
@@ -92,7 +93,8 @@ public class ProjectController {
                       @RequestParam(defaultValue = "5") Integer size
     ) {
         projectService.del(id);
-        model.addAttribute("msg", "删除成功");
-        return "redirect:/project/list?start=" + start + "&size=" + size;
+        model.addAttribute("start", start);
+        model.addAttribute("size", size);
+        return "redirect:/project/list";
     }
 }

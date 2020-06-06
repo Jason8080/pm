@@ -97,7 +97,7 @@
         select * from tb_project
         <where>
             <if test="pc.likes!=null and pc.likes!=''">
-                and pm_name like #{pc.likes} or `name` like #{pc.likes}
+                and (pm_name like #{pc.likes} or `name` like #{pc.likes})
             </if>
             <if test="pc.overdue!=null and pc.overdue">
                 and (current_stage &lt; 100 and `current_time` &lt; now())

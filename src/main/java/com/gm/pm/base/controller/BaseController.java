@@ -1,6 +1,7 @@
 package com.gm.pm.base.controller;
 
 import com.gm.pm.entity.Login;
+import com.gm.pm.kit.TokenKit;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -32,7 +33,7 @@ public class BaseController {
      * @return
      */
     public String generateToken(Login login){
-        return "";
+        return TokenKit.generateToken(login);
     }
 
     /**

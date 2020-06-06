@@ -1,5 +1,7 @@
 package com.gm.pm.kit;
 
+import com.gm.pm.entity.Login;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,5 +37,15 @@ public class TokenKit {
             }
         }
         return null;
+    }
+
+    /**
+     * 生成token
+     *
+     * @param login
+     * @return
+     */
+    public static String generateToken(Login login) {
+        return "";
     }
 }

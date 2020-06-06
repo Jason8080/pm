@@ -9,4 +9,5 @@ import lombok.Data;
 public class Login {
     private String name;
     private String pass;
+    private String remember;
 }

@@ -23,37 +23,34 @@
         <div class="content-header" th:include="common/navbar::navbar(menu='', menuUrl='', currentPage='项目管理')"/>
 
         <section class="content">
-<!--            <div class="container-fluid">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-12">-->
-                        <div class="card">
+            <div class="container-fluid">
+                <form id="listForm" action="/project/list" method="post">
+                    <input id="start" type="hidden" name="start" th:value="${page.getPageNum()}"/>
+                    <input id="size" type="hidden" name="size" th:value="${page.getPageSize()}"/>
+                    <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">项目列表</h3>
                                 <div class="card-tools">
-                                    <form action="/project/list" method="post">
-                                        <input type="hidden" name="start" th:value="${page.getPageNum()}"/>
-                                        <input type="hidden" name="size" th:value="${page.getPageSize()}"/>
-                                        <div class="input-group" style="width: 100%;">
-                                            <div class="input-group-append">
-                                                <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}" class="btn btn-success float-left">添加</a>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <select name="overdue" class="btn btn-default float-left">
-                                                    <option th:selected="${pc.overdue}" value="0">查看全部</option>
-                                                    <option th:selected="${pc.overdue}" value="1">只看逾期</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <input type="text" name="likes" th:value="${pc.likes}"
-                                                       class="form-control float-right" placeholder="项目经理或客户名称..">
-                                            </div>
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                            </div>
+                                    <div class="input-group" style="width: 100%;">
+                                        <div class="input-group-append">
+                                            <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}" class="btn btn-success float-left">添加</a>
                                         </div>
-                                    </form>
+                                        <div class="input-group-append">
+                                            <select name="overdue" class="btn btn-default float-left">
+                                                <option th:selected="${pc.overdue}" value="0">查看全部</option>
+                                                <option th:selected="${pc.overdue}" value="1">只看逾期</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <input type="text" name="likes" th:value="${pc.likes}"
+                                                   class="form-control float-right" placeholder="项目经理或客户名称..">
+                                        </div>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -95,7 +92,8 @@
                                             </small>
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" th:href="@{'/project/update/'+${project.id}+'?start='+${start}+'&size='+${size}}">
+                                            <a class="btn btn-info btn-sm"
+                                               th:href="@{'/project/update/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.overdue!=null?('&overdue='+pc.overdue):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 修改
@@ -112,9 +110,8 @@
                             </div>
                             <div class="card-footer clearfix" th:include="common/page::page"/>
                         </div>
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+                </form>
+            </div>
         </section>
     </div>
 

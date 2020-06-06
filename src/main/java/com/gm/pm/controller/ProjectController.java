@@ -7,7 +7,11 @@ import com.gm.pm.entity.ProjectCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * @author Jason
@@ -52,7 +56,7 @@ public class ProjectController {
     }
 
     @GetMapping(value = "update/{id}")
-    public String update(Model model, @PathVariable Long id,
+    public String update(Model model, @PathVariable Long id, ProjectCondition pc,
                          @RequestParam(defaultValue = "1") Integer start,
                          @RequestParam(defaultValue = "5") Integer size
     ) {
@@ -60,16 +64,20 @@ public class ProjectController {
         model.addAttribute("project", project);
         model.addAttribute("start", start);
         model.addAttribute("size", size);
+        model.addAttribute("pc", pc);
         return "project/update";
     }
 
     @PostMapping(value = "update")
-    public String update(Project project,
+    public String update(Project project, ProjectCondition pc,
                          @RequestParam(defaultValue = "1") Integer start,
                          @RequestParam(defaultValue = "5") Integer size
-    ) {
+    ) throws Exception {
         projectService.update(project);
-        return "redirect:/project/list?start=" + start + "&size=" + size;
+        String overdueParam = pc.getOverdue() != null ? ("&overdue=" + pc.getOverdue()) : "";
+        String encode = URLEncoder.encode(pc.getLikes(), "UTF-8");
+        String likesParam = !StringUtils.isEmpty(pc.getLikes())? ("&likes=" + encode) : "";
+        return "redirect:/project/list?start=" + start + "&size=" + size + overdueParam + likesParam;
     }
 
 

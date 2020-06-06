@@ -2,29 +2,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="panelBar" th:fragment="page">
-    <div class="ui-corner-all">
-        <ul class="pagination pagination-sm float-left">
-            <li class="page-item">
-                共 [[${page.total}]] 条
-            </li>
-        </ul>
-        <ul class="pagination pagination-sm float-right">
-            <li class="page-item">
-                <a class="page-link" th:href="@{'?start=1&size=5'}">首页</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" th:href="@{'?start='+ ${page.prePage}+'&size=5'}">上页</a>
-            </li>
-            <li th:each="i:${page.navigatepageNums}" th:class="'page-item '+ ${page.pageNum==i?'active':''}">
-                <a class="page-link" th:href="@{'?start='+${i}+'&size=5'}">[[${i}]]</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" th:href="@{'?start='+ ${page.nextPage}+'&size=5'}">下页</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" th:href="@{'?start='+ ${page.pages}+'&size=5'}">尾页</a>
-            </li>
-        </ul>
+    <script>
+        function toPage(start, size){
+            $("#start").val(start);
+            $("#size").val(size);
+            $("#listForm").submit();
+        }
+    </script>
+    <div class="btn-group">
+        共 [[${page.total}]] 条
+    </div>
+    <div class="btn-group float-right">
+        <button type="button" class="btn btn-default"
+                th:onclick="'toPage(1, '+${page.pageSize}+')'">首页</button>
+
+        <button type="button" class="btn btn-default"
+                th:onclick="'toPage('+${page.prePage}+','+${page.pageSize}+')'">上页</button>
+
+        <button type="button" th:each="i:${page.navigatepageNums}"
+                th:class="'btn btn-'+${page.pageNum==i?'primary':'default'}"
+                th:onclick="'toPage('+${i}+','+${page.pageSize}+')'">
+            [[${i}]]
+        </button>
+
+        <button type="button" class="btn btn-default"
+                th:onclick="'toPage('+${page.nextPage}+','+${page.pageSize}+')'">下页</button>
+
+        <button type="button" class="btn btn-default"
+                th:onclick="'toPage('+${page.pages}+','+${page.pageSize}+')'">尾页</button>
     </div>
 </div>
 </body>

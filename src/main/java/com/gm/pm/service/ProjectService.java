@@ -1,4 +1,4 @@
-package com.gm.pm;
+package com.gm.pm.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;

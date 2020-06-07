@@ -4,6 +4,7 @@ import com.gm.pm.entity.Login;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * @author Jason
@@ -45,7 +46,8 @@ public class TokenKit {
      * @param login
      * @return
      */
-    public static String generateToken(Login login) {
-        return "";
+    public static void generateToken(Login login) {
+        String token = UUID.randomUUID().toString();
+        login.setToken(token);
     }
 }

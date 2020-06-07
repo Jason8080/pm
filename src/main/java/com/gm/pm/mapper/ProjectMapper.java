@@ -11,13 +11,6 @@ import org.apache.ibatis.annotations.Param;
  * @author Jason
  */
 public interface ProjectMapper {
-    /**
-     * Insert integer.
-     *
-     * @param project the project
-     * @return the integer
-     */
-    Page selectList(Project project);
 
     /**
      * Insert integer.

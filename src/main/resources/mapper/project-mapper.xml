@@ -91,15 +91,6 @@
         delete from tb_project where id=#{id}
     </delete>
 
-    <select id="selectList" resultMap="proMap">
-        select * from tb_project
-        <where>
-            <if test="pmName!=null and pmName!=''">
-                pm_name like concat('%', #{pmName}, '%')
-            </if>
-        </where>
-    </select>
-
     <select id="selectBy" resultMap="proMap">
         select * from tb_project
         <where>

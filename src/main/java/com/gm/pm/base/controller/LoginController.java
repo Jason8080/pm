@@ -29,6 +29,14 @@ public class LoginController extends BaseController {
         model.addAttribute("toa", toa);
         return "login";
     }
+    @GetMapping(value = "/logout")
+    public String logout(RedirectAttributes model, HttpServletResponse res) {
+        model.addAttribute("msg", "登出成功!");
+        Cookie cookie = new Cookie("token", "");
+        cookie.setMaxAge(0);
+        res.addCookie(cookie);
+        return "redirect:/login";
+    }
     @PostMapping(value = "/login")
     public String login(RedirectAttributes model, Login login,
                         HttpServletRequest request, HttpServletResponse res
@@ -39,7 +47,7 @@ public class LoginController extends BaseController {
         switch (msg){
             case "ok": {
                 model.addAttribute("token", login.getToken());
-                model.addAttribute("msg", "登陆成功!");
+                model.addAttribute("msg", "登入成功!");
                 Cookie cookie = new Cookie("token", login.getToken());
                 res.addCookie(cookie);
                 return "redirect:/";

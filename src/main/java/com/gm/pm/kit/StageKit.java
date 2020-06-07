@@ -45,6 +45,7 @@ public class StageKit {
             project.setCurrentTime(currentTime);
         } catch (Exception e) {
             e.printStackTrace();
+            project.setCurrentTime(new Date());
         }
     }
 }

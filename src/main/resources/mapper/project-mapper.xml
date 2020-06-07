@@ -33,7 +33,14 @@
             <if test="id==null">
                 null,
             </if>
-            #{name}, #{pmName}, #{currentStage},
+            #{name},
+            <if test="pmName!=null and pmName!=''">
+                #{pmName},
+            </if>
+            <if test="pmName==null or pmName==''">
+                null,
+            </if>
+            #{currentStage},
             #{currentTime}, #{currentSlider}, #{demand},
             #{planTime}, #{surveyTime}, #{executeTime},
             #{verifyTime}, #{onlineTime}, #{acceptTime}
@@ -99,8 +106,14 @@
             <if test="pc.likes!=null and pc.likes!=''">
                 and (pm_name like #{pc.likes} or `name` like #{pc.likes})
             </if>
-            <if test="pc.choose!=null and pc.choose">
-                and (current_stage &lt; 100 and `current_time` &lt; now())
+            <if test="pc.choose==1 or pc.choose==3">
+                and (pm_name != '' and pm_name is not null)
+            </if>
+            <if test="pc.choose==2 or pc.choose==4">
+                and (pm_name = '' or pm_name is null)
+            </if>
+            <if test="pc.choose==3 or pc.choose==4">
+                and (current_slider &lt; 100 and `current_time` &lt; now())
             </if>
         </where>
     </select>

@@ -47,11 +47,23 @@ public class TokenKit {
      * @return
      */
     public static void generateToken(Login login) {
-        String token = UUID.randomUUID().toString();
+        JwtKit.Head head = new JwtKit.Head();
+        JwtKit.Body body = new JwtKit.Body();
+        body.setExp((72 * 3600 * 1000L));
+        body.setName(login.getName());
+        body.setIp(login.getLastIp());
+        body.setRoles(login.getRoles());
+        body.setJti("");
+        String token = JwtKit.sign(head, body);
         login.setToken(token);
     }
 
-    public static Login getLogin(String token) {
-        return new Login();
+    public static Login parseToken(String token) {
+        JwtKit.Body body = JwtKit.sign(token);
+        if (body != null) {
+            return new Login(token, body.getName(), body.getRoles(),
+                    body.getExp(), body.getIp(), body.getJti());
+        }
+        return null;
     }
 }

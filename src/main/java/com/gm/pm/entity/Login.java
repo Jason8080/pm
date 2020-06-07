@@ -16,4 +16,14 @@ public class Login {
     private String remember = "off";
     private String lastIp;
     private Date lastTime;
+
+    public Login() {
+    }
+
+    public Login(String token, String name, String roles, Long exp, String ip, String jti) {
+        this.token = token;
+        this.name = name;
+        this.roles = roles;
+        this.lastIp = ip;
+    }
 }

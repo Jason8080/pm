@@ -37,6 +37,6 @@ public class PermissionController extends BaseController {
      * @return
      */
     public Login getCurrentUser(){
-        return TokenKit.getLogin(token);
+        return TokenKit.parseToken(token);
     }
 }

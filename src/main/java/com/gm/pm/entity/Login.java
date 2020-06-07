@@ -20,8 +20,14 @@ public class Login {
     public Login() {
     }
 
-    public Login(String token, String name, String roles, Long exp, String ip, String jti) {
+    public Login(String token, String name, String roles, String ip) {
         this.token = token;
+        this.name = name;
+        this.roles = roles;
+        this.lastIp = ip;
+    }
+
+    public Login(String name, String roles, String ip) {
         this.name = name;
         this.roles = roles;
         this.lastIp = ip;

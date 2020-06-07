@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
 /**
@@ -52,7 +53,7 @@ public class JwtKit {
     }
 
     public static Body sign(String sign) {
-        String[] split = sign.split(".");
+        String[] split = sign.split("\\.");
         if(split.length == 3){
             String eh = split[0];
             String eb = split[1];
@@ -108,5 +109,14 @@ public class JwtKit {
             stringBuffer.append(temp);
         }
         return stringBuffer.toString();
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        String jason = Base64.getEncoder().encodeToString("Jason".getBytes("UTF-8"));
+        byte[] decode = Base64.getDecoder().decode(jason.getBytes("UTF-8"));
+        String s = new String(decode);
+        System.out.println(s);
+
     }
 }

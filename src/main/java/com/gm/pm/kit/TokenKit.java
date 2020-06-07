@@ -53,7 +53,6 @@ public class TokenKit {
         body.setName(login.getName());
         body.setIp(login.getLastIp());
         body.setRoles(login.getRoles());
-        body.setJti("");
         String token = JwtKit.sign(head, body);
         login.setToken(token);
     }
@@ -61,9 +60,17 @@ public class TokenKit {
     public static Login parseToken(String token) {
         JwtKit.Body body = JwtKit.sign(token);
         if (body != null) {
-            return new Login(token, body.getName(), body.getRoles(),
-                    body.getExp(), body.getIp(), body.getJti());
+            return new Login(token, body.getName(), body.getRoles(), body.getIp());
         }
         return null;
+    }
+
+
+    public static void main(String[] args) {
+        Login login = new Login("Jason", "admin", "127.0.0.1");
+        generateToken(login);
+        System.out.println(login.getToken());
+        Login l = parseToken(login.getToken());
+        System.out.println(l);
     }
 }

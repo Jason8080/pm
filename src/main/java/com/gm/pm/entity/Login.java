@@ -11,7 +11,6 @@ import java.util.Date;
 public class Login {
     private String name;
     private String pass;
-    private String token;
     private String roles;
     private String remember = "off";
     private String lastIp;
@@ -19,13 +18,6 @@ public class Login {
 
 
     public Login() {
-    }
-
-    public Login(String token, String name, String roles, String ip) {
-        this.token = token;
-        this.name = name;
-        this.roles = roles;
-        this.lastIp = ip;
     }
 
     public Login(String name, String roles, String ip) {

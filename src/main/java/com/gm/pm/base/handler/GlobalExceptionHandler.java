@@ -62,6 +62,7 @@ public class GlobalExceptionHandler {
         ModelAndView mv = new ModelAndView();
         String msg = URLEncoder.encode("请联系管理员!", "UTF-8");
         mv.setViewName("redirect:/error/500?type=warning&msg=" + msg);
+        e.printStackTrace();
         return mv;
     }
 }

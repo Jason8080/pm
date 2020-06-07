@@ -3,10 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gm.pm.mapper.LoginMapper">
-    <resultMap id="userMap" type="User">
+    <resultMap id="loginMap" type="Login">
         <id property="name" column="name"/>
         <result property="pass" column="pass"/>
-        <result property="token" column="token"/>
         <result property="roles" column="roles"/>
         <result property="remember" column="remember"/>
         <result property="lastIp" column="last_ip"/>
@@ -15,16 +14,13 @@
 
 
     <insert id="insert" parameterType="Login">
-        insert into login values(#{name},#{pass},#{token},#{roles},#{remember},#{lastIp},#{lastTime})
+        insert into login values(#{name},#{pass},#{roles},#{remember},#{lastIp},#{lastTime})
     </insert>
 
 
     <update id="login" parameterType="Login" timeout="1000">
         update login
         <set>
-            <if test="token!=null and token!=''">
-                token = #{token},
-            </if>
             <if test="remember!=null and remember!=''">
                 remember = #{remember},
             </if>
@@ -36,4 +32,9 @@
             `name` = #{name} and `pass` = #{pass}
         </where>
     </update>
+
+
+    <select id="name2pass" resultMap="loginMap">
+        select * from login where `name` = #{name} and `pass` = #{pass}
+    </select>
 </mapper>

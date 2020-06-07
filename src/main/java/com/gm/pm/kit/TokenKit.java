@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class TokenKit {
 
-    public static long exp = 2 * 3600 * 1000L;
+    public static int exp = 2 * 3600 * 1000;
 
     /**
      * 获取请求头中的Token
@@ -49,7 +49,7 @@ public class TokenKit {
      * @param login
      * @return
      */
-    public static void generateToken(Login login) {
+    public static String generateToken(Login login) {
         JwtKit.Head head = new JwtKit.Head();
         JwtKit.Body body = new JwtKit.Body();
         body.setExp(System.currentTimeMillis() + exp);
@@ -57,7 +57,7 @@ public class TokenKit {
         body.setIp(login.getLastIp());
         body.setRoles(login.getRoles());
         String token = JwtKit.sign(head, body);
-        login.setToken(token);
+        return token;
     }
 
     public static Login parseToken(String token) {
@@ -66,7 +66,7 @@ public class TokenKit {
             Long exp = body.getExp();
             long current = System.currentTimeMillis();
             if (exp != null && current < exp) {
-                return new Login(token, body.getName(), body.getRoles(), body.getIp());
+                return new Login(body.getName(), body.getRoles(), body.getIp());
             }
         }
         return null;
@@ -84,9 +84,9 @@ public class TokenKit {
 
     public static void main(String[] args) {
         Login login = new Login("Jason", "admin", "127.0.0.1");
-        generateToken(login);
-        System.out.println(login.getToken());
-        Login l = parseToken(login.getToken());
+        String token = generateToken(login);
+        System.out.println(token);
+        Login l = parseToken(token);
         System.out.println(l);
     }
 }

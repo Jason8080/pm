@@ -26,11 +26,19 @@ public class PermissionController extends BaseController {
             @CookieValue(value="token", name = "token") String token,
             HttpServletRequest request, HttpServletResponse response, HttpSession session
     ){
-        TokenKit.assertToken(token);
+        Login login = TokenKit.assertToken(token);
+        saveSession(session, login);
         this.token = token;
         this.request = request;
         this.response = response;
         this.session = session;
+    }
+
+    private void saveSession(HttpSession session, Login login) {
+        Object o = session.getAttribute("login");
+        if(o==null){
+            session.setAttribute("login", login);
+        }
     }
 
     /**

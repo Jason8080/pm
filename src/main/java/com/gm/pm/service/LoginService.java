@@ -17,8 +17,8 @@ public class LoginService {
 
 
     public String login(Login login) {
-        TokenKit.generateToken(login);
-        Integer num = loginMapper.login(login);
-        return num>0?"ok":"用户名或密码错误!";
+        Login dbLogin = loginMapper.name2pass(login.getName(), login.getPass());
+        login.setRoles(dbLogin.getRoles());
+        return dbLogin!=null?TokenKit.generateToken(login):null;
     }
 }

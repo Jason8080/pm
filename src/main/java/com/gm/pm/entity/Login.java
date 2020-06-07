@@ -12,6 +12,7 @@ public class Login {
     private String name;
     private String pass;
     private String token;
+    private String roles;
     private String remember = "off";
     private String lastIp;
     private Date lastTime;

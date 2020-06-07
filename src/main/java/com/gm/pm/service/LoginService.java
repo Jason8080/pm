@@ -18,7 +18,10 @@ public class LoginService {
 
     public String login(Login login) {
         Login dbLogin = loginMapper.name2pass(login.getName(), login.getPass());
-        login.setRoles(dbLogin.getRoles());
-        return dbLogin!=null?TokenKit.generateToken(login):null;
+        if(dbLogin!=null){
+            login.setRoles(dbLogin.getRoles());
+            return TokenKit.generateToken(login);
+        }
+        return null;
     }
 }

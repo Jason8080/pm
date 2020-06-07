@@ -1,15 +1,18 @@
 package com.gm.pm.kit;
 
 import com.gm.pm.entity.Login;
+import com.gm.pm.ex.TokenException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.UUID;
 
 /**
  * @author Jason
  */
 public class TokenKit {
+
+    public static long exp = 2 * 3600 * 1000L;
+
     /**
      * 获取请求头中的Token
      *
@@ -49,7 +52,7 @@ public class TokenKit {
     public static void generateToken(Login login) {
         JwtKit.Head head = new JwtKit.Head();
         JwtKit.Body body = new JwtKit.Body();
-        body.setExp((72 * 3600 * 1000L));
+        body.setExp(System.currentTimeMillis() + exp);
         body.setName(login.getName());
         body.setIp(login.getLastIp());
         body.setRoles(login.getRoles());
@@ -60,9 +63,22 @@ public class TokenKit {
     public static Login parseToken(String token) {
         JwtKit.Body body = JwtKit.sign(token);
         if (body != null) {
-            return new Login(token, body.getName(), body.getRoles(), body.getIp());
+            Long exp = body.getExp();
+            long current = System.currentTimeMillis();
+            if (exp != null && current < exp) {
+                return new Login(token, body.getName(), body.getRoles(), body.getIp());
+            }
         }
         return null;
+    }
+
+    public static Login assertToken(String token) {
+        Login login = parseToken(token);
+        try {
+            return Assert.notEmpty(login);
+        } catch (Exception e) {
+            throw new TokenException();
+        }
     }
 
 

@@ -17,6 +17,7 @@ public class Login {
     private String lastIp;
     private Date lastTime;
 
+
     public Login() {
     }
 

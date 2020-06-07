@@ -15,7 +15,12 @@
             <form id="loginForm" action="/login" method="post">
                 <div class="form-group">
                     <div class="input-group mb-3">
-                        <input name="name" type="text" maxlength="20" class="form-control" placeholder="登录名">
+                        <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                               name="name"
+                               type="text"
+                               maxlength="20"
+                               class="form-control"
+                               placeholder="登录名">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>

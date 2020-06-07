@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Jason
@@ -46,6 +47,7 @@ public class LoginController extends BaseController {
         String msg = loginService.login(login);
         switch (msg){
             case "ok": {
+                saveSession(request.getSession(), login);
                 model.addAttribute("token", login.getToken());
                 model.addAttribute("msg", "登入成功!");
                 Cookie cookie = new Cookie("token", login.getToken());
@@ -58,5 +60,9 @@ public class LoginController extends BaseController {
                 return "redirect:/login";
             }
         }
+    }
+
+    private void saveSession(HttpSession session, Login login) {
+        session.setAttribute("login", login);
     }
 }

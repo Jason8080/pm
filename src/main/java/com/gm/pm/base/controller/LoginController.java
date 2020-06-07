@@ -23,15 +23,6 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @GetMapping(value = "/")
-    public ModelAndView index(Model model, Login login) {
-        model.addAttribute("login", login);
-        return new ModelAndView("index");
-    }
-    @GetMapping(value = "/lock")
-    public String lockscreen() {
-        return "lockscreen";
-    }
     @GetMapping(value = "/login")
     public String login(Model model, Toa toa) {
         model.addAttribute("toa", toa);

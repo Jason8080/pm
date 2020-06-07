@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
         ModelAndView mv = new ModelAndView();
         if(StringUtils.isEmpty(token)) {
             String msg = URLEncoder.encode("登陆超时或未登录!", "UTF-8");
-            mv.setViewName("redirect:/login?type=warning&msg="+msg);
+            mv.setViewName("redirect:/login");
         }else {
             mv.setViewName("forward:/error/"+400+"?type=error&msg=Cookies遇到问题, 请检查!");
         }

@@ -1,6 +1,7 @@
 package com.gm.pm.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.gm.pm.base.controller.PermissionController;
 import com.gm.pm.service.ProjectService;
 import com.gm.pm.base.controller.BaseController;
 import com.gm.pm.entity.Project;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("project")
-public class ProjectController extends BaseController {
+public class ProjectController extends PermissionController {
 
 
     @Autowired

@@ -12,13 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Jason
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
 
     @Autowired
     LoginService loginService;
@@ -29,7 +30,11 @@ public class LoginController {
         return "login";
     }
     @PostMapping(value = "/login")
-    public String login(RedirectAttributes model, Login login, HttpServletResponse res) {
+    public String login(RedirectAttributes model, Login login,
+                        HttpServletRequest request, HttpServletResponse res
+    ) {
+        String ip = getIP(request);
+        login.setLastIp(ip);
         String msg = loginService.login(login);
         switch (msg){
             case "ok": {

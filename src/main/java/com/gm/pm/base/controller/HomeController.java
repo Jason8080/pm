@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Jason
  */
 @Controller
-public class HomeController extends BaseController {
+public class HomeController extends PermissionController {
 
     @GetMapping(value = "/")
     public ModelAndView index(Model model, Toa toa, Login login) {

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("error")
-public class ErrorController {
+public class ErrorController extends BaseController {
 
     @GetMapping(value = "{code}")
     public String four(Model model, Toa toa,

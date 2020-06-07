@@ -50,4 +50,8 @@ public class TokenKit {
         String token = UUID.randomUUID().toString();
         login.setToken(token);
     }
+
+    public static Login getLogin(String token) {
+        return new Login();
+    }
 }

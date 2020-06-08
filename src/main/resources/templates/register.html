@@ -31,22 +31,8 @@
 
                 <div class="form-group">
                     <div class="input-group mb-3">
-                        <input type="email"
-                               name="email"
-                               maxlength="50"
-                               class="form-control"
-                               placeholder="邮箱">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="input-group mb-3">
-                        <input type="password"
+                        <input id="pass"
+                               type="password"
                                name="pass"
                                maxlength="20"
                                class="form-control"
@@ -102,12 +88,6 @@
 <script>
     $('#registerForm').validate({
         rules: {
-            email: {
-                required: true,
-                email: true,
-                minlength: 6,
-                maxlength: 50,
-            },
             name: {
                 required: true,
                 minlength: 3,
@@ -120,6 +100,7 @@
             },
             password: {
                 required: true,
+                equalTo: "#pass",
                 minlength: 3,
                 maxlength: 20,
             },
@@ -128,12 +109,6 @@
             },
         },
         messages: {
-            email: {
-                required: "请输入邮箱地址",
-                email: "请输入合法的邮箱地址",
-                minlength: "邮箱为6-50个字符",
-                maxlength: "邮箱为6-50个字符",
-            },
             name: {
                 required: "请输入登入名",
                 minlength: "登入名为3-20个字符",
@@ -146,6 +121,7 @@
             },
             password: {
                 required: "请确认登入密码",
+                equalTo: "两次输入的密码不一致",
                 minlength: "登入密码为3-20个字符",
                 maxlength: "登入密码为3-20个字符",
             },

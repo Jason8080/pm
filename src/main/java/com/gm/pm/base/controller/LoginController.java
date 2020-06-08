@@ -89,7 +89,7 @@ public class LoginController extends BaseController {
             model.addAttribute("type", "error");
             model.addAttribute("title", "注册失败");
             model.addAttribute("msg", "用户名已经存在!");
-            return "forward:/register";
+            return "redirect:/register";
         }
     }
 

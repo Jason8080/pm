@@ -40,9 +40,11 @@
                                                 <option th:selected="${pc.choose==0}" value="0">全部</option>
                                                 <option th:selected="${pc.choose==1}" value="1">全部已分配</option>
                                                 <option th:selected="${pc.choose==2}" value="2">全部未分配</option>
-                                                <option th:selected="${pc.choose==3}" value="3">已分配逾期</option>
-                                                <option th:selected="${pc.choose==4}" value="4">未分配逾期</option>
-                                                <option th:selected="${pc.choose==5}" value="5">按紧急排序</option>
+                                                <option th:selected="${pc.choose==3}" value="3">全部未关闭</option>
+                                                <option th:selected="${pc.choose==4}" value="4">全部已关闭</option>
+                                                <option th:selected="${pc.choose==5}" value="5">已分配逾期</option>
+                                                <option th:selected="${pc.choose==6}" value="6">未分配逾期</option>
+                                                <option th:selected="${pc.choose==7}" value="7">按紧急排序</option>
                                             </select>
                                         </div>
                                         <div class="input-group-append">

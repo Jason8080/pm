@@ -8,6 +8,7 @@
         <result property="name" column="name"/>
         <result property="pmName" column="pm_name"/>
         <result property="days" column="days"/>
+        <result property="status" column="status"/>
         <result property="currentStage" column="current_stage"/>
         <result property="currentTime" column="current_time"/>
         <result property="currentSlider" column="current_slider"/>
@@ -27,10 +28,10 @@
 
     <insert id="insert" parameterType="Project">
         insert into tb_project (
-        id, `name`, pm_name, days, current_stage,
-        `current_time`, current_slider, priority,
-        demand, completed, next_plan, risk, remarks,
-        plan_time, survey_time, execute_time,
+        id, `name`, pm_name, days, status,
+        current_stage, `current_time`, current_slider,
+        priority, demand, completed, next_plan, risk,
+        remarks, plan_time, survey_time, execute_time,
         verify_time, online_time, accept_time
         )
         values (
@@ -47,11 +48,8 @@
         <if test="pmName==null or pmName==''">
             null,
         </if>
-        <if test="days!=null">
-            #{days},
-        </if>
-        #{currentStage}, #{currentTime}, #{currentSlider},
-        #{priority}, #{demand},
+        #{days}, status}, #{currentStage}, #{currentTime},
+        #{currentSlider}, #{priority}, #{demand},
         #{completed}, #{nextPlan}, #{risk}, #{remarks},
         #{planTime}, #{surveyTime}, #{executeTime},
         #{verifyTime}, #{onlineTime}, #{acceptTime}
@@ -63,6 +61,9 @@
         <set>
             <if test="days!=null">
                 days=#{days},
+            </if>
+            <if test="status!=null">
+                status=#{status},
             </if>
             <if test="currentStage!=null and currentStage!=''">
                 current_stage=#{currentStage},
@@ -120,7 +121,7 @@
     </delete>
 
     <select id="selectBy" resultMap="proMap">
-        <if test="pc.choose==5">
+        <if test="pc.choose==7">
             select * from (
         </if>
         select * from tb_project
@@ -128,18 +129,24 @@
             <if test="pc.likes!=null and pc.likes!=''">
                 and (pm_name like #{pc.likes} or `name` like #{pc.likes})
             </if>
-            <if test="pc.choose==1 or pc.choose==3">
+            <if test="pc.choose==1 or pc.choose==5">
                 and (pm_name != '' and pm_name is not null)
             </if>
-            <if test="pc.choose==2 or pc.choose==4">
+            <if test="pc.choose==2 or pc.choose==6">
                 and (pm_name = '' or pm_name is null)
             </if>
-            <if test="pc.choose==3 or pc.choose==4">
+            <if test="pc.choose==5 or pc.choose==6">
                 and (current_slider &lt; 100 and `current_time` &lt; now())
+            </if>
+            <if test="pc.choose!=4">
+                and status &gt; 0
+            </if>
+            <if test="pc.choose==4">
+                and status = 0
             </if>
         </where>
         order by `current_time` asc
-        <if test="pc.choose==5">
+        <if test="pc.choose==7">
             ) tb order by tb.`priority` desc
         </if>
     </select>

@@ -120,6 +120,7 @@
                 and (current_slider &lt; 100 and `current_time` &lt; now())
             </if>
         </where>
+        order by `current_time`
     </select>
 
     <select id="selectById" resultMap="proMap">

@@ -49,7 +49,7 @@
         <if test="pmName==null or pmName==''">
             null,
         </if>
-        #{days}, status}, #{currentStage}, #{currentTime},
+        #{days}, #{status}, #{currentStage}, #{currentTime},
         #{currentSlider}, #{priority}, #{demand},
         #{completed}, #{nextPlan}, #{risk}, #{remarks},
         #{planTime}, #{surveyTime}, #{executeTime},

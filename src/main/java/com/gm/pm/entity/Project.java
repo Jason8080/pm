@@ -18,6 +18,9 @@ public class Project {
     private Date currentTime;
     private Integer currentSlider;
     private String demand;
+    private String completed;
+    private String nextPlan;
+    private String risk;
     private Long residualDay;
 
     public Long getResidualDay() {

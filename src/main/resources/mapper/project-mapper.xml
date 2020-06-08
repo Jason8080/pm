@@ -11,6 +11,9 @@
         <result property="currentTime" column="current_time"/>
         <result property="currentSlider" column="current_slider"/>
         <result property="demand" column="demand"/>
+        <result property="completed" column="completed"/>
+        <result property="nextPlan" column="next_plan"/>
+        <result property="risk" column="risk"/>
         <result property="planTime" column="plan_time"/>
         <result property="surveyTime" column="survey_time"/>
         <result property="executeTime" column="execute_time"/>
@@ -23,6 +26,7 @@
         insert into tb_project (
             id, `name`, pm_name, current_stage,
             `current_time`, current_slider, demand,
+            completed, next_plan, risk,
             plan_time, survey_time, execute_time,
             verify_time, online_time, accept_time
         )
@@ -42,9 +46,9 @@
             </if>
             #{currentStage},
             #{currentTime}, #{currentSlider}, #{demand},
+            #{completed}, #{nextPlan}, #{risk},
             #{planTime}, #{surveyTime}, #{executeTime},
             #{verifyTime}, #{onlineTime}, #{acceptTime}
-
         )
     </insert>
 
@@ -62,6 +66,15 @@
             </if>
             <if test="demand!=null and demand!=''">
                 demand=#{demand},
+            </if>
+            <if test="completed!=null and completed!=''">
+                completed=#{completed},
+            </if>
+            <if test="nextPlan!=null and nextPlan!=''">
+                next_plan=#{nextPlan},
+            </if>
+            <if test="risk!=null and risk!=''">
+                risk=#{risk},
             </if>
             <if test="planTime!=null">
                 plan_time=#{planTime},

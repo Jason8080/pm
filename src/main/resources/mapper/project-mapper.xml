@@ -28,7 +28,7 @@
 
     <insert id="insert" parameterType="Project">
         insert into tb_project (
-        id, `name`, pm_name, days, status,
+        id, client, `name`, pm_name, days, status,
         current_stage, `current_time`, current_slider,
         priority, demand, completed, next_plan, risk,
         remarks, plan_time, survey_time, execute_time,
@@ -41,7 +41,7 @@
         <if test="id==null">
             null,
         </if>
-        #{name},
+        #{client}, #{name},
         <if test="pmName!=null and pmName!=''">
             #{pmName},
         </if>
@@ -59,6 +59,9 @@
     <update id="update" parameterType="Project">
         update tb_project
         <set>
+            <if test="client!=null and client!=''">
+                client=#{client},
+            </if>
             <if test="days!=null">
                 days=#{days},
             </if>
@@ -127,7 +130,7 @@
         select * from tb_project
         <where>
             <if test="pc.likes!=null and pc.likes!=''">
-                and (pm_name like #{pc.likes} or `name` like #{pc.likes})
+                and (client like #{pc.likes} or pm_name like #{pc.likes} or `name` like #{pc.likes})
             </if>
             <if test="pc.choose==1 or pc.choose==5">
                 and (pm_name != '' and pm_name is not null)

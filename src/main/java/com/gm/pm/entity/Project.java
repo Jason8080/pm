@@ -12,6 +12,7 @@ import java.util.Date;
 @Data
 public class Project {
     private Long id;
+    private String client;
     private String name;
     private String pmName;
     private Integer days;

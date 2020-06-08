@@ -329,24 +329,24 @@
                     date: true,
                 },
                 surveyTime: {
+                    ato: "#currentStage",
                     date: true,
-                    compareDate: "#planTime",
                 },
                 executeTime: {
+                    ato: "#currentStage",
                     date: true,
-                    compareDate: "#surveyTime",
                 },
                 verifyTime: {
+                    ato: "#currentStage",
                     date: true,
-                    compareDate: "#executeTime",
                 },
                 onlineTime: {
+                    ato: "#currentStage",
                     date: true,
-                    compareDate: "#verifyTime",
                 },
                 acceptTime: {
+                    ato: "#currentStage",
                     date: true,
-                    compareDate: "#onlineTime",
                 },
             },
             messages: {
@@ -388,19 +388,24 @@
                 },
                 planTime: "请填写分配时间",
                 surveyTime: {
-                    compareDate: "调研时间应大于分配时间",
+                    ato: "请填写调研时间",
+                    date: "请填写正确的日期",
                 },
                 executeTime: {
-                    compareDate: "编码时间应大于调研时间",
+                    ato: "请填写编码时间",
+                    date: "请填写正确的日期",
                 },
                 verifyTime: {
-                    compareDate: "测试时间应大于编码时间",
+                    ato: "请填写测试时间",
+                    date: "请填写正确的日期",
                 },
                 onlineTime: {
-                    compareDate: "上线时间应大于测试时间",
+                    ato: "请填写上线时间",
+                    date: "请填写正确的日期",
                 },
                 acceptTime: {
-                    compareDate: "验收时间应大于上线时间",
+                    ato: "请填写验收时间",
+                    date: "请填写正确的日期",
                 },
             },
             errorElement: 'span',

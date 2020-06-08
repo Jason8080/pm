@@ -24,4 +24,13 @@ public class LoginService {
         }
         return null;
     }
+
+    public String register(Login login) {
+        Login dbLogin = loginMapper.select2name(login.getName());
+        if(dbLogin==null){
+            loginMapper.insert(login);
+            return TokenKit.generateToken(login);
+        }
+        return null;
+    }
 }

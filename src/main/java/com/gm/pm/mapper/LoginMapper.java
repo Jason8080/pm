@@ -25,4 +25,19 @@ public interface LoginMapper {
      * @return the login
      */
     Login name2pass(@Param("name") String name, @Param("pass") String pass);
+
+    /**
+     * Insert.
+     *
+     * @param login the login
+     */
+    void insert(Login login);
+
+    /**
+     * Select 2 name login.
+     *
+     * @param name the name
+     * @return the login
+     */
+    Login select2name(String name);
 }

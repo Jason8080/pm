@@ -3,21 +3,21 @@
 <head>
     <th:block th:include="common/head::head"/>
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
         <a href="/"><b>GM</b>LTE</a>
     </div>
     <div class="card">
-        <div class="card-body login-card-body">
-            <p class="login-box-msg">登入开始管理你的项目</p>
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">注册一个新的用户</p>
 
-            <form id="loginForm" action="/login" method="post">
+            <form id="registerForm" action="/register" method="post">
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <input onchange="this.value=this.value.replace(/\s+/g,'')"
-                               name="name"
                                type="text"
+                               name="name"
                                maxlength="20"
                                class="form-control"
                                placeholder="登入名">
@@ -31,11 +31,41 @@
 
                 <div class="form-group">
                     <div class="input-group mb-3">
-                        <input name="pass"
-                               type="password"
+                        <input type="email"
+                               name="email"
+                               maxlength="50"
+                               class="form-control"
+                               placeholder="邮箱">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="password"
+                               name="pass"
                                maxlength="20"
                                class="form-control"
-                               placeholder="密码">
+                               placeholder="设置密码">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="password"
+                               name="password"
+                               maxlength="20"
+                               class="form-control"
+                               placeholder="确认密码">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -48,26 +78,36 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input name="remember" type="checkbox" id="remember">
-                                <label for="remember">
-                                    记住我
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                <label for="agreeTerms">
+                                    我接受这个 <a href="#">条款</a>
                                 </label>
                             </div>
                         </div>
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">登入</button>
+                            <button type="submit" class="btn btn-primary btn-block">注册</button>
                         </div>
                     </div>
                 </div>
             </form>
+
+            <a href="/login" class="text-center">我已经有账户了</a>
         </div>
     </div>
 </div>
+
+
 <th:block th:include="common/js::js"/>
 
 <script>
-    $('#loginForm').validate({
+    $('#registerForm').validate({
         rules: {
+            email: {
+                required: true,
+                email: true,
+                minlength: 6,
+                maxlength: 50,
+            },
             name: {
                 required: true,
                 minlength: 3,
@@ -78,8 +118,22 @@
                 minlength: 3,
                 maxlength: 20,
             },
+            password: {
+                required: true,
+                minlength: 3,
+                maxlength: 20,
+            },
+            terms: {
+                required: true,
+            },
         },
         messages: {
+            email: {
+                required: "请输入邮箱地址",
+                email: "请输入合法的邮箱地址",
+                minlength: "邮箱为6-50个字符",
+                maxlength: "邮箱为6-50个字符",
+            },
             name: {
                 required: "请输入登入名",
                 minlength: "登入名为3-20个字符",
@@ -89,6 +143,14 @@
                 required: "请输入登入密码",
                 minlength: "登入密码为3-20个字符",
                 maxlength: "登入密码为3-20个字符",
+            },
+            password: {
+                required: "请确认登入密码",
+                minlength: "登入密码为3-20个字符",
+                maxlength: "登入密码为3-20个字符",
+            },
+            terms: {
+                required: "请勾选同意条款",
             },
         },
         errorElement: 'span',

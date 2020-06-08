@@ -37,4 +37,8 @@
     <select id="name2pass" resultMap="loginMap">
         select * from login where `name` = #{name} and `pass` = #{pass}
     </select>
+
+    <select id="select2name" resultMap="loginMap">
+        select * from login where `name` = #{name}
+    </select>
 </mapper>

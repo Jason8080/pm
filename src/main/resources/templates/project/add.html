@@ -42,6 +42,14 @@
                                                    class="form-control"
                                                    placeholder="客户名称">
                                         </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>工作量</label>
+                                            <input
+                                                   name="days"
+                                                   type="number"
+                                                   class="form-control"
+                                                   placeholder="工作量人天">
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -77,7 +85,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>已经完成</label>
                                                 <textarea name="completed" maxlength="100"
@@ -85,7 +93,7 @@
                                                           placeholder="已完成的内容; 注意排版哦.."></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>下步计划</label>
                                                 <textarea name="nextPlan" maxlength="50"
@@ -93,12 +101,20 @@
                                                           placeholder="下一步的内容; 注意排版哦.."></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>风险提示</label>
                                                 <textarea name="risk" maxlength="50"
                                                           class="form-control" rows="3"
                                                           placeholder="项目可能存在的风险; 注意排版哦.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>备注</label>
+                                                <textarea name="remarks" maxlength="50"
+                                                          class="form-control" rows="3"
+                                                          placeholder="需要备注吗; 注意排版哦.."></textarea>
                                             </div>
                                         </div>
                                     </div>

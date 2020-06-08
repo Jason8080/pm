@@ -14,6 +14,7 @@ public class Project {
     private Long id;
     private String name;
     private String pmName;
+    private Integer days;
     private String currentStage;
     private Date currentTime;
     private Integer currentSlider;
@@ -21,6 +22,7 @@ public class Project {
     private String completed;
     private String nextPlan;
     private String risk;
+    private String remarks;
     private Long residualDay;
 
     public Long getResidualDay() {

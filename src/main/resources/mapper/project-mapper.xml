@@ -143,10 +143,10 @@
                 and (current_slider &lt; 100 and `current_time` &lt; now())
             </if>
             <if test="pc.choose!=4">
-                and status &gt; 0
+                and (status is null or status = 'on')
             </if>
             <if test="pc.choose==4">
-                and status = 0
+                and (status is null or status = 'off')
             </if>
         </where>
         order by `current_time` asc

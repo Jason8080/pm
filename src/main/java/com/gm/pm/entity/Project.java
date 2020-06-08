@@ -16,7 +16,7 @@ public class Project {
     private String name;
     private String pmName;
     private Integer days;
-    private Integer status;
+    private String status;
     private String currentStage;
     private Date currentTime;
     private Integer currentSlider;

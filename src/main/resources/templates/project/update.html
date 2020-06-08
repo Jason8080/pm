@@ -293,7 +293,7 @@
             return value != undefined && value != '';
         });
 
-        jQuery.validator.addMethod("positiveinteger", function(value, element, param) {
+        jQuery.validator.addMethod("positiveinteger", function (value, element, param) {
             var num = parseInt(value);
             return param || (num > 0 && (num + "") == value);
         }, "请输入正整数");

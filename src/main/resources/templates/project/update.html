@@ -45,7 +45,7 @@
                                                    type="text"
                                                    th:value="${project.client}"
                                                    class="form-control"
-                                                   placeholder="项目名称" disabled>
+                                                   placeholder="客户名称" disabled>
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>项目名称</label>
@@ -54,7 +54,7 @@
                                                    type="text"
                                                    th:value="${project.name}"
                                                    class="form-control"
-                                                   placeholder="项目名称" disabled>
+                                                   placeholder="项目名称">
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>工作量</label>
@@ -301,13 +301,13 @@
         $('#addForm').validate({
             rules: {
                 client: {
-                    minlength: 6,
-                    maxlength: 30,
-                },
-                name: {
                     required: true,
                     minlength: 6,
                     maxlength: 20,
+                },
+                name: {
+                    minlength: 6,
+                    maxlength: 30,
                 },
                 pmName: {
                     ato: "#currentStage",
@@ -360,13 +360,19 @@
             },
             messages: {
                 client: {
-                    minlength: "客户名称为6-30个字符",
-                    maxlength: "客户名称为6-30个字符",
+                    required: "请填写客户名称",
+                    minlength: "客户名称为6-20个字符",
+                    maxlength: "客户名称为6-20个字符",
+                },
+                name: {
+                    ato: "请填写项目名称",
+                    minlength: "项目名称为6-30个字符",
+                    maxlength: "项目名称为6-30个字符",
                 },
                 pmName: {
                     ato: "请填写项目经理名称",
-                    minlength: "项目经理为2-6个字符",
-                    maxlength: "项目经理为2-6个字符",
+                    minlength: "项目经理名称为2-6个字符",
+                    maxlength: "项目经理名称为2-6个字符",
                 },
                 currentStage: {
                     required: "请选择当前所在阶段",

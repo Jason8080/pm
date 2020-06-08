@@ -48,7 +48,7 @@
                                                    name="name"
                                                    type="text"
                                                    class="form-control"
-                                                   placeholder="客户名称">
+                                                   placeholder="项目名称">
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>工作量</label>
@@ -279,13 +279,13 @@
         $('#addForm').validate({
             rules: {
                 client: {
-                    minlength: 6,
-                    maxlength: 30,
-                },
-                name: {
                     required: true,
                     minlength: 6,
                     maxlength: 20,
+                },
+                name: {
+                    minlength: 6,
+                    maxlength: 30,
                 },
                 pmName: {
                     ato: "#currentStage",
@@ -338,13 +338,13 @@
             },
             messages: {
                 client: {
-                    minlength: "客户名称为6-30个字符",
-                    maxlength: "客户名称为6-30个字符",
-                },
-                name: {
                     required: "请填写客户名称",
                     minlength: "客户名称为6-20个字符",
                     maxlength: "客户名称为6-20个字符",
+                },
+                name: {
+                    minlength: "项目名称为6-30个字符",
+                    maxlength: "项目名称为6-30个字符",
                 },
                 pmName: {
                     ato: "请填写项目经理名称",

@@ -5,6 +5,7 @@
 <mapper namespace="com.gm.pm.mapper.ProjectMapper">
     <resultMap id="proMap" type="Project">
         <id property="id" column="id"/>
+        <result property="client" column="client"/>
         <result property="name" column="name"/>
         <result property="pmName" column="pm_name"/>
         <result property="days" column="days"/>

@@ -48,6 +48,16 @@
                                                    placeholder="客户名称" disabled>
                                         </div>
                                         <div class="form-group col-sm-2">
+                                            <label>合同编号</label>
+                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                   name="contract"
+                                                   type="text"
+                                                   th:value="${project.contract}"
+                                                   class="form-control"
+                                                   placeholder="项目名称"
+                                                   th:disabled="${project.contract!=null && project.contract!=''}"/>
+                                        </div>
+                                        <div class="form-group col-sm-2">
                                             <label>项目名称</label>
                                             <input onchange="this.value=this.value.replace(/\s+/g,'')"
                                                    name="name"
@@ -309,6 +319,10 @@
                     minlength: 6,
                     maxlength: 30,
                 },
+                contract: {
+                    minlength: 6,
+                    maxlength: 20,
+                },
                 pmName: {
                     ato: "#currentStage",
                     minlength: 2,
@@ -368,6 +382,10 @@
                     ato: "请填写项目名称",
                     minlength: "项目名称为6-30个字符",
                     maxlength: "项目名称为6-30个字符",
+                },
+                contract: {
+                    minlength: "合同编号为6-20个字符",
+                    maxlength: "合同编号为6-20个字符",
                 },
                 pmName: {
                     ato: "请填写项目经理名称",

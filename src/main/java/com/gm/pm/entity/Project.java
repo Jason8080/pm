@@ -14,6 +14,7 @@ public class Project {
     private Long id;
     private String client;
     private String name;
+    private String contract;
     private String pmName;
     private Integer days;
     private String status;

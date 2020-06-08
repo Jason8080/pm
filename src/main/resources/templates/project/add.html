@@ -278,6 +278,10 @@
 
         $('#addForm').validate({
             rules: {
+                client: {
+                    minlength: 6,
+                    maxlength: 30,
+                },
                 name: {
                     required: true,
                     minlength: 6,
@@ -333,6 +337,10 @@
                 },
             },
             messages: {
+                client: {
+                    minlength: "客户名称为6-30个字符",
+                    maxlength: "客户名称为6-30个字符",
+                },
                 name: {
                     required: "请填写客户名称",
                     minlength: "客户名称为6-20个字符",

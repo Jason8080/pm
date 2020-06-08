@@ -27,34 +27,34 @@
 
     <insert id="insert" parameterType="Project">
         insert into tb_project (
-            id, `name`, pm_name, days, current_stage,
-            `current_time`, current_slider, priority,
-            demand, completed, next_plan, risk, remarks,
-            plan_time, survey_time, execute_time,
-            verify_time, online_time, accept_time
+        id, `name`, pm_name, days, current_stage,
+        `current_time`, current_slider, priority,
+        demand, completed, next_plan, risk, remarks,
+        plan_time, survey_time, execute_time,
+        verify_time, online_time, accept_time
         )
         values (
-            <if test="id!=null">
-                #{id},
-            </if>
-            <if test="id==null">
-                null,
-            </if>
-            #{name},
-            <if test="pmName!=null and pmName!=''">
-                #{pmName},
-            </if>
-            <if test="pmName==null or pmName==''">
-                null,
-            </if>
-            <if test="days!=null">
-                #{days},
-            </if>
-            #{currentStage}, #{currentTime}, #{currentSlider},
-            #{priority}, #{demand},
-            #{completed}, #{nextPlan}, #{risk}, #{remarks},
-            #{planTime}, #{surveyTime}, #{executeTime},
-            #{verifyTime}, #{onlineTime}, #{acceptTime}
+        <if test="id!=null">
+            #{id},
+        </if>
+        <if test="id==null">
+            null,
+        </if>
+        #{name},
+        <if test="pmName!=null and pmName!=''">
+            #{pmName},
+        </if>
+        <if test="pmName==null or pmName==''">
+            null,
+        </if>
+        <if test="days!=null">
+            #{days},
+        </if>
+        #{currentStage}, #{currentTime}, #{currentSlider},
+        #{priority}, #{demand},
+        #{completed}, #{nextPlan}, #{risk}, #{remarks},
+        #{planTime}, #{surveyTime}, #{executeTime},
+        #{verifyTime}, #{onlineTime}, #{acceptTime}
         )
     </insert>
 
@@ -120,6 +120,9 @@
     </delete>
 
     <select id="selectBy" resultMap="proMap">
+        <if test="pc.choose==5">
+            select * from (
+        </if>
         select * from tb_project
         <where>
             <if test="pc.likes!=null and pc.likes!=''">
@@ -135,7 +138,10 @@
                 and (current_slider &lt; 100 and `current_time` &lt; now())
             </if>
         </where>
-        order by `current_time`
+        order by `current_time` asc
+        <if test="pc.choose==5">
+            ) tb order by tb.`priority` desc
+        </if>
     </select>
 
     <select id="selectById" resultMap="proMap">

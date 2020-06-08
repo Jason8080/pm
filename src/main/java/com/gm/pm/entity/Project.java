@@ -18,6 +18,7 @@ public class Project {
     private String currentStage;
     private Date currentTime;
     private Integer currentSlider;
+    private Integer priority;
     private String demand;
     private String completed;
     private String nextPlan;

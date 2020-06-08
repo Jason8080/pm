@@ -10,7 +10,8 @@
 
 
     <div class="content-wrapper">
-        <div class="content-header" th:include="common/navbar::navbar(menu='项目管理', menuUrl='/project/list', currentPage='添加项目')"/>
+        <div class="content-header"
+             th:include="common/navbar::navbar(menu='项目管理', menuUrl='/project/list', currentPage='添加项目')"/>
 
         <section class="content">
             <div class="container-fluid">
@@ -27,69 +28,89 @@
                                     <h3 class="card-title">项目信息</h3>
                                 </div>
                                 <div class="card-body">
-                                        <div class="row">
-                                            <div class="form-group col-sm-2">
-                                                <label>项目经理</label>
-                                                <input onchange="this.value=this.value.replace(/\s+/g,'')"
-                                                       name="pmName"
-                                                       type="text"
-                                                       th:value="${project.pmName}"
-                                                       class="form-control" placeholder="项目经理"
-                                                       th:disabled="${project.pmName!=null && project.pmName!=''}"/>
-                                            </div>
-                                            <div class="form-group col-sm-2">
-                                                <label>项目名称</label>
-                                                <input onchange="this.value=this.value.replace(/\s+/g,'')"
-                                                       name="name"
-                                                       type="text"
-                                                       th:value="${project.name}"
-                                                       class="form-control"
-                                                       placeholder="项目名称" disabled>
-                                            </div>
-                                            <div class="form-group col-sm-2">
-                                                <label>工作量</label>
-                                                <input
-                                                        name="days"
-                                                        type="number"
-                                                        th:value="${project.days}"
-                                                        class="form-control"
-                                                        placeholder="工作量人天">
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
+                                            <label>项目经理</label>
+                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                   name="pmName"
+                                                   type="text"
+                                                   th:value="${project.pmName}"
+                                                   class="form-control" placeholder="项目经理"
+                                                   th:disabled="${project.pmName!=null && project.pmName!=''}"/>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>项目名称</label>
+                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                   name="name"
+                                                   type="text"
+                                                   th:value="${project.name}"
+                                                   class="form-control"
+                                                   placeholder="项目名称" disabled>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>工作量</label>
+                                            <input onchange="this.value=this.value.replace('-','')"
+                                                   name="days"
+                                                   type="text"
+                                                   th:value="${project.days}"
+                                                   class="form-control"
+                                                   placeholder="工作量人天">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>需求简述</label>
+                                                <textarea name="demand" class="form-control" rows="3"
+                                                          placeholder="需求简述; 注意排版哦..">[[${project.demand}]]</textarea>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>需求简述</label>
-                                                    <textarea name="demand" class="form-control" rows="3"
-                                                              placeholder="需求简述; 注意排版哦..">[[${project.demand}]]</textarea>
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
+                                            <label>所在阶段</label>
+                                            <select id="currentStage" name="currentStage" class="custom-select">
+                                                <option th:selected="${project.currentStage=='分配'}" value="分配">分配
+                                                </option>
+                                                <option th:selected="${project.currentStage=='调研'}" value="调研">调研
+                                                </option>
+                                                <option th:selected="${project.currentStage=='编码'}" value="编码">编码
+                                                </option>
+                                                <option th:selected="${project.currentStage=='测试'}" value="测试">测试
+                                                </option>
+                                                <option th:selected="${project.currentStage=='上线'}" value="上线">上线
+                                                </option>
+                                                <option th:selected="${project.currentStage=='验收'}" value="验收">验收
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label>当前进度</label>
+                                            <div class="slider-blue">
+                                                <input name="currentSlider" type="text"
+                                                       th:value="${project.currentSlider}"
+                                                       class="slider form-control"
+                                                       data-slider-min="0" data-slider-max="100" data-slider-step="1"
+                                                       th:data-slider-value="${project.currentSlider}"
+                                                       data-slider-orientation="horizontal"
+                                                       data-slider-selection="before" data-slider-tooltip="show"
+                                                       th:data-value="${project.currentSlider}" style="display: none;">
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-2">
-                                                <label>所在阶段</label>
-                                                <select id="currentStage" name="currentStage" class="custom-select">
-                                                    <option th:selected="${project.currentStage=='分配'}" value="分配">分配</option>
-                                                    <option th:selected="${project.currentStage=='调研'}" value="调研">调研</option>
-                                                    <option th:selected="${project.currentStage=='编码'}" value="编码">编码</option>
-                                                    <option th:selected="${project.currentStage=='测试'}" value="测试">测试</option>
-                                                    <option th:selected="${project.currentStage=='上线'}" value="上线">上线</option>
-                                                    <option th:selected="${project.currentStage=='验收'}" value="验收">验收</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-sm-10">
-                                                <label>当前进度</label>
-                                                <div class="slider-blue">
-                                                    <input name="currentSlider" type="text" th:value="${project.currentSlider}"
-                                                           class="slider form-control"
-                                                           data-slider-min="0" data-slider-max="100" data-slider-step="1"
-                                                           th:data-slider-value="${project.currentSlider}" data-slider-orientation="horizontal"
-                                                           data-slider-selection="before" data-slider-tooltip="show"
-                                                           th:data-value="${project.currentSlider}" style="display: none;">
-                                                </div>
+                                        <div class="form-group col-sm-3">
+                                            <label>紧急程度</label>
+                                            <div class="slider-yellow">
+                                                <input name="priority" type="text" th:value="${project.priority}"
+                                                       class="slider form-control"
+                                                       data-slider-min="1" data-slider-max="5" data-slider-step="1"
+                                                       th:data-slider-value="${project.priority}"
+                                                       data-slider-orientation="horizontal"
+                                                       data-slider-selection="before" data-slider-tooltip="show"
+                                                       th:data-value="${project.priority}" style="display: none;">
                                             </div>
                                         </div>
-                                        <div class="row">
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>已经完成</label>
@@ -130,7 +151,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                            <div class="form-group col-sm-2">
+                                        <div class="form-group col-sm-2">
                                             <label>分配完成</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
@@ -144,63 +165,63 @@
                                                        data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                             </div>
                                         </div>
-                                            <div class="form-group col-sm-2">
-                                                <label>调研完成</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
+                                        <div class="form-group col-sm-2">
+                                            <label>调研完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt"></i></span>
-                                                    </div>
-                                                    <input id="surveyTime" name="surveyTime"
-                                                           th:value="${#dates.format(project.surveyTime, 'yyyy-MM-dd')}"
-                                                           type="text" class="form-control"
-                                                           data-inputmask-alias="datetime"
-                                                           data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                                 </div>
+                                                <input id="surveyTime" name="surveyTime"
+                                                       th:value="${#dates.format(project.surveyTime, 'yyyy-MM-dd')}"
+                                                       type="text" class="form-control"
+                                                       data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                             </div>
-                                            <div class="form-group col-sm-2">
-                                                <label>编码完成</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>编码完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt"></i></span>
-                                                    </div>
-                                                    <input id="executeTime" name="executeTime"
-                                                           th:value="${#dates.format(project.executeTime, 'yyyy-MM-dd')}"
-                                                           type="text" class="form-control"
-                                                           data-inputmask-alias="datetime"
-                                                           data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                                 </div>
+                                                <input id="executeTime" name="executeTime"
+                                                       th:value="${#dates.format(project.executeTime, 'yyyy-MM-dd')}"
+                                                       type="text" class="form-control"
+                                                       data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                             </div>
-                                            <div class="form-group col-sm-2">
-                                                <label>测试完成</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>测试完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt"></i></span>
-                                                    </div>
-                                                    <input id="verifyTime" name="verifyTime"
-                                                           th:value="${#dates.format(project.verifyTime, 'yyyy-MM-dd')}"
-                                                           type="text" class="form-control"
-                                                           data-inputmask-alias="datetime"
-                                                           data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                                 </div>
+                                                <input id="verifyTime" name="verifyTime"
+                                                       th:value="${#dates.format(project.verifyTime, 'yyyy-MM-dd')}"
+                                                       type="text" class="form-control"
+                                                       data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                             </div>
-                                            <div class="form-group col-sm-2">
-                                                <label>上线完成</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>上线完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
                                                                 class="far fa-calendar-alt"></i></span>
-                                                    </div>
-                                                    <input id="onlineTime" name="onlineTime"
-                                                           th:value="${#dates.format(project.onlineTime, 'yyyy-MM-dd')}"
-                                                           type="text" class="form-control"
-                                                           data-inputmask-alias="datetime"
-                                                           data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                                 </div>
+                                                <input id="onlineTime" name="onlineTime"
+                                                       th:value="${#dates.format(project.onlineTime, 'yyyy-MM-dd')}"
+                                                       type="text" class="form-control"
+                                                       data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
                                             </div>
-                                            <div class="form-group col-sm-2">
+                                        </div>
+                                        <div class="form-group col-sm-2">
                                             <label>验收完成</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
@@ -245,9 +266,9 @@
                 return true;
             }
         });
-        jQuery.validator.addMethod("compareDate", function(value, ele, param) {
+        jQuery.validator.addMethod("compareDate", function (value, ele, param) {
             let currentStage = $("#currentStage").val();
-            if(currentStage=='分配'){
+            if (currentStage == '分配') {
                 return true;
             }
             var date = jQuery(param).val();
@@ -255,13 +276,19 @@
             var after = new Date(Date.parse(value));
             return before < after;
         });
-        jQuery.validator.addMethod("ato", function(value, ele, param) {
+        jQuery.validator.addMethod("ato", function (value, ele, param) {
             let currentStage = $(param).val();
-            if(currentStage=='分配'){
+            if (currentStage == '分配') {
                 return true;
             }
-            return value!=undefined && value!='';
+            return value != undefined && value != '';
         });
+
+        jQuery.validator.addMethod("positiveinteger", function(value, element, param) {
+            var num = parseInt(value);
+            return param || (num > 0 && (num + "") == value);
+        }, "请输入正整数");
+
         $('#addForm').validate({
             rules: {
                 name: {
@@ -283,6 +310,10 @@
                     required: true,
                     min: 0,
                     max: 100
+                },
+                days: {
+                    min: 0,
+                    positiveinteger: true,
                 },
                 demand: {
                     required: true,
@@ -334,6 +365,9 @@
                     required: "请选择当前阶段完成进度",
                     min: "完成进度为0-100",
                     max: "完成进度为0-100",
+                },
+                days: {
+                    min: "工作量应该是自然数",
                 },
                 demand: {
                     required: "请简诉项目需求",

@@ -67,20 +67,20 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th style="width: 30px;">#</th>
-                                        <th style="width: 70px;">人员</th>
-                                        <th style="width: 10%">客户名称</th>
-                                        <th style="width: 47%;">需求</th>
+                                        <th style="width: 2%;">#</th>
+                                        <th style="width: 6%;">人员</th>
+                                        <th style="width: 14%">客户名称</th>
+                                        <th style="width: 40%;">需求</th>
                                         <th style="width: 5%;">剩余</th>
                                         <th style="width: 10%">进度</th>
-                                        <th style="width: 150px;">操作</th>
+                                        <th style="width: 12%;">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="project,stat:${page.list}">
                                         <td>[[${stat.count}]]</td>
-                                        <td>[[${project.pmName}]]</td>
-                                        <td>[[${project.client}]]</td>
+                                        <td th:title="${project.pmName}">[[${project.pmName}]]</td>
+                                        <td th:title="${project.client}">[[${project.client}]]</td>
                                         <td>
                                             <pre>[[${project.demand}]]</pre>
                                         </td>
@@ -101,17 +101,17 @@
                                                 [[${project.currentStage}]]: [[${project.currentSlider}]]%
                                             </small>
                                         </td>
-                                        <td class="project-actions text-right">
+                                        <td class="project-actions">
                                             <a class="btn btn-info btn-sm"
                                                th:href="@{'/project/update/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 修改
                                             </a>
-                                            <a class="btn btn-danger btn-sm" th:href="@{'/project/del/'+${project.id}+'?start='+${start}+'&size='+${size}}">
+                                            <a class="btn btn-danger btn-sm" th:href="@{'/project/state/'+${project.id}+'?start='+${start}+'&size='+${size}}">
                                                 <i class="fas fa-trash">
                                                 </i>
-                                                删除
+                                                关闭
                                             </a>
                                         </td>
                                     </tr>

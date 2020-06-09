@@ -85,6 +85,22 @@ public class ProjectController extends PermissionController {
         return "redirect:/project/list";
     }
 
+    @PostMapping(value = "state")
+    public String state(RedirectAttributes model, Project project, ProjectCondition pc,
+                         @RequestParam(defaultValue = "1") Integer start,
+                         @RequestParam(defaultValue = "5") Integer size
+    ) throws Exception {
+        Project pro = new Project();
+        pro.setId(project.getId());
+        pro.setStatus("off");
+        projectService.update(project);
+        model.addAttribute("start", start);
+        model.addAttribute("size", size);
+        model.addAttribute("choose", pc.getChoose());
+        model.addAttribute("likes", pc.getLikes());
+        return "redirect:/project/list";
+    }
+
 
     @GetMapping(value = "del/{id}")
     public String del(RedirectAttributes model, @PathVariable Long id,

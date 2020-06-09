@@ -44,6 +44,10 @@ public class ProjectService {
         projectMapper.update(project);
     }
 
+    public void state(Project project) {
+        projectMapper.update(project);
+    }
+
     public void del(Long id) {
         projectMapper.deleteById(id);
     }

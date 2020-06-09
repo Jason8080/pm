@@ -2,11 +2,10 @@ package com.gm.pm.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.gm.pm.base.controller.PermissionController;
-import com.gm.pm.service.ProjectService;
-import com.gm.pm.base.controller.BaseController;
 import com.gm.pm.entity.Project;
 import com.gm.pm.entity.ProjectCondition;
 import com.gm.pm.entity.Toa;
+import com.gm.pm.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,15 +84,16 @@ public class ProjectController extends PermissionController {
         return "redirect:/project/list";
     }
 
-    @PostMapping(value = "state")
-    public String state(RedirectAttributes model, Project project, ProjectCondition pc,
-                         @RequestParam(defaultValue = "1") Integer start,
-                         @RequestParam(defaultValue = "5") Integer size
+    @GetMapping(value = "state/{id}")
+    public String state(RedirectAttributes model, @PathVariable Long id,
+                        String status, ProjectCondition pc,
+                        @RequestParam(defaultValue = "1") Integer start,
+                        @RequestParam(defaultValue = "5") Integer size
     ) throws Exception {
         Project pro = new Project();
-        pro.setId(project.getId());
-        pro.setStatus("off");
-        projectService.update(project);
+        pro.setId(id);
+        pro.setStatus(status);
+        projectService.state(pro);
         model.addAttribute("start", start);
         model.addAttribute("size", size);
         model.addAttribute("choose", pc.getChoose());

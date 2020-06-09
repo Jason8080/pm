@@ -155,6 +155,9 @@
             <if test="pc.choose==4">
                 and (status is null or status = 'off')
             </if>
+            <if test="pc.choose==8">
+                and (DATE_SUB(`current_time`, INTERVAL -30 DAY) &lt;= date(`current_time`))
+            </if>
         </where>
         order by `current_time` asc
         <if test="pc.choose==7">

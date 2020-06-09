@@ -45,6 +45,7 @@
                                                 <option th:selected="${pc.choose==5}" value="5">已分配逾期</option>
                                                 <option th:selected="${pc.choose==6}" value="6">未分配逾期</option>
                                                 <option th:selected="${pc.choose==7}" value="7">按紧急排序</option>
+                                                <option th:selected="${pc.choose==8}" value="8">30日可验收</option>
                                             </select>
                                         </div>
                                         <div class="input-group-append">
@@ -108,10 +109,10 @@
                                                 </i>
                                                 修改
                                             </a>
-                                            <a class="btn btn-danger btn-sm" th:href="@{'/project/state/'+${project.id}+'?start='+${start}+'&size='+${size}}">
-                                                <i class="fas fa-trash">
+                                            <a th:class="'btn btn-' + ${project.status=='off'?'success':'danger'} + ' btn-sm'" th:href="@{'/project/state/'+${project.id}+'?status='+ ${project.status=='off'?'on':'off'} +'&start='+${start}+'&size='+${size}}">
+                                                <i th:class="'fas '+${project.status=='off'?'fa-vote-yea':'fa-trash'}">
                                                 </i>
-                                                关闭
+                                                [[${project.status=='off'?'开启':'关闭'}]]
                                             </a>
                                         </td>
                                     </tr>

@@ -272,18 +272,19 @@
             var after = new Date(Date.parse(value));
             return before < after;
         });
+
         jQuery.validator.addMethod("ato", function (value, ele, param) {
-            let currentStage = $(param).val();
-            if (currentStage == '分配') {
-                return true;
+            let currentStage = $("#currentStage").val();
+            if (param == currentStage) {
+                return value != undefined && value != '';
             }
-            return value != undefined && value != '';
+            return true;
         });
 
         jQuery.validator.addMethod("positiveinteger", function(value, element, param) {
             var num = parseInt(value);
-            return param || (num > 0 && (num + "") == value);
-        }, "请输入正整数");
+            return value == undefined || value=='' || (num > 0 && (num + "") == value);
+        });
 
         $('#addForm').validate({
             rules: {
@@ -329,23 +330,23 @@
                     date: true,
                 },
                 surveyTime: {
-                    ato: "#currentStage",
+                    ato: "调研",
                     date: true,
                 },
                 executeTime: {
-                    ato: "#currentStage",
+                    ato: "编码",
                     date: true,
                 },
                 verifyTime: {
-                    ato: "#currentStage",
+                    ato: "测试",
                     date: true,
                 },
                 onlineTime: {
-                    ato: "#currentStage",
+                    ato: "上线",
                     date: true,
                 },
                 acceptTime: {
-                    ato: "#currentStage",
+                    ato: "验收",
                     date: true,
                 },
             },
@@ -379,7 +380,8 @@
                     max: "完成进度为0-100",
                 },
                 days: {
-                    min: "工作量应该是自然数",
+                    min: "请输入大于等于0的自然天数",
+                    positiveinteger: "请输入自然数",
                 },
                 demand: {
                     required: "请简诉项目需求",

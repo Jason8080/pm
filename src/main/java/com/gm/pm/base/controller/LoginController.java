@@ -83,8 +83,9 @@ public class LoginController extends BaseController {
         String token = loginService.register(login);
         if (!StringUtils.isEmpty(token)) {
             saveSession(request.getSession(), login);
+            model.addAttribute("type", "info");
             model.addAttribute("title", "注册成功");
-            model.addAttribute("msg", "现在试试登入吧!");
+            model.addAttribute("msg", "联系管理员激活!");
             return "redirect:/login";
         } else {
             model.addAttribute("type", "error");

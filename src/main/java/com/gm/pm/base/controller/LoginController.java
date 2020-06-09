@@ -58,7 +58,7 @@ public class LoginController extends BaseController {
             return "redirect:/login";
         }else if(db.getStatus()==1){
             String ip = getIP(request);
-            db.setLastIp(ip);
+            db.setIp(ip);
             saveSession(request.getSession(), db);
             String token = TokenKit.generateToken(db);
             model.addAttribute("token", token);
@@ -79,7 +79,7 @@ public class LoginController extends BaseController {
     public String register(RedirectAttributes model, Login login,
                            HttpServletRequest request, HttpServletResponse res) {
         String ip = getIP(request);
-        login.setLastIp(ip);
+        login.setIp(ip);
         String token = loginService.register(login);
         if (!StringUtils.isEmpty(token)) {
             saveSession(request.getSession(), login);

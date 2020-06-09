@@ -54,7 +54,7 @@ public class TokenKit {
         JwtKit.Body body = new JwtKit.Body();
         body.setExp(System.currentTimeMillis() + exp);
         body.setName(login.getName());
-        body.setIp(login.getLastIp());
+        body.setIp(login.getIp());
         body.setRoles(login.getRoles());
         String token = JwtKit.sign(head, body);
         return token;

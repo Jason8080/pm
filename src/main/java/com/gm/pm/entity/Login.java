@@ -13,8 +13,8 @@ public class Login {
     private String pass;
     private String roles;
     private String remember = "off";
-    private String lastIp;
-    private Date lastTime;
+    private String ip;
+    private Date exp;
     private Integer status = 0;
 
 
@@ -24,6 +24,6 @@ public class Login {
     public Login(String name, String roles, String ip) {
         this.name = name;
         this.roles = roles;
-        this.lastIp = ip;
+        this.ip = ip;
     }
 }

@@ -153,6 +153,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.2.5.RELEASE</version>
+                <configuration>
+                    <mainClass>com.gm.pm.PmApp</mainClass>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

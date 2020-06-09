@@ -298,7 +298,7 @@
 
         jQuery.validator.addMethod("ato", function (value, ele, param) {
             let currentStage = $("#currentStage").val();
-            if (param == currentStage) {
+            if (param.indexOf(currentStage)>-1) {
                 return value != undefined && value != '';
             }
             return true;
@@ -325,7 +325,7 @@
                     maxlength: 20,
                 },
                 pmName: {
-                    ato: "#currentStage",
+                    ato: "调研,编码,测试,上线,验收",
                     minlength: 2,
                     maxlength: 6,
                 },

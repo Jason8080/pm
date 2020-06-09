@@ -26,4 +26,9 @@ public class Login {
         this.roles = roles;
         this.ip = ip;
     }
+
+    public Login(String name, String pass) {
+        this.name = name;
+        this.pass = pass;
+    }
 }

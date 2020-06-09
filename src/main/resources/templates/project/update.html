@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="common/head::head"/>
 </head>
@@ -169,7 +170,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div shiro:hasRole="sa" class="col-md-12">
                                 <div class="card card-success">
                                     <div class="card-header">
                                         <h3 class="card-title">预期时间</h3>

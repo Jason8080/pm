@@ -16,20 +16,15 @@ public class LoginService {
     LoginMapper loginMapper;
 
 
-    public String login(Login login) {
-        Login dbLogin = loginMapper.name2pass(login.getName(), login.getPass());
-        if(dbLogin!=null){
-            login.setRoles(dbLogin.getRoles());
-            return TokenKit.generateToken(login);
-        }
-        return null;
+    public Login login(Login login) {
+        return loginMapper.name2pass(login.getName(), login.getPass());
     }
 
     public String register(Login login) {
         Login dbLogin = loginMapper.select2name(login.getName());
         if(dbLogin==null){
             loginMapper.insert(login);
-            return TokenKit.generateToken(login);
+            return "TokenKit.generateToken(login)";
         }
         return null;
     }

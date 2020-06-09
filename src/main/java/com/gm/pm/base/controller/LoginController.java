@@ -51,11 +51,16 @@ public class LoginController extends BaseController {
     public String login(RedirectAttributes model, Login login,
                         HttpServletRequest request, HttpServletResponse res
     ) {
-        String ip = getIP(request);
-        login.setLastIp(ip);
-        String token = loginService.login(login);
-        if (!StringUtils.isEmpty(token)) {
-            saveSession(request.getSession(), login);
+        Login db = loginService.login(login);
+        if(db==null){
+            model.addAttribute("type", "error");
+            model.addAttribute("msg", "用户名或密码错误!");
+            return "redirect:/login";
+        }else if(db.getStatus()==1){
+            String ip = getIP(request);
+            db.setLastIp(ip);
+            saveSession(request.getSession(), db);
+            String token = TokenKit.generateToken(db);
             model.addAttribute("token", token);
             model.addAttribute("msg", "登入成功!");
             Cookie cookie = new Cookie("token", token);
@@ -64,7 +69,7 @@ public class LoginController extends BaseController {
             return "redirect:/";
         } else {
             model.addAttribute("type", "error");
-            model.addAttribute("msg", "用户名或密码错误!");
+            model.addAttribute("msg", "用户尚未激活!");
             return "redirect:/login";
         }
     }
@@ -78,13 +83,9 @@ public class LoginController extends BaseController {
         String token = loginService.register(login);
         if (!StringUtils.isEmpty(token)) {
             saveSession(request.getSession(), login);
-            model.addAttribute("token", token);
             model.addAttribute("title", "注册成功");
-            model.addAttribute("msg", "已经自动为您登入!");
-            Cookie cookie = new Cookie("token", token);
-            cookie.setMaxAge(TokenKit.exp / 1000);
-            res.addCookie(cookie);
-            return "redirect:/";
+            model.addAttribute("msg", "现在试试登入吧!");
+            return "redirect:/login";
         } else {
             model.addAttribute("type", "error");
             model.addAttribute("title", "注册失败");

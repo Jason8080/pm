@@ -10,26 +10,36 @@
         <result property="remember" column="remember"/>
         <result property="lastIp" column="last_ip"/>
         <result property="lastTime" column="last_time"/>
+        <result property="status" column="status"/>
     </resultMap>
 
 
     <insert id="insert" parameterType="Login">
-        insert into login values(#{name},#{pass},#{roles},#{remember},#{lastIp},#{lastTime})
+        insert into login values(#{name},#{pass},#{roles},#{remember},#{lastIp},#{lastTime},#{status})
     </insert>
 
 
-    <update id="login" parameterType="Login" timeout="1000">
+    <update id="login" parameterType="Login">
         update login
         <set>
+            <if test="roles!=null and roles!=''">
+                roles = #{roles},
+            </if>
             <if test="remember!=null and remember!=''">
                 remember = #{remember},
             </if>
             <if test="lastIp!=null and lastIp!=''">
                 last_ip = #{lastIp},
             </if>
+            <if test="lastTime!=null and lastTime!=''">
+                last_time = #{lastTime},
+            </if>
+            <if test="status!=null and status!=''">
+                status = #{status},
+            </if>
         </set>
         <where>
-            `name` = #{name} and `pass` = #{pass}
+            `name` = #{name}
         </where>
     </update>
 

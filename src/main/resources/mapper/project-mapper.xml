@@ -131,7 +131,7 @@
         delete from tb_project where id=#{id}
     </delete>
 
-    <select id="selectBy" resultMap="proMap">
+    <select id="selectBy" resultMap="proMap" timeout="3000">
         <if test="pc.choose==7">
             select * from (
         </if>

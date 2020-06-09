@@ -15,6 +15,7 @@ public class Login {
     private String remember = "off";
     private String lastIp;
     private Date lastTime;
+    private Integer status = 0;
 
 
     public Login() {

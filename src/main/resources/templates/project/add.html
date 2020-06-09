@@ -14,8 +14,8 @@
              th:include="common/navbar::navbar(menu='项目管理', menuUrl='/project/list', currentPage='添加项目')"/>
 
         <section class="content">
-            <div class="container-fluid">
-                <div class="row">
+            <div class="row">
+                <div class="container-fluid">
                     <form action="/project/add" method="post" role="form" id="addForm">
                         <input type="hidden" name="start" th:value="${start}"/>
                         <input type="hidden" name="size" th:value="${size}"/>
@@ -275,15 +275,15 @@
 
         jQuery.validator.addMethod("ato", function (value, ele, param) {
             let currentStage = $("#currentStage").val();
-            if (param.indexOf(currentStage)>-1) {
+            if (param.indexOf(currentStage) > -1) {
                 return value != undefined && value != '';
             }
             return true;
         });
 
-        jQuery.validator.addMethod("positiveinteger", function(value, element, param) {
+        jQuery.validator.addMethod("positiveinteger", function (value, element, param) {
             var num = parseInt(value);
-            return value == undefined || value=='' || (num > 0 && (num + "") == value);
+            return value == undefined || value == '' || (num > 0 && (num + "") == value);
         });
 
         $('#addForm').validate({
@@ -326,7 +326,7 @@
                     maxlength: 2000,
                 },
                 planTime: {
-                    required: true,
+                    ato: "分配",
                     date: true,
                 },
                 surveyTime: {
@@ -388,7 +388,10 @@
                     minlength: "需求描述为10-2000个字符",
                     maxlength: "需求描述为10-2000个字符",
                 },
-                planTime: "请填写分配时间",
+                planTime: {
+                    ato: "请填写分配时间",
+                    date: "请填写正确的日期",
+                },
                 surveyTime: {
                     ato: "请填写调研时间",
                     date: "请填写正确的日期",

@@ -34,7 +34,7 @@ public class HttpsConfig {
                 SecurityCollection collection=new SecurityCollection();
                 collection.addPattern("/*");
                 securityConstraint.addCollection(collection);
-//                context.addConstraint(securityConstraint);
+                context.addConstraint(securityConstraint);
             }
         };
         tomcat.addAdditionalTomcatConnectors(connector);

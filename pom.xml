@@ -76,6 +76,12 @@
             <version>1.9.22</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+
 
         <!-- 日志处理 -->
         <dependency>

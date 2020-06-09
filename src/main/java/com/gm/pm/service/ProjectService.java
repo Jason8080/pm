@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gm.pm.entity.ProjectCondition;
+import com.gm.pm.kit.MailKit;
 import com.gm.pm.kit.StageKit;
 import com.gm.pm.mapper.ProjectMapper;
 import com.gm.pm.entity.Project;
@@ -50,5 +51,16 @@ public class ProjectService {
 
     public void del(Long id) {
         projectMapper.deleteById(id);
+    }
+
+    public void urge(Long id) {
+        Project project = projectMapper.selectById(id);
+        if(project!=null){
+            // MailKit.send("你的项目有人着急了", "", "");
+        }
+    }
+
+    public static void main(String[] args) {
+        MailKit.send("你的项目有人着急了", "你真的是", "xiaoku13141@163.com");
     }
 }

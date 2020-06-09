@@ -112,4 +112,19 @@ public class ProjectController extends PermissionController {
         model.addAttribute("size", size);
         return "redirect:/project/list";
     }
+
+    @RequestMapping(value = "urge/{id}")
+    public String urge(RedirectAttributes model, @PathVariable Long id,
+                       ProjectCondition pc,
+                       @RequestParam(defaultValue = "1") Integer start,
+                       @RequestParam(defaultValue = "5") Integer size
+    ) {
+        projectService.urge(id);
+        model.addAttribute("msg","邮件已发送!");
+        model.addAttribute("start", start);
+        model.addAttribute("size", size);
+        model.addAttribute("choose", pc.getChoose());
+        model.addAttribute("likes", pc.getLikes());
+        return "redirect:/project/list";
+    }
 }

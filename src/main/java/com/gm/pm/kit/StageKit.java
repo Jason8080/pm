@@ -42,7 +42,7 @@ public class StageKit {
             Field f = aClass.getDeclaredField(field);
             f.setAccessible(true);
             Date currentTime = (Date) f.get(project);
-            project.setCurrentTime(currentTime);
+            project.setCurrentTime(currentTime!=null?currentTime:new Date());
         } catch (Exception e) {
             e.printStackTrace();
             project.setCurrentTime(new Date());

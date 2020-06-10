@@ -31,7 +31,7 @@
                         <div class="card-header">
                             <h3 class="card-title">项目列表</h3>
                             <div class="card-tools">
-                                <div class="input-group" style="width: 100%;">
+                                <div class="input-group">
                                     <div class="input-group-append">
                                         <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}"
                                            class="btn btn-success float-left">添加</a>
@@ -69,9 +69,9 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style="width: 10px;">#</th>
-                                    <th style="width: 70px;">人员</th>
-                                    <th style="width: 170px;">客户名称</th>
+                                    <th style="width: 3%;">#</th>
+                                    <th style="width: auto;">人员</th>
+                                    <th style="width: auto;">客户名称</th>
                                     <th style="width: auto;">需求</th>
                                     <th style="width: 60px;">剩余</th>
                                     <th style="width: 100px;">进度</th>

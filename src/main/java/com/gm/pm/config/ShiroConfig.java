@@ -6,6 +6,9 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.Cookie;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -50,9 +53,10 @@ public class ShiroConfig {
 
     @Bean
     public SecurityManager securityManager() {
-        DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
-        defaultSecurityManager.setRealm(customRealm());
-        return defaultSecurityManager;
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+//        securityManager.setSessionManager(new JwtSessionManager());
+        securityManager.setRealm(customRealm());
+        return securityManager;
     }
 
     @Bean

@@ -89,6 +89,48 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>已经完成</label>
+                                                    <textarea name="completed"
+                                                              class="form-control" rows="3" maxlength="100"
+                                                              placeholder="已完成的内容; 注意排版哦..">[[${project.completed}]]</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>下步计划</label>
+                                                    <textarea name="nextPlan" class="form-control" rows="3"
+                                                              maxlength="50"
+                                                              placeholder="下一步的内容; 注意排版哦..">[[${project.nextPlan}]]</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>风险提示</label>
+                                                    <textarea name="risk" class="form-control" rows="3" maxlength="50"
+                                                              placeholder="项目可能存在的风险; 注意排版哦..">[[${project.risk}]]</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>备注</label>
+                                                    <textarea name="remarks" class="form-control" rows="3"
+                                                              maxlength="50"
+                                                              placeholder="需要备注吗; 注意排版哦..">[[${project.remarks}]]</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div shiro:hasRole="DM" class="col-md-12">
+                                <div class="card card-success">
+                                    <div class="card-header">
+                                        <h3 class="card-title">预期时间</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
                                             <div class="form-group col-sm-2">
                                                 <label>所在阶段</label>
                                                 <select id="currentStage" name="currentStage" class="custom-select">
@@ -134,48 +176,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <label>已经完成</label>
-                                                    <textarea name="completed"
-                                                              class="form-control" rows="3" maxlength="100"
-                                                              placeholder="已完成的内容; 注意排版哦..">[[${project.completed}]]</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <label>下步计划</label>
-                                                    <textarea name="nextPlan" class="form-control" rows="3"
-                                                              maxlength="50"
-                                                              placeholder="下一步的内容; 注意排版哦..">[[${project.nextPlan}]]</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <label>风险提示</label>
-                                                    <textarea name="risk" class="form-control" rows="3" maxlength="50"
-                                                              placeholder="项目可能存在的风险; 注意排版哦..">[[${project.risk}]]</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <label>备注</label>
-                                                    <textarea name="remarks" class="form-control" rows="3"
-                                                              maxlength="50"
-                                                              placeholder="需要备注吗; 注意排版哦..">[[${project.remarks}]]</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div shiro:hasRole="sa" class="col-md-12">
-                                <div class="card card-success">
-                                    <div class="card-header">
-                                        <h3 class="card-title">预期时间</h3>
-                                    </div>
-                                    <div class="card-body">
                                         <div class="row">
                                             <div class="form-group col-sm-2">
                                                 <label>分配完成</label>

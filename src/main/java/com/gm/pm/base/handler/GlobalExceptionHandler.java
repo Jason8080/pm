@@ -2,6 +2,7 @@ package com.gm.pm.base.handler;
 
 import com.gm.pm.ex.TokenException;
 import com.gm.pm.kit.TokenKit;
+import org.apache.shiro.authc.AccountException;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.MissingRequestCookieException;
@@ -45,6 +46,14 @@ public class GlobalExceptionHandler {
     public ModelAndView tokenExceptionHandler(HttpServletRequest request, Exception e) throws Exception {
         ModelAndView mv = new ModelAndView();
         String msg = URLEncoder.encode("登入超时或未登入!", "UTF-8");
+        mv.setViewName("redirect:/login?type=warning&msg=" + msg);
+        return mv;
+    }
+
+    @ExceptionHandler(value = {AccountException.class})
+    public ModelAndView shiroExceptionHandler(HttpServletRequest request, Exception e) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String msg = URLEncoder.encode(e.getMessage(), "UTF-8");
         mv.setViewName("redirect:/login?type=warning&msg=" + msg);
         return mv;
     }

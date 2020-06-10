@@ -4,6 +4,11 @@ import com.gm.pm.entity.Login;
 import com.gm.pm.entity.Toa;
 import com.gm.pm.kit.TokenKit;
 import com.gm.pm.service.LoginService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +45,7 @@ public class LoginController extends BaseController {
 
     @GetMapping(value = "/logout")
     public String logout(RedirectAttributes model, HttpServletResponse res) {
+        loginService.logout();
         model.addAttribute("msg", "登出成功!");
         Cookie cookie = new Cookie("token", "");
         cookie.setMaxAge(0);
@@ -60,7 +66,7 @@ public class LoginController extends BaseController {
             String ip = getIP(request);
             db.setIp(ip);
             saveSession(request.getSession(), db);
-            String token = TokenKit.generateToken(db);
+            String token = TokenKit.generateToken(login);
             model.addAttribute("token", token);
             model.addAttribute("msg", "登入成功!");
             Cookie cookie = new Cookie("token", token);
@@ -73,6 +79,14 @@ public class LoginController extends BaseController {
             return "redirect:/login";
         }
     }
+
+//    @PostMapping(value = "/login")
+//    public String login(RedirectAttributes model, Login login,
+//                        HttpServletRequest request, HttpServletResponse res
+//    ) {
+//        loginService.login(login);
+//        return "redirect:/";
+//    }
 
 
     @PostMapping(value = "/register")

@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Jason
- */
 @Configuration
+ */
 public class HttpsConfig {
     @Bean
     public Connector connector(){

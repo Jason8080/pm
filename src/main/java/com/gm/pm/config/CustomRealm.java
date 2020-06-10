@@ -1,6 +1,8 @@
 package com.gm.pm.config;
 
 import com.gm.pm.entity.Login;
+import com.gm.pm.kit.TokenKit;
+import com.gm.pm.mapper.LoginMapper;
 import com.gm.pm.service.LoginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -17,7 +19,7 @@ import org.springframework.util.StringUtils;
 public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
-    LoginService loginService;
+    LoginMapper loginMapper;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -41,13 +43,9 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         System.out.println("-------开始身份认证--------");
-        String username = (String) authenticationToken.getPrincipal();
-        String password = new String((char[]) authenticationToken.getCredentials());
-        Login login = loginService.login(new Login(username, password));
-        System.out.println("用户信息" + login);
-        if (login == null) {
-            throw new AccountException("用户名或密码错误");
-        }
-        return new SimpleAuthenticationInfo(username, password, getName());
+        JwtAuthenticationToken jat = (JwtAuthenticationToken) authenticationToken;
+        Login login = jat.getPrincipal();
+        String token = jat.getCredentials();
+        return new SimpleAuthenticationInfo(login, token, getName());
     }
 }

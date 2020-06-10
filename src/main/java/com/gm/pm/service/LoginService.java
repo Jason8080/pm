@@ -1,8 +1,13 @@
 package com.gm.pm.service;
 
+import com.gm.pm.config.JwtAuthenticationToken;
 import com.gm.pm.entity.Login;
 import com.gm.pm.kit.TokenKit;
 import com.gm.pm.mapper.LoginMapper;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +22,12 @@ public class LoginService {
 
 
     public Login login(Login login) {
-        return loginMapper.name2pass(login.getName(), login.getPass());
+        Subject subject = SecurityUtils.getSubject();
+        Login db = loginMapper.name2pass(login.getName(), login.getPass());
+        String token = TokenKit.generateToken(db);
+        AuthenticationToken auth = new JwtAuthenticationToken(db, token);
+        SecurityUtils.getSecurityManager().login(subject, auth);
+        return db;
     }
 
     public String register(Login login) {
@@ -27,5 +37,10 @@ public class LoginService {
             return "TokenKit.generateToken(login)";
         }
         return null;
+    }
+
+    public void logout() {
+        Subject subject = SecurityUtils.getSubject();
+        SecurityUtils.getSecurityManager().logout(subject);
     }
 }

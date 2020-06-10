@@ -15,7 +15,7 @@ public interface LoginMapper {
      * @param login the login
      * @return the user
      */
-    Integer login(Login login);
+    Integer update(Login login);
 
     /**
      * Login login.

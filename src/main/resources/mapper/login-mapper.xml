@@ -17,7 +17,7 @@
     </insert>
 
 
-    <update id="login" parameterType="Login">
+    <update id="update" parameterType="Login">
         update login
         <set>
             <if test="roles!=null and roles!=''">

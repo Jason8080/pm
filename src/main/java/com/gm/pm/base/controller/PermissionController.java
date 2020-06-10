@@ -2,6 +2,8 @@ package com.gm.pm.base.controller;
 
 import com.gm.pm.entity.Login;
 import com.gm.pm.kit.TokenKit;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -21,14 +23,26 @@ public class PermissionController extends BaseController {
     public String token;
 
 
+//    @ModelAttribute
+//    public void pre(
+//            @CookieValue(value="token", name = "token") String token,
+//            HttpServletRequest request, HttpServletResponse response, HttpSession session
+//    ){
+//        Login login = TokenKit.assertToken(token);
+//        saveSession(session, login);
+//        this.token = token;
+//        this.request = request;
+//        this.response = response;
+//        this.session = session;
+//    }
+
     @ModelAttribute
     public void pre(
-            @CookieValue(value="token", name = "token") String token,
             HttpServletRequest request, HttpServletResponse response, HttpSession session
     ){
-        Login login = TokenKit.assertToken(token);
+        Subject subject = SecurityUtils.getSubject();
+        Login login = (Login) subject.getPrincipal();
         saveSession(session, login);
-        this.token = token;
         this.request = request;
         this.response = response;
         this.session = session;

@@ -23,7 +23,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //这里设置没有登录时，跳转界面
-        shiroFilterFactoryBean.setLoginUrl("/");
+        shiroFilterFactoryBean.setLoginUrl("/login");
         //这里是没有授权时，跳转的界面
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 

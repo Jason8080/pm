@@ -1,5 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="common/head::head"/>
 </head>
@@ -27,55 +28,57 @@
                 <form id="listForm" action="/project/list" method="post">
                     <input id="start" type="hidden" name="start" th:value="${page.getPageNum()}"/>
                     <input id="size" type="hidden" name="size" th:value="${page.getPageSize()}"/>
-                    <div class="card">
+                    <div class="card table-responsive">
                         <div class="card-header">
-                            <h3 class="card-title">项目列表</h3>
-                            <div class="card-tools">
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}"
-                                           class="btn btn-success float-left">添加</a>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <select name="choose" class="btn btn-default float-left">
-                                            <option th:selected="${pc.choose==0}" value="0">全部</option>
-                                            <option th:selected="${pc.choose==1}" value="1">全部已分配</option>
-                                            <option th:selected="${pc.choose==2}" value="2">全部未分配</option>
-                                            <option th:selected="${pc.choose==3}" value="3">全部未关闭</option>
-                                            <option th:selected="${pc.choose==4}" value="4">全部已关闭</option>
-                                            <option th:selected="${pc.choose==5}" value="5">已分配逾期</option>
-                                            <option th:selected="${pc.choose==6}" value="6">未分配逾期</option>
-                                            <option th:selected="${pc.choose==7}" value="7">按紧急排序</option>
-                                            <option th:selected="${pc.choose==8}" value="8">30日可验收</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <input onchange="this.value=this.value.replace(/\s+/g,'')"
-                                               type="text"
-                                               name="likes"
-                                               th:value="${pc.likes}"
-                                               class="form-control float-right"
-                                               placeholder="项目经理或客户名称..">
-                                    </div>
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                            <table class="table table-bordered text-nowrap">
+                                <h3 class="card-title">项目列表</h3>
+                                <div class="card-tools">
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}"
+                                               class="btn btn-success float-left">添加</a>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <select name="choose" class="btn btn-default float-left">
+                                                <option th:selected="${pc.choose==0}" value="0">全部</option>
+                                                <option th:selected="${pc.choose==1}" value="1">全部已分配</option>
+                                                <option th:selected="${pc.choose==2}" value="2">全部未分配</option>
+                                                <option th:selected="${pc.choose==3}" value="3">全部未关闭</option>
+                                                <option th:selected="${pc.choose==4}" value="4">全部已关闭</option>
+                                                <option th:selected="${pc.choose==5}" value="5">已分配逾期</option>
+                                                <option th:selected="${pc.choose==6}" value="6">未分配逾期</option>
+                                                <option th:selected="${pc.choose==7}" value="7">按紧急排序</option>
+                                                <option th:selected="${pc.choose==8}" value="8">30日可验收</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                   type="text"
+                                                   name="likes"
+                                                   th:value="${pc.likes}"
+                                                   class="form-control float-right"
+                                                   placeholder="项目经理或客户名称..">
+                                        </div>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </table>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered text-nowrap">
                                 <thead>
                                 <tr>
-                                    <th style="width: 3%;">#</th>
-                                    <th style="width: auto;">人员</th>
-                                    <th style="width: auto;">客户名称</th>
-                                    <th style="width: auto;">需求</th>
+                                    <th style="width: 10px;">#</th>
+                                    <th style="width: 80px;">人员</th>
+                                    <th style="width: 170px;">客户名称</th>
+                                    <th style="width: 400px;">需求</th>
                                     <th style="width: 60px;">剩余</th>
                                     <th style="width: 100px;">进度</th>
-                                    <th style="width: 160px;">操作</th>
+                                    <th style="width: 140px">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -110,19 +113,21 @@
                                             </i>
                                             修改
                                         </a>
-                                        <a th:class="'btn btn-' + ${project.status=='off'?'success':'danger'} + ' btn-sm'"
-                                           th:href="@{'/project/state/'+${project.id}+'?status='+ ${project.status=='off'?'on':'off'} +'&start='+${start}+'&size='+${size}}">
-                                            <i th:class="'fas '+${project.status=='off'?'fa-vote-yea':'fa-trash'}">
-                                            </i>
-                                            [[${project.status=='off'?'开启':'关闭'}]]
-                                        </a>
-                                        <br/>
-                                        <br/>
                                         <a class="btn btn-info btn-sm"
                                            th:href="@{'/project/urge/'+${project.id}+''}">
                                             <i class="far fa-envelope"></i>
                                             催单
                                         </a>
+                                        <div shiro:hasRole="DM">
+                                            <br/>
+                                            <br/>
+                                            <a th:class="'btn btn-' + ${project.status=='off'?'success':'danger'} + ' btn-sm'"
+                                               th:href="@{'/project/state/'+${project.id}+'?status='+ ${project.status=='off'?'on':'off'} +'&start='+${start}+'&size='+${size}}">
+                                                <i th:class="'fas '+${project.status=='off'?'fa-vote-yea':'fa-trash'}">
+                                                </i>
+                                                [[${project.status=='off'?'开启':'关闭'}]]
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>

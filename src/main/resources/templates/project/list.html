@@ -24,49 +24,46 @@
         <div class="content-header" th:include="common/navbar::navbar(menu='', menuUrl='', currentPage='项目管理')"/>
 
         <section class="content">
-            <div class="container-fluid">
                 <form id="listForm" action="/project/list" method="post">
                     <input id="start" type="hidden" name="start" th:value="${page.getPageNum()}"/>
                     <input id="size" type="hidden" name="size" th:value="${page.getPageSize()}"/>
                     <div class="card table-responsive">
                         <div class="card-header">
-                            <table class="table table-bordered text-nowrap">
-                                <h3 class="card-title">项目列表</h3>
-                                <div class="card-tools">
-                                    <div class="input-group">
-                                        <div class="input-group-append">
-                                            <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}"
-                                               class="btn btn-success float-left">添加</a>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <select name="choose" class="btn btn-default float-left">
-                                                <option th:selected="${pc.choose==0}" value="0">全部</option>
-                                                <option th:selected="${pc.choose==1}" value="1">全部已分配</option>
-                                                <option th:selected="${pc.choose==2}" value="2">全部未分配</option>
-                                                <option th:selected="${pc.choose==3}" value="3">全部未关闭</option>
-                                                <option th:selected="${pc.choose==4}" value="4">全部已关闭</option>
-                                                <option th:selected="${pc.choose==5}" value="5">已分配逾期</option>
-                                                <option th:selected="${pc.choose==6}" value="6">未分配逾期</option>
-                                                <option th:selected="${pc.choose==7}" value="7">按紧急排序</option>
-                                                <option th:selected="${pc.choose==8}" value="8">30日可验收</option>
-                                            </select>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
-                                                   type="text"
-                                                   name="likes"
-                                                   th:value="${pc.likes}"
-                                                   class="form-control float-right"
-                                                   placeholder="项目经理或客户名称..">
-                                        </div>
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                            <h3 class="card-title">项目列表</h3>
+                            <div class="card-tools">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}"
+                                       class="btn btn-success float-left">添加</a>
                                 </div>
-                            </table>
+                                <div class="input-group-append">
+                                    <select name="choose" class="btn btn-default float-left">
+                                        <option th:selected="${pc.choose==0}" value="0">全部</option>
+                                        <option th:selected="${pc.choose==1}" value="1">全部已分配</option>
+                                        <option th:selected="${pc.choose==2}" value="2">全部未分配</option>
+                                        <option th:selected="${pc.choose==3}" value="3">全部未关闭</option>
+                                        <option th:selected="${pc.choose==4}" value="4">全部已关闭</option>
+                                        <option th:selected="${pc.choose==5}" value="5">已分配逾期</option>
+                                        <option th:selected="${pc.choose==6}" value="6">未分配逾期</option>
+                                        <option th:selected="${pc.choose==7}" value="7">按紧急排序</option>
+                                        <option th:selected="${pc.choose==8}" value="8">30日可验收</option>
+                                    </select>
+                                </div>
+                                <div class="input-group-append">
+                                    <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                           type="text"
+                                           name="likes"
+                                           th:value="${pc.likes}"
+                                           class="form-control float-right"
+                                           placeholder="项目经理或客户名称..">
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered text-nowrap">
@@ -136,7 +133,6 @@
                         <div class="card-footer clearfix" th:include="common/page::page"/>
                     </div>
                 </form>
-            </div>
         </section>
     </div>
 

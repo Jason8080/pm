@@ -159,9 +159,9 @@
                 and (DATE_SUB(CURDATE(), INTERVAL -30 DAY) > date(accept_time))
             </if>
         </where>
-        order by `current_time` asc
+        order by `priority` desc
         <if test="pc.choose==7">
-            ) tb order by tb.`priority` desc
+            ) tb order by tb.`current_time` asc
         </if>
     </select>
 

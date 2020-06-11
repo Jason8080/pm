@@ -46,7 +46,7 @@
                                             <option th:selected="${pc.choose==4}" value="4">全部已关闭</option>
                                             <option th:selected="${pc.choose==5}" value="5">已分配逾期</option>
                                             <option th:selected="${pc.choose==6}" value="6">未分配逾期</option>
-                                            <option th:selected="${pc.choose==7}" value="7">按紧急排序</option>
+                                            <option th:selected="${pc.choose==7}" value="7">按逾期排序</option>
                                             <option th:selected="${pc.choose==8}" value="8">30日可验收</option>
                                         </select>
                                     </div>
@@ -107,8 +107,7 @@
                                         <td class="project-actions">
                                             <a class="btn btn-info btn-sm"
                                                th:href="@{'/project/update/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
+                                                <i class="fas fa-pencil-alt"></i>
                                                 修改
                                             </a>
                                             <a class="btn btn-info btn-sm"
@@ -120,10 +119,15 @@
                                                 <br/>
                                                 <br/>
                                                 <a th:class="'btn btn-' + ${project.status=='off'?'success':'danger'} + ' btn-sm'"
-                                                   th:href="@{'/project/state/'+${project.id}+'?status='+ ${project.status=='off'?'on':'off'} +'&start='+${start}+'&size='+${size}}">
+                                                   th:href="@{'/project/state/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
                                                     <i th:class="'fas '+${project.status=='off'?'fa-vote-yea':'fa-trash'}">
                                                     </i>
                                                     [[${project.status=='off'?'开启':'关闭'}]]
+                                                </a>
+                                                <a class="btn btn-danger btn-sm"
+                                                   th:href="@{'/project/del/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                                    <i class="fas fa-trash"></i>
+                                                    删除
                                                 </a>
                                             </div>
                                         </td>

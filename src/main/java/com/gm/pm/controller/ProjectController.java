@@ -104,12 +104,15 @@ public class ProjectController extends PermissionController {
 
     @GetMapping(value = "del/{id}")
     public String del(RedirectAttributes model, @PathVariable Long id,
+                      ProjectCondition pc,
                       @RequestParam(defaultValue = "1") Integer start,
                       @RequestParam(defaultValue = "5") Integer size
     ) {
         projectService.del(id);
         model.addAttribute("start", start);
         model.addAttribute("size", size);
+        model.addAttribute("choose", pc.getChoose());
+        model.addAttribute("likes", pc.getLikes());
         return "redirect:/project/list";
     }
 

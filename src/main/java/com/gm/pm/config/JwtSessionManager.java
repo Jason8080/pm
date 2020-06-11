@@ -29,15 +29,15 @@ public class JwtSessionManager extends DefaultWebSessionManager {
 
     @Override
     protected void onStart(Session session, SessionContext context) {
-        super.onStart(session, context);
-//        Serializable currentId = session.getId();
-//        Cookie template = this.getSessionIdCookie();
-//        Cookie cookie = new SimpleCookie(template);
-//        String idString = currentId.toString();
-//        cookie.setValue(idString);
-//        HttpServletRequest request = WebUtils.getHttpRequest(context);
-//        HttpServletResponse response = WebUtils.getHttpResponse(context);
-//        cookie.saveTo(request, response);
+//        super.onStart(session, context);
+        Serializable currentId = session.getId();
+        Cookie template = this.getSessionIdCookie();
+        Cookie cookie = new SimpleCookie(template);
+        String idString = currentId.toString();
+        cookie.setValue(idString);
+        HttpServletRequest request = WebUtils.getHttpRequest(context);
+        HttpServletResponse response = WebUtils.getHttpResponse(context);
+        cookie.saveTo(request, response);
     }
 
 }

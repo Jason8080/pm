@@ -1,6 +1,7 @@
 package com.gm.pm.base.controller;
 
 import com.gm.pm.entity.Login;
+import com.gm.pm.kit.Assert;
 import com.gm.pm.kit.TokenKit;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -40,8 +41,7 @@ public class PermissionController extends BaseController {
     public void pre(
             HttpServletRequest request, HttpServletResponse response, HttpSession session
     ){
-        Subject subject = SecurityUtils.getSubject();
-        Login login = (Login) subject.getPrincipal();
+        Login login = Assert.onLine();
         saveSession(session, login);
         this.request = request;
         this.response = response;

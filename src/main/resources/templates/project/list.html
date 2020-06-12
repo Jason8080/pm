@@ -67,73 +67,73 @@
                             </div>
                         </div>
                         <div class="card-body">
-                                <table class="table table-bordered text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 10px;">#</th>
-                                        <th style="width: 80px;">人员</th>
-                                        <th style="width: 170px;">客户名称</th>
-                                        <th style="width: 400px;">需求</th>
-                                        <th style="width: 60px;">剩余</th>
-                                        <th style="width: 100px;">进度</th>
-                                        <th shiro:authenticated style="width: 160px">操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="project,stat:${page.list}">
-                                        <td>[[${stat.count}]]</td>
-                                        <td th:title="${project.pmName}">[[${project.pmName}]]</td>
-                                        <td th:title="${project.client}">[[${project.client}]]</td>
-                                        <td>
-                                            <pre>[[${project.demand}]]</pre>
-                                        </td>
-                                        <td>
+                            <table class="table table-bordered text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th style="width: 10px;">#</th>
+                                    <th style="width: 80px;">人员</th>
+                                    <th style="width: 170px;">客户名称</th>
+                                    <th style="width: 400px;">需求</th>
+                                    <th style="width: 60px;">剩余</th>
+                                    <th style="width: 100px;">进度</th>
+                                    <th shiro:authenticated style="width: 160px">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="project,stat:${page.list}">
+                                    <td>[[${stat.count}]]</td>
+                                    <td th:title="${project.pmName}">[[${project.pmName}]]</td>
+                                    <td th:title="${project.client}">[[${project.client}]]</td>
+                                    <td>
+                                        <pre>[[${project.demand}]]</pre>
+                                    </td>
+                                    <td>
                                     <span th:class="'float-left badge ' + ${project.residualDay>0?'bg-success':(project.residualDay==0?'bg-warning':'bg-danger')}">
                                         [[${project.residualDay}]]天
                                     </span>
-                                        </td>
-                                        <td class="project_progress">
-                                            <div class="progress progress-sm">
-                                                <div th:class="'progress-bar ' + ${project.currentSlider>80?'bg-success':(project.currentSlider>60?'bg-primary':(project.currentSlider>40?'bg-warning':'bg-danger'))}"
-                                                     role="progressbar"
-                                                     aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"
-                                                     th:style="'width: '+ ${project.currentSlider}+'%'">
-                                                </div>
+                                    </td>
+                                    <td class="project_progress">
+                                        <div class="progress progress-sm">
+                                            <div th:class="'progress-bar ' + ${project.currentSlider>80?'bg-success':(project.currentSlider>60?'bg-primary':(project.currentSlider>40?'bg-warning':'bg-danger'))}"
+                                                 role="progressbar"
+                                                 aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"
+                                                 th:style="'width: '+ ${project.currentSlider}+'%'">
                                             </div>
-                                            <small>
-                                                [[${project.currentStage}]]: [[${project.currentSlider}]]%
-                                            </small>
-                                        </td>
-                                        <td shiro:authenticated class="project-actions">
-                                            <a class="btn btn-info btn-sm"
-                                               th:href="@{'/project/update/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
-                                                <i class="fas fa-pencil-alt"></i>
-                                                修改
+                                        </div>
+                                        <small>
+                                            [[${project.currentStage}]]: [[${project.currentSlider}]]%
+                                        </small>
+                                    </td>
+                                    <td shiro:authenticated class="project-actions">
+                                        <a class="btn btn-info btn-sm"
+                                           th:href="@{'/project/update/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            修改
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                           th:href="@{'/project/urge/'+${project.id}+''}">
+                                            <i class="far fa-envelope"></i>
+                                            催单
+                                        </a>
+                                        <div shiro:hasRole="DM">
+                                            <br/>
+                                            <br/>
+                                            <a th:class="'btn btn-' + ${project.status=='off'?'success':'danger'} + ' btn-sm'"
+                                               th:href="@{'/project/state/'+${project.id}+'?status='+${project.status=='off'?'on':'off'}+'&start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                                <i th:class="'fas '+${project.status=='off'?'fa-vote-yea':'fa-trash'}">
+                                                </i>
+                                                [[${project.status=='off'?'开启':'关闭'}]]
                                             </a>
-                                            <a class="btn btn-info btn-sm"
-                                               th:href="@{'/project/urge/'+${project.id}+''}">
-                                                <i class="far fa-envelope"></i>
-                                                催单
+                                            <a shiro:hasRole="sa" class="btn btn-danger btn-sm"
+                                               th:href="@{'/project/del/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                                <i class="fas fa-trash"></i>
+                                                删除
                                             </a>
-                                            <div shiro:hasRole="DM">
-                                                <br/>
-                                                <br/>
-                                                <a th:class="'btn btn-' + ${project.status=='off'?'success':'danger'} + ' btn-sm'"
-                                                   th:href="@{'/project/state/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
-                                                    <i th:class="'fas '+${project.status=='off'?'fa-vote-yea':'fa-trash'}">
-                                                    </i>
-                                                    [[${project.status=='off'?'开启':'关闭'}]]
-                                                </a>
-                                                <a class="btn btn-danger btn-sm"
-                                                   th:href="@{'/project/del/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
-                                                    <i class="fas fa-trash"></i>
-                                                    删除
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="card-footer clearfix" th:include="common/page::page"/>
                     </form>

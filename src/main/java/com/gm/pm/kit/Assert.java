@@ -25,7 +25,6 @@ public class Assert {
             }
             return (Login) login;
         } catch (AccountException e) {
-            e.printStackTrace();
             return null;
         }
     }

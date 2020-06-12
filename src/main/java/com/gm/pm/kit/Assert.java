@@ -17,11 +17,16 @@ public class Assert {
     }
 
     public static Login onLine() {
-        Subject subject = SecurityUtils.getSubject();
-        Object login = subject.getPrincipal();
-        if(login==null){
-            throw new AccountException("登入超时或未登录!");
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            Object login = subject.getPrincipal();
+            if(login==null){
+                throw new AccountException("登入超时或未登录!");
+            }
+            return (Login) login;
+        } catch (AccountException e) {
+            e.printStackTrace();
+            return null;
         }
-        return (Login) login;
     }
 }

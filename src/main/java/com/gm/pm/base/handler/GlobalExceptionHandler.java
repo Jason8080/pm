@@ -2,6 +2,7 @@ package com.gm.pm.base.handler;
 
 import com.gm.pm.ex.TokenException;
 import com.gm.pm.kit.TokenKit;
+import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.authc.AccountException;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.util.StringUtils;
@@ -50,7 +51,7 @@ public class GlobalExceptionHandler {
         return mv;
     }
 
-    @ExceptionHandler(value = {AccountException.class})
+    @ExceptionHandler(value = {AccountException.class, UnavailableSecurityManagerException.class})
     public ModelAndView shiroExceptionHandler(HttpServletRequest request, Exception e) throws Exception {
         ModelAndView mv = new ModelAndView();
         String msg = URLEncoder.encode(e.getMessage(), "UTF-8");

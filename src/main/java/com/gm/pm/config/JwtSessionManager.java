@@ -25,33 +25,32 @@ public class JwtSessionManager extends DefaultWebSessionManager {
     }
 
     @Override
+    protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = WebUtils.toHttp(request);
+        String token = req.getHeader("token");
+        if (StringUtils.isEmpty(token)) {
+            return super.getSessionId(request, response);
+        }
+        return token;
+    }
+
+    @Override
     public Cookie getSessionIdCookie() {
         Cookie cookie = new SimpleCookie("token");
+        cookie.setMaxAge(2*3600*1000);
         cookie.setHttpOnly(true);
         return cookie;
     }
-    @Override
-    protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
-        String token = request.getParameter("token");
-        if (StringUtils.isEmpty(token)) {
-            // 是否将sid保存到cookie，浏览器模式下使用此参数。
-            if (WebUtils.isTrue(request, "token")) {
-                HttpServletRequest rq = (HttpServletRequest) request;
-                HttpServletResponse rs = (HttpServletResponse) response;
-                Cookie template = getSessionIdCookie();
-                Cookie cookie = new SimpleCookie(template);
-                cookie.setValue(token);
-                cookie.saveTo(rq, rs);
-            }
-            // 设置当前session状态
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE,
-                    ShiroHttpServletRequest.URL_SESSION_ID_SOURCE); // session来源与url
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, token);
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
-            return token;
-        } else {
-            return super.getSessionId(request, response);
-        }
-    }
 
+    @Override
+    protected void onStart(Session session, SessionContext context) {
+        Serializable currentId = session.getId();
+        Cookie template = this.getSessionIdCookie();
+        Cookie cookie = new SimpleCookie(template);
+        String idString = currentId.toString();
+        cookie.setValue(idString);
+        HttpServletRequest request = WebUtils.getHttpRequest(context);
+        HttpServletResponse response = WebUtils.getHttpResponse(context);
+        cookie.saveTo(request, response);
+    }
 }

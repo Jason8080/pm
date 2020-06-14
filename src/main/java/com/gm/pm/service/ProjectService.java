@@ -3,20 +3,18 @@ package com.gm.pm.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.gm.pm.entity.Inventory;
+import com.gm.pm.entity.Project;
 import com.gm.pm.entity.ProjectCondition;
 import com.gm.pm.kit.MailKit;
 import com.gm.pm.kit.StageKit;
 import com.gm.pm.mapper.ProjectMapper;
-import com.gm.pm.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Date;
+import java.util.List;
 
 /**
- *
- *
  * @author Jason
  */
 @Service
@@ -27,7 +25,7 @@ public class ProjectService {
     public PageInfo findAll(Project project, ProjectCondition pc, Integer start, Integer size) {
         PageHelper.startPage(start, size);
         pc.likeEndless();
-        Page page = projectMapper.selectBy(project, pc);
+        Page page = projectMapper.selectBy(pc);
         return new PageInfo(page);
     }
 
@@ -55,12 +53,24 @@ public class ProjectService {
 
     public void urge(Long id) {
         Project project = projectMapper.selectById(id);
-        if(project!=null){
+        if (project != null) {
             // MailKit.send("你的项目有人着急了", "", "");
         }
     }
 
     public static void main(String[] args) {
         MailKit.send("你的项目有人着急了", "你真的是", "xiaoku13141@163.com");
+    }
+
+    public Project in(ProjectCondition pc, Inventory in) {
+        pc.likeEndless();
+        List<Project> list = projectMapper.selectBy(pc);
+        int current = in.getCurrent();
+        in.setPrev(current - 1);
+        in.setNext(current + 1);
+        if (current >= 0 && current < list.size()) {
+            return list.get(current);
+        }
+        return null;
     }
 }

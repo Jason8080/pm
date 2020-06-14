@@ -2,6 +2,7 @@ package com.gm.pm.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.gm.pm.base.controller.PermissionController;
+import com.gm.pm.entity.Inventory;
 import com.gm.pm.entity.Project;
 import com.gm.pm.entity.ProjectCondition;
 import com.gm.pm.entity.Toa;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * @author Jason
@@ -69,6 +73,38 @@ public class ProjectController extends PermissionController {
         model.addAttribute("size", size);
         model.addAttribute("pc", pc);
         return "project/update";
+    }
+
+    @GetMapping(value = "o2o")
+    public String o2o(Model model, ProjectCondition pc, Inventory in
+    ) throws Exception {
+        Project project = projectService.in(pc, in);
+        if(project!=null){
+            model.addAttribute("project", project);
+            model.addAttribute("in", in);
+            model.addAttribute("pc", pc.likeRecover());
+            return "project/o2o";
+        }else {
+            pc.likeRecover();
+            String msg = URLEncoder.encode("盘点完成!", "UTF-8");
+            String likes = URLEncoder.encode(pc.getLikes(), "UTF-8");
+            return "redirect:/project/list?choose="+pc.getChoose()+"&likes="+likes+"&msg="+msg;
+        }
+    }
+
+    @PostMapping(value = "o2o")
+    public String o2o(RedirectAttributes model, Project project, ProjectCondition pc,
+                      Inventory in
+    ) {
+        projectService.update(project);
+        int current = in.getCurrent();
+        in.setPrev(current - 1);
+        in.setNext(current + 1);
+        model.addAttribute("current", in.getNext());
+        model.addAttribute("choose", pc.getChoose());
+        model.addAttribute("likes", pc.getLikes());
+        model.addAttribute("msg", "保存成功!");
+        return "redirect:/project/o2o";
     }
 
     @PostMapping(value = "update")

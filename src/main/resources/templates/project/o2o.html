@@ -12,19 +12,18 @@
 
     <div class="content-wrapper">
         <div class="content-header"
-             th:include="common/navbar::navbar(menu='项目管理', menuUrl='/project/list', currentPage='修改项目')"/>
+             th:include="common/navbar::navbar(menu='项目管理', menuUrl='/project/list', currentPage='盘点项目')"/>
 
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
 
                     <div class="container-fluid">
-                        <form action="/project/update" method="post" role="form" id="addForm">
+                        <form action="/project/o2o" method="post" role="form" id="addForm">
                             <input type="hidden" name="id" th:value="${project.id}"/>
-                            <input type="hidden" name="start" th:value="${start}"/>
-                            <input type="hidden" name="size" th:value="${size}"/>
                             <input type="hidden" name="choose" th:value="${pc.choose}"/>
                             <input type="hidden" name="likes" th:value="${pc.likes}"/>
+                            <input type="hidden" name="current" th:value="${in.current}"/>
                             <div class="col-md-12">
                                 <div class="card card-warning">
                                     <div class="card-header">
@@ -267,8 +266,16 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="card-footer">
-                                    <input type="reset" value="重置" class="btn btn-default float-left"/>
-                                    <input type="submit" value="提交" class="btn btn-primary float-right"/>
+                                    <a class="btn btn-default float-left"
+                                       th:if="${in.prev>=0}"
+                                       th:href="@{'/project/o2o?current='+${in.prev}+'&start='+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                        上一条
+                                    </a>
+                                    <a class="btn btn-default float-left"
+                                       th:href="@{'/project/o2o?current='+${in.next}+'&start='+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                        下一条
+                                    </a>
+                                    <input type="submit" value="保存并下一条" class="btn btn-primary float-right"/>
                                 </div>
                             </div>
                         </form>

@@ -25,7 +25,7 @@ public class Assert {
             }
             return (Login) login;
         } catch (AccountException e) {
-            return null;
+            throw new AccountException("登入超时或未登录!");
         }
     }
 }

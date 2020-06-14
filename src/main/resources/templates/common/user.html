@@ -1,12 +1,16 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="panelBar" th:fragment="user">
     <div class="image">
         <img src="/static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
     </div>
     <div class="info">
-        <a href="#" class="d-block">[[${session.login!=null?session.login.name:'visitor'}]]</a>
+        <a href="#" class="d-block">
+            <shiro:notAuthenticated>visitor</shiro:notAuthenticated>
+            <shiro:principal property="name"/>
+        </a>
     </div>
 </div>
 </body>

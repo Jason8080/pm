@@ -3,7 +3,6 @@ package com.gm.pm.base.controller;
 import com.gm.pm.entity.Toa;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("error")
 public class ErrorController extends BaseController {
 
-    @GetMapping(value = "{code}")
+    @RequestMapping(value = "{code}")
     public String four(Model model, Toa toa,
                        @PathVariable String code
     ) {

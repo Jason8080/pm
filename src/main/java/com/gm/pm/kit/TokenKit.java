@@ -2,6 +2,7 @@ package com.gm.pm.kit;
 
 import com.gm.pm.entity.Login;
 import com.gm.pm.ex.TokenException;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,14 @@ public class TokenKit {
      * @return
      */
     public static String getToken(HttpServletRequest request) {
-        return getCookie(request, "token");
+        String token = request.getParameter("token");
+        if (StringUtils.isEmpty(token)) {
+            token = request.getHeader("token");
+            if (StringUtils.isEmpty(token)) {
+                token = getCookie(request, "token");
+            }
+        }
+        return token;
     }
 
     /**

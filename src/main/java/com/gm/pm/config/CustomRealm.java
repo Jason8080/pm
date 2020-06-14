@@ -44,8 +44,9 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         System.out.println("-------开始身份认证--------");
         JwtAuthenticationToken jat = (JwtAuthenticationToken) authenticationToken;
+        jat.setRememberMe(true);
         Login login = jat.getPrincipal();
-        String token = jat.getCredentials();
-        return new SimpleAuthenticationInfo(login, token, getName());
+        String pass = jat.getCredentials();
+        return new SimpleAuthenticationInfo(login, pass, getName());
     }
 }

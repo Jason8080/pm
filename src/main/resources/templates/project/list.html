@@ -29,11 +29,11 @@
                     <form id="listForm" action="/project/list" method="post" style="width: auto; overflow:scroll;" class="sidebar-form">
                         <input id="start" type="hidden" name="start" th:value="${page.getPageNum()}"/>
                         <input id="size" type="hidden" name="size" th:value="${page.getPageSize()}"/>
-                        <div class="card-header">
+                        <div class="card-header" style="width: 1050px;">
                             <h3 class="card-title">项目列表</h3>
 
                             <div class="card-tools">
-                                <div class="input-group hidden-xs" style="width: 340px;">
+                                <div class="input-group hidden-xs" style="width: 500px;">
                                     <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}"
                                        class="btn btn-success float-left">添加</a>
                                     <select name="choose" class="btn btn-sm btn-default" style="width: 100px;">
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="width: 1050px;">
                             <table class="table table-bordered text-nowrap">
                                 <thead>
                                 <tr>
@@ -130,7 +130,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer clearfix" th:include="common/page::page"/>
+                        <div class="card-footer clearfix" th:include="common/page::page" style="width: 1050px;"/>
                     </form>
                 </div>
             </div>

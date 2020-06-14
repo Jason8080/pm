@@ -271,6 +271,7 @@
                                        th:href="@{'/project/o2o?current='+${in.prev}+'&start='+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
                                         上一条
                                     </a>
+                                    <input type="reset" value="重置" class="btn btn-default float-left"/>
                                     <a class="btn btn-default float-left"
                                        th:href="@{'/project/o2o?current='+${in.next}+'&start='+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
                                         下一条

@@ -26,14 +26,15 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="card">
-                    <form id="listForm" action="/project/list" method="post" style="width: auto; overflow:scroll;" class="sidebar-form">
+                    <form id="listForm" action="/project/list" method="post" style="width: auto; overflow:scroll;"
+                          class="sidebar-form">
                         <input id="start" type="hidden" name="start" th:value="${page.getPageNum()}"/>
                         <input id="size" type="hidden" name="size" th:value="${page.getPageSize()}"/>
                         <div class="card-header" style="width: 1050px;">
                             <h3 class="card-title">项目列表</h3>
 
                             <div class="card-tools">
-                                <div class="input-group hidden-xs" style="width: 500px;">
+                                <div class="input-group hidden-xs" style="width: 400px;">
                                     <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}"
                                        class="btn btn-success float-left">添加</a>
                                     <select name="choose" class="btn btn-sm btn-default" style="width: 100px;">
@@ -47,16 +48,16 @@
                                         <option th:selected="${pc.choose==7}" value="7">按逾期排序</option>
                                         <option th:selected="${pc.choose==8}" value="8">30日可验收</option>
                                     </select>
-
                                     <input onchange="this.value=this.value.replace(/\s+/g,'')"
                                            type="text"
                                            name="likes"
                                            th:value="${pc.likes}"
                                            class="form-control"
                                            placeholder="项目经理或客户名称..">
-
                                     <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-lg btn-default"><i class="fa fa-search"></i></button>
+                                        <button type="submit" class="btn btn-flat">
+                                            <i class="fa fa-search"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

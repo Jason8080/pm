@@ -1,0 +1,432 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="common/head::head"/>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/top::top"/>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:include="common/side::side(currentPage='项目管理')"/>
+
+
+    <div class="content-wrapper">
+        <div class="content-header"
+             th:include="common/navbar::navbar(menu='项目管理', menuUrl='/project/list', currentPage='添加项目')"/>
+
+        <section class="content">
+            <div class="row">
+                <div class="container-fluid">
+                    <form action="/project/add" method="post" role="form" id="addForm">
+                        <input type="hidden" name="start" th:value="${start}"/>
+                        <input type="hidden" name="size" th:value="${size}"/>
+                        <div class="col-md-12">
+                            <div class="card card-warning">
+                                <div class="card-header">
+                                    <h3 class="card-title">项目信息</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
+                                            <label>项目经理</label>
+                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                   name="pmName"
+                                                   type="text"
+                                                   class="form-control"
+                                                   placeholder="项目经理">
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>客户名称</label>
+                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                   name="client"
+                                                   type="text"
+                                                   class="form-control"
+                                                   placeholder="客户名称">
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>合同编号</label>
+                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                   name="contract"
+                                                   type="text"
+                                                   class="form-control"
+                                                   placeholder="合同编号">
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>项目名称</label>
+                                            <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                   name="name"
+                                                   type="text"
+                                                   class="form-control"
+                                                   placeholder="项目名称">
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>工作量</label>
+                                            <input onchange="this.value=this.value.replace('-','')"
+                                                   name="days"
+                                                   type="text"
+                                                   class="form-control"
+                                                   placeholder="工作量人天">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>需求简述</label>
+                                                <textarea name="demand" class="form-control" rows="3"
+                                                          placeholder="需求简述; 注意排版哦.."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>已经完成</label>
+                                                <textarea name="completed" maxlength="100"
+                                                          class="form-control" rows="3"
+                                                          placeholder="已完成的内容; 注意排版哦.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>下步计划</label>
+                                                <textarea name="nextPlan" maxlength="50"
+                                                          class="form-control" rows="3"
+                                                          placeholder="下一步的内容; 注意排版哦.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>风险提示</label>
+                                                <textarea name="risk" maxlength="50"
+                                                          class="form-control" rows="3"
+                                                          placeholder="项目可能存在的风险; 注意排版哦.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>备注</label>
+                                                <textarea name="remarks" maxlength="50"
+                                                          class="form-control" rows="3"
+                                                          placeholder="需要备注吗; 注意排版哦.."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div shiro:hasRole="DM" class="col-md-12">
+                            <div class="card card-success">
+                                <div class="card-header">
+                                    <h3 class="card-title">预期时间</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
+                                            <label>所在阶段</label>
+                                            <select id="currentStage" name="currentStage" class="custom-select">
+                                                <option value="分配">分配</option>
+                                                <option value="调研">调研</option>
+                                                <option value="编码">编码</option>
+                                                <option value="测试">测试</option>
+                                                <option value="上线">上线</option>
+                                                <option value="验收">验收</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label>当前进度</label>
+                                            <div class="slider-blue">
+                                                <input name="currentSlider" type="text" value="50"
+                                                       class="slider form-control"
+                                                       data-slider-min="0" data-slider-max="100" data-slider-step="5"
+                                                       data-slider-value="50" data-slider-orientation="horizontal"
+                                                       data-slider-selection="before" data-slider-tooltip="show"
+                                                       data-value="50" style="display: none;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label>紧急程度</label>
+                                            <div class="slider-yellow">
+                                                <input name="priority" type="text" value="1"
+                                                       class="slider form-control"
+                                                       data-slider-min="1" data-slider-max="5" data-slider-step="1"
+                                                       data-slider-value="1" data-slider-orientation="horizontal"
+                                                       data-slider-selection="before" data-slider-tooltip="show"
+                                                       data-value="1" style="display: none;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
+                                            <label>分配完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input id="planTime" name="planTime"
+                                                       type="text" class="form-control"
+                                                       data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>调研完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input id="surveyTime" name="surveyTime" type="text"
+                                                       class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>编码完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input id="executeTime" name="executeTime" type="text"
+                                                       class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>测试完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input id="verifyTime" name="verifyTime"
+                                                       type="text" class="form-control"
+                                                       data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd"
+                                                       data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>上线完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input id="onlineTime" name="onlineTime" type="text"
+                                                       class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>验收完成</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input id="acceptTime" name="acceptTime" type="text"
+                                                       class="form-control" data-inputmask-alias="datetime"
+                                                       data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer">
+                                <input type="reset" value="重置" class="btn btn-default float-left"/>
+                                <input type="submit" value="提交" class="btn btn-primary float-right"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <footer class="main-footer" th:include="common/footer::footer"/>
+    <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
+</div>
+<th:block th:include="common/js::js"/>
+<script>
+    $(function () {
+        $('.slider').bootstrapSlider();
+        $('[data-mask]').inputmask();
+
+
+        $.validator.setDefaults({
+            submitHandler: function () {
+                return true;
+            }
+        });
+        jQuery.validator.addMethod("compareDate", function (value, ele, param) {
+            let currentStage = $("#currentStage").val();
+            if (currentStage == '分配') {
+                return true;
+            }
+            var date = jQuery(param).val();
+            var before = new Date(Date.parse(date));
+            var after = new Date(Date.parse(value));
+            return before < after;
+        });
+
+        jQuery.validator.addMethod("ato", function (value, ele, param) {
+            let currentStage = $("#currentStage").val();
+            if (param.indexOf(currentStage) > -1) {
+                return value != undefined && value != '';
+            }
+            return true;
+        });
+
+        jQuery.validator.addMethod("positiveinteger", function (value, element, param) {
+            var num = parseInt(value);
+            return value == undefined || value == '' || (num > 0 && (num + "") == value);
+        });
+
+        $('#addForm').validate({
+            rules: {
+                client: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20,
+                },
+                name: {
+                    minlength: 6,
+                    maxlength: 30,
+                },
+                contract: {
+                    minlength: 6,
+                    maxlength: 50,
+                },
+                pmName: {
+                    ato: "调研,编码,测试,上线,验收",
+                    minlength: 2,
+                    maxlength: 6,
+                },
+                currentStage: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 18,
+                },
+                currentSlider: {
+                    required: true,
+                    min: 0,
+                    max: 100
+                },
+                days: {
+                    min: 0,
+                    positiveinteger: true,
+                },
+                demand: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 2000,
+                },
+                planTime: {
+                    ato: "分配",
+                    date: true,
+                },
+                surveyTime: {
+                    ato: "调研",
+                    date: true,
+                },
+                executeTime: {
+                    ato: "编码",
+                    date: true,
+                },
+                verifyTime: {
+                    ato: "测试",
+                    date: true,
+                },
+                onlineTime: {
+                    ato: "上线",
+                    date: true,
+                },
+                acceptTime: {
+                    ato: "验收",
+                    date: true,
+                },
+            },
+            messages: {
+                client: {
+                    required: "请填写客户名称",
+                    minlength: "客户名称为6-20个字符",
+                    maxlength: "客户名称为6-20个字符",
+                },
+                name: {
+                    minlength: "项目名称为6-30个字符",
+                    maxlength: "项目名称为6-30个字符",
+                },
+                contract: {
+                    minlength: "合同编号为6-50个字符",
+                    maxlength: "合同编号为6-50个字符",
+                },
+                pmName: {
+                    ato: "请填写项目经理名称",
+                    minlength: "项目经理为2-6个字符",
+                    maxlength: "项目经理为2-6个字符",
+                },
+                currentStage: {
+                    required: "请选择当前所在阶段",
+                    minlength: "所在阶段为2-6个字符",
+                    maxlength: "所在阶段2-6个字符",
+                },
+                currentSlider: {
+                    required: "请选择当前阶段完成进度",
+                    min: "完成进度为0-100",
+                    max: "完成进度为0-100",
+                },
+                days: {
+                    min: "请输入大于等于0的自然天数",
+                    positiveinteger: "请输入自然数",
+                },
+                demand: {
+                    required: "请简诉项目需求",
+                    minlength: "需求描述为10-2000个字符",
+                    maxlength: "需求描述为10-2000个字符",
+                },
+                planTime: {
+                    ato: "请填写分配时间",
+                    date: "请填写正确的日期",
+                },
+                surveyTime: {
+                    ato: "请填写调研时间",
+                    date: "请填写正确的日期",
+                },
+                executeTime: {
+                    ato: "请填写编码时间",
+                    date: "请填写正确的日期",
+                },
+                verifyTime: {
+                    ato: "请填写测试时间",
+                    date: "请填写正确的日期",
+                },
+                onlineTime: {
+                    ato: "请填写上线时间",
+                    date: "请填写正确的日期",
+                },
+                acceptTime: {
+                    ato: "请填写验收时间",
+                    date: "请填写正确的日期",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    })
+</script>
+</body>
+</html>

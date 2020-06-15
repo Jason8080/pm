@@ -165,7 +165,7 @@
         </if>
     </select>
 
-    <select id="selectById" resultMap="proMap">
+    <select id="selectById" resultMap="proMap" timeout="3000">
         select * from tb_project where id = #{id}
     </select>
 </mapper>

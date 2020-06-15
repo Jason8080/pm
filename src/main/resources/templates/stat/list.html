@@ -1,0 +1,169 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="common/head::head"/>
+</head>
+<style>
+    table {
+        table-layout: fixed;
+    }
+
+    td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/top::top"/>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:include="common/side::side(currentPage='项目管理')"/>
+
+    <div class="content-wrapper">
+        <div class="content-header" th:include="common/navbar::navbar(menu='', menuUrl='', currentPage='项目管理')"/>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <form id="listForm" action="/project/list" method="post" style="width: auto; overflow:scroll;"
+                          class="sidebar-form">
+                        <input id="start" type="hidden" name="start" th:value="${page.getPageNum()}"/>
+                        <input id="size" type="hidden" name="size" th:value="${page.getPageSize()}"/>
+                        <div class="card-header" style="width: 1220px;">
+                            <h3 class="card-title">项目列表</h3>
+
+                            <div class="card-tools">
+                                <div class="input-group hidden-xs">
+                                    <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                           type="text"
+                                           name="likes"
+                                           th:value="${pc.likes}"
+                                           class="form-control"
+                                           placeholder="项目经理或客户名称..">
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-lg btn-flat">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-tools">
+                                <div class="input-group hidden-xs">
+                                    <select name="choose" class="btn btn-default">
+                                        <option th:selected="${pc.choose==0}" value="0">全部</option>
+                                        <option th:selected="${pc.choose==1}" value="1">全部已分配</option>
+                                        <option th:selected="${pc.choose==2}" value="2">全部未分配</option>
+                                        <option th:selected="${pc.choose==3}" value="3">全部未关闭</option>
+                                        <option th:selected="${pc.choose==4}" value="4">全部已关闭</option>
+                                        <option th:selected="${pc.choose==5}" value="5">已分配逾期</option>
+                                        <option th:selected="${pc.choose==6}" value="6">未分配逾期</option>
+                                        <option th:selected="${pc.choose==7}" value="7">按逾期排序</option>
+                                        <option th:selected="${pc.choose==8}" value="8">30日可验收</option>
+                                    </select>
+                                    <span style="width: 15px;"></span>
+                                </div>
+                            </div>
+                            <div shiro:hasRole="DM" class="card-tools">
+                                <div class="input-group hidden-xs">
+                                    <a th:href="@{'/project/o2o?'+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}"
+                                       class="btn btn-info btn-social-icon"><i class="fa fa-fw fa-magnet"></i>盘点</a>
+                                    <span style="width: 20px;"></span>
+                                </div>
+                            </div>
+                            <div class="card-tools">
+                                <div class="input-group hidden-xs">
+                                    <a th:href="@{'/project/add?start=' + ${start} + '&size=' + ${size}}"
+                                       class="btn btn-success btn-social-icon"><i class="fa fa-fw fa-plus"></i>添加</a>
+                                    <span style="width: 20px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="width: 1220px;">
+                            <table class="table table-bordered text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th style="width: 10px;">#</th>
+                                    <th style="width: 80px;">人员</th>
+                                    <th style="width: 170px;">客户名称</th>
+                                    <th style="width: 400px;">需求</th>
+                                    <th style="width: 60px;">剩余</th>
+                                    <th style="width: 100px;">进度</th>
+                                    <th shiro:authenticated style="width: 160px">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="project,stat:${page.list}">
+                                    <td>[[${stat.count}]]</td>
+                                    <td th:title="${project.pmName}">[[${project.pmName}]]</td>
+                                    <td th:title="${project.client}">[[${project.client}]]</td>
+                                    <td>
+                                        <pre>[[${project.demand}]]</pre>
+                                    </td>
+                                    <td>
+                                    <span th:class="'float-left badge ' + ${project.residualDay>0?'bg-success':(project.residualDay==0?'bg-warning':'bg-danger')}">
+                                        [[${project.residualDay}]]天
+                                    </span>
+                                    </td>
+                                    <td class="project_progress">
+                                        <div class="progress progress-sm">
+                                            <div th:class="'progress-bar ' + ${project.currentSlider>80?'bg-success':(project.currentSlider>60?'bg-primary':(project.currentSlider>40?'bg-warning':'bg-danger'))}"
+                                                 role="progressbar"
+                                                 aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"
+                                                 th:style="'width: '+ ${project.currentSlider}+'%'">
+                                            </div>
+                                        </div>
+                                        <small>
+                                            [[${project.currentStage}]]: [[${project.currentSlider}]]%
+                                        </small>
+                                    </td>
+                                    <td shiro:authenticated class="project-actions">
+                                        <a class="btn btn-info btn-sm"
+                                           th:href="@{'/project/update/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            修改
+                                        </a>
+                                        <a class="btn btn-info btn-sm"
+                                           th:href="@{'/project/urge/'+${project.id}+''}">
+                                            <i class="far fa-envelope"></i>
+                                            催单
+                                        </a>
+                                        <div shiro:hasRole="DM">
+                                            <br/>
+                                            <br/>
+                                            <a th:class="'btn btn-' + ${project.status=='off'?'success':'danger'} + ' btn-sm'"
+                                               th:href="@{'/project/state/'+${project.id}+'?status='+${project.status=='off'?'on':'off'}+'&start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                                <i th:class="'fas '+${project.status=='off'?'fa-vote-yea':'fa-trash'}">
+                                                </i>
+                                                [[${project.status=='off'?'开启':'关闭'}]]
+                                            </a>
+                                            <a shiro:hasRole="sa" class="btn btn-danger btn-sm"
+                                               th:href="@{'/project/del/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                                <i class="fa fa-fw fa-times-circle"></i>
+                                                删除
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer clearfix" th:include="common/page::page" style="width: 1220px;"/>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <footer class="main-footer" th:include="common/footer::footer"/>
+    <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
+</div>
+<th:block th:include="common/js::js"/>
+<script>
+    $("input[data-bootstrap-switch]").each(function () {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+</script>
+</body>
+</html>

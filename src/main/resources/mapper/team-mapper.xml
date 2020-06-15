@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gm.pm.mapper.TeamMapper">
+    <resultMap id="teamMap" type="Team">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="pmName" column="pm_name"/>
+        <result property="predecessor" column="predecessor"/>
+        <result property="concurrency" column="concurrency"/>
+        <result property="acceptCount" column="accept_count"/>
+        <result property="tags" column="tags"/>
+        <result property="summary" column="summary"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="idleDays" column="idle_days"/>
+
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <insert id="insert">
+        insert into tb_team (
+        id, `name`, pm_name, predecessor, concurrency, accept_count,
+        tags, summary, begin_time, idle_days, status
+        ) values (
+        <if test="id!=null">
+            #{id},
+        </if>
+        <if test="id==null">
+            null,
+        </if>
+        #{name}, #{pm_name}, #{predecessor}, #{concurrency}, #{acceptCount},
+        #{tags}, #{summary}, #{begin_time}, #{idle_days}, #{status}
+        )
+    </insert>
+
+    <update id="update">
+        update tb_team
+        <set>
+            <if test="name!=null and name!=''">
+                `name` = #{name},
+            </if>
+            <if test="pmName!=null and pmName!=''">
+                pm_name = #{pmName},
+            </if>
+            <if test="predecessor!=null and predecessor!=''">
+                predecessor = #{predecessor},
+            </if>
+            <if test="concurrency!=null">
+                concurrency = #{concurrency},
+            </if>
+            <if test="acceptCount!=null">
+                accept_count = #{acceptCount},
+            </if>
+            <if test="tags!=null">
+                tags = #{tags},
+            </if>
+            <if test="summary!=null">
+                summary = #{summary},
+            </if>
+            <if test="beginTime!=null">
+                begin_time = #{beginTime},
+            </if>
+            <if test="idleDays!=null">
+                idle_days = #{idleDays},
+            </if>
+            <if test="status!=null">
+                status = #{status},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <delete id="deleteById">
+        delete from tb_team where id=#{id}
+    </delete>
+
+    <select id="selectBy" resultMap="teamMap" timeout="3000">
+        select * from tb_team
+        <where>
+            <if test="pc.likes!=null and pc.likes!=''">
+                and (`name` like #{pc.likes} or pm_name like #{pc.likes} or predecessor like #{pc.likes} or tags like #{pc.likes} or summary like #{pc.likes})
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultMap="teamMap" timeout="3000">
+        select * from tb_team where id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="common/head::head"/>
+</head>
+<style>
+    table {
+        table-layout: fixed;
+    }
+
+    td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/top::top"/>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:include="common/side::side(currentPage='团队管理')"/>
+
+    <div class="content-wrapper">
+        <div class="content-header" th:include="common/navbar::navbar(menu='', menuUrl='', currentPage='团队管理')"/>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <form id="listForm" action="/team/list" method="post" style="width: auto; overflow:scroll;"
+                          class="sidebar-form">
+                        <input id="start" type="hidden" name="start" th:value="${page.getPageNum()}"/>
+                        <input id="size" type="hidden" name="size" th:value="${page.getPageSize()}"/>
+                        <div class="card-header" style="width: 1220px;">
+                            <h3 class="card-title">团队列表</h3>
+
+                            <div class="card-tools">
+                                <div class="input-group hidden-xs">
+                                    <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                           type="text"
+                                           name="likes"
+                                           th:value="${pc.likes}"
+                                           class="form-control"
+                                           placeholder="项目经理或团队名称..">
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-lg btn-flat">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-tools">
+                                <div class="input-group hidden-xs">
+                                    <select name="choose" class="btn btn-default">
+                                        <option th:selected="${pc.choose==0}" value="0">全部</option>
+                                    </select>
+                                    <span style="width: 15px;"></span>
+                                </div>
+                            </div>
+                            <div class="card-tools">
+                                <div class="input-group hidden-xs">
+                                    <a th:href="@{'/team/add?start=' + ${start} + '&size=' + ${size}}"
+                                       class="btn btn-success btn-social-icon"><i class="fa fa-fw fa-plus"></i>添加</a>
+                                    <span style="width: 20px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="width: 1220px;">
+                            <table class="table table-bordered text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th style="width: 10px;">#</th>
+                                    <th>人员</th>
+                                    <th>前任</th>
+                                    <th>并发数</th>
+                                    <th style="width: 300px;">项目纪要</th>
+                                    <th>持续时间</th>
+                                    <th>续航能力</th>
+                                    <th shiro:authenticated style="width: 160px">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="team,stat:${page.list}">
+                                    <td>[[${stat.count}]]</td>
+                                    <td th:title="${team.pmName}">[[${team.pmName}]]</td>
+                                    <td th:title="${team.predecessor}">[[${team.predecessor}]]</td>
+                                    <td>[[${team.concurrency}]]</td>
+                                    <td>
+                                        <pre>[[${team.summary}]]</pre>
+                                    </td>
+                                    <td>[[${#dates.format(team.beginTime,'yyyy-MM-dd')}]]</td>
+                                    <td>[[${team.idleDays}]]</td>
+                                    <td shiro:authenticated class="project-actions">
+                                        <a class="btn btn-info btn-sm"
+                                           th:href="@{'/team/update/'+${team.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            修改
+                                        </a>
+                                        <a th:class="'btn btn-' + ${team.status=='off'?'success':'danger'} + ' btn-sm'"
+                                           th:href="@{'/team/state/'+${team.id}+'?status='+${team.status=='off'?'on':'off'}+'&start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                            <i th:class="'fas '+${team.status=='off'?'fa-vote-yea':'fa-trash'}">
+                                            </i>
+                                            [[${team.status=='off'?'开启':'关闭'}]]
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer clearfix" th:include="common/page::page" style="width: 1220px;"/>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <footer class="main-footer" th:include="common/footer::footer"/>
+    <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
+</div>
+<th:block th:include="common/js::js"/>
+<script>
+    $("input[data-bootstrap-switch]").each(function () {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+</script>
+</body>
+</html>

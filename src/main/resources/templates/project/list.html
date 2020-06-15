@@ -139,7 +139,7 @@
                                             </a>
                                             <a shiro:hasRole="sa" class="btn btn-danger btn-sm"
                                                th:href="@{'/project/del/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fa fa-fw fa-times-circle"></i>
                                                 删除
                                             </a>
                                         </div>

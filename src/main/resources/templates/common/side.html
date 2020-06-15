@@ -25,8 +25,20 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="/project/list" th:class="'nav-link ' + ${currentPage=='项目管理'?'active':''}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="far fa-clock"></i>
                                 <p>项目管理</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/team/list" th:class="'nav-link ' + ${currentPage=='团队管理'?'active':''}">
+                                <i class="fab fa-drupal"></i>
+                                <p>团队管理</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/stat/list" th:class="'nav-link ' + ${currentPage=='统计报表'?'active':''}">
+                                <i class="fas fa-chart-line"></i>
+                                <p>统计报表</p>
                             </a>
                         </li>
                     </ul>

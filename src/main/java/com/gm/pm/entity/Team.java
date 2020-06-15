@@ -22,4 +22,5 @@ public class Team {
     private Integer idleDays;
 
     private String status;
+    private String remarks;
 }

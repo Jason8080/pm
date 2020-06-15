@@ -16,6 +16,7 @@
         <result property="idleDays" column="idle_days"/>
 
         <result property="status" column="status"/>
+        <result property="remarks" column="remarks"/>
     </resultMap>
 
     <insert id="insert">
@@ -30,7 +31,7 @@
             null,
         </if>
         #{name}, #{pm_name}, #{predecessor}, #{concurrency}, #{acceptCount},
-        #{tags}, #{summary}, #{begin_time}, #{idle_days}, #{status}
+        #{tags}, #{summary}, #{begin_time}, #{idle_days}, #{status}, #{remarks}
         )
     </insert>
 
@@ -66,6 +67,9 @@
             </if>
             <if test="status!=null">
                 status = #{status},
+            </if>
+            <if test="remarks!=null">
+                remarks = #{remarks},
             </if>
         </set>
         <where>

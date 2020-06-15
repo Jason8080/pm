@@ -69,12 +69,15 @@
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <label>持续时间</label>
-                                                <input onchange="this.value=this.value.replace('-','')"
-                                                       name="beginTime"
-                                                       type="text"
-                                                       th:value="${#dates.format(team.beginTime,'yyyy-MM-dd')}"
-                                                       class="form-control"
-                                                       placeholder="持续时间">
+                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                    <input name="beginTime" type="text" class="form-control datetimepicker-input"
+                                                           data-target="#reservationdate"
+                                                           th:value="${#dates.format(team.beginTime,'yyyy-MM-dd')}"
+                                                           placeholder="持续时间"/>
+                                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <label>续航能力</label>
@@ -138,6 +141,10 @@
 <th:block th:include="common/js::js"/>
 <script>
     $(function () {
+        $('#reservationdate').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn'),
+        });
         $.validator.setDefaults({
             submitHandler: function () {
                 return true;

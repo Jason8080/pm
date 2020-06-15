@@ -43,22 +43,25 @@ public class ProjectController extends PermissionController {
     }
 
     @GetMapping(value = "add")
-    public String add(Model model,
+    public String add(Model model, ProjectCondition pc,
                       @RequestParam(defaultValue = "1") Integer start,
                       @RequestParam(defaultValue = "5") Integer size) {
         model.addAttribute("start", start);
         model.addAttribute("size", size);
+        model.addAttribute("pc", pc);
         return "project/add";
     }
 
     @PostMapping(value = "add")
-    public String add(RedirectAttributes model, Project project,
+    public String add(RedirectAttributes model, Project project, ProjectCondition pc,
                       @RequestParam(defaultValue = "1") Integer start,
                       @RequestParam(defaultValue = "5") Integer size
     ) {
         projectService.add(project);
         model.addAttribute("start", start);
         model.addAttribute("size", size);
+        model.addAttribute("choose", pc.getChoose());
+        model.addAttribute("likes", pc.getLikes());
         return "redirect:/project/list";
     }
 

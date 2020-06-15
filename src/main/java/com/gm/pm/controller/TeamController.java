@@ -39,22 +39,25 @@ public class TeamController extends PermissionController {
     }
 
     @GetMapping(value = "add")
-    public String add(Model model,
+    public String add(Model model, TeamCondition pc,
                       @RequestParam(defaultValue = "1") Integer start,
                       @RequestParam(defaultValue = "5") Integer size) {
         model.addAttribute("start", start);
         model.addAttribute("size", size);
+        model.addAttribute("pc", pc);
         return "team/add";
     }
 
     @PostMapping(value = "add")
-    public String add(RedirectAttributes model, Team team,
+    public String add(RedirectAttributes model, Team team, TeamCondition pc,
                       @RequestParam(defaultValue = "1") Integer start,
                       @RequestParam(defaultValue = "5") Integer size
     ) {
         teamService.add(team);
         model.addAttribute("start", start);
-        model.addAttribute("size", size);
+        model.addAttribute("start", start);
+        model.addAttribute("choose", pc.getChoose());
+        model.addAttribute("likes", pc.getLikes());
         return "redirect:/team/list";
     }
 

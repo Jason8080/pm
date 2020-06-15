@@ -22,7 +22,7 @@
     <insert id="insert">
         insert into tb_team (
         id, `name`, pm_name, predecessor, concurrency, accept_count,
-        tags, summary, begin_time, idle_days, status
+        tags, summary, begin_time, idle_days, `status`, remarks
         ) values (
         <if test="id!=null">
             #{id},
@@ -30,8 +30,8 @@
         <if test="id==null">
             null,
         </if>
-        #{name}, #{pm_name}, #{predecessor}, #{concurrency}, #{acceptCount},
-        #{tags}, #{summary}, #{begin_time}, #{idle_days}, #{status}, #{remarks}
+        #{name}, #{pmName}, #{predecessor}, #{concurrency}, #{acceptCount},
+        #{tags}, #{summary}, #{beginTime}, #{idleDays}, #{status}, #{remarks}
         )
     </insert>
 
@@ -66,7 +66,7 @@
                 idle_days = #{idleDays},
             </if>
             <if test="status!=null">
-                status = #{status},
+                `status` = #{status},
             </if>
             <if test="remarks!=null">
                 remarks = #{remarks},

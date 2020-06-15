@@ -76,7 +76,7 @@ public class ProjectController extends PermissionController {
     }
 
     @GetMapping(value = "o2o")
-    public String o2o(Model model, ProjectCondition pc, Inventory in
+    public String o2o(Model model, ProjectCondition pc, Inventory in, Toa toa
     ) throws Exception {
         Project project = projectService.in(pc, in);
         if(project!=null){

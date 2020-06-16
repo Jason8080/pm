@@ -108,7 +108,7 @@
                                             <i class="fas fa-pencil-alt"></i>
                                             更新
                                         </a>
-                                        <a th:class="'btn btn-' + ${team.status=='off'?'success':'danger'} + ' btn-sm'"
+                                        <a shiro:hasRole="DM" th:class="'btn btn-' + ${team.status=='off'?'success':'danger'} + ' btn-sm'"
                                            th:href="@{'/team/state/'+${team.id}+'?status='+${team.status=='off'?'on':'off'}+'&start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
                                             <i th:class="'fas '+${team.status=='off'?'fa-check-circle':'fa-ban'}">
                                             </i>

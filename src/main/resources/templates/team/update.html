@@ -67,7 +67,7 @@
                                                        class="form-control"
                                                        placeholder="验收数">
                                             </div>
-                                            <div class="form-group col-sm-2">
+                                            <div shiro:hasRole="DM" class="form-group col-sm-2">
                                                 <label>***</label>
                                                 <input onchange="this.value=this.value.replace('-','')"
                                                        name="saturability"

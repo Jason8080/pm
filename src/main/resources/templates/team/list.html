@@ -97,10 +97,11 @@
                                         </a>
                                         <a th:class="'btn btn-' + ${team.status=='off'?'success':'danger'} + ' btn-sm'"
                                            th:href="@{'/team/state/'+${team.id}+'?status='+${team.status=='off'?'on':'off'}+'&start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
-                                            <i th:class="'fas '+${team.status=='off'?'fa-vote-yea':'fa-trash'}">
+                                            <i th:class="'fas '+${team.status=='off'?'fa-check-circle':'fa-ban'}">
                                             </i>
                                             [[${team.status=='off'?'开启':'关闭'}]]
                                         </a>
+                                        <!--fa-power-off: 电源按钮-->
                                     </td>
                                 </tr>
                                 </tbody>

@@ -133,13 +133,13 @@
                                             <br/>
                                             <a th:class="'btn btn-' + ${project.status=='off'?'success':'danger'} + ' btn-sm'"
                                                th:href="@{'/project/state/'+${project.id}+'?status='+${project.status=='off'?'on':'off'}+'&start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
-                                                <i th:class="'fas '+${project.status=='off'?'fa-vote-yea':'fa-trash'}">
+                                                <i th:class="'fas '+${project.status=='off'?'fa-check-circle':'fa-ban'}">
                                                 </i>
                                                 [[${project.status=='off'?'开启':'关闭'}]]
                                             </a>
                                             <a shiro:hasRole="sa" class="btn btn-danger btn-sm"
                                                th:href="@{'/project/del/'+${project.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
-                                                <i class="fa fa-fw fa-times-circle"></i>
+                                                <i class="fas fa-trash"></i>
                                                 删除
                                             </a>
                                         </div>

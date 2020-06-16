@@ -81,8 +81,8 @@ public class TeamService {
                 Page<Project> page = projectMapper.selectBy(pc);
                 StringBuilder sb = new StringBuilder();
                 page.forEach(x -> {
-                    String format = String.format("%s (%s: %s%)", x.getClient(), x.getCurrentStage(), x.getCurrentSlider());
-                    sb.append(format);
+                    String format = String.format("%s (%s: %s", x.getClient(), x.getCurrentStage(), x.getCurrentSlider());
+                    sb.append(format + "%)" + "\r\n");
                 });
                 team.setSummary(sb.toString());
             }

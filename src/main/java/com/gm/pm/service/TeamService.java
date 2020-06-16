@@ -84,7 +84,10 @@ public class TeamService {
                 pc.setLikes(pmName);
                 Page<Project> page = projectMapper.selectBy(pc);
                 StringBuilder sb = new StringBuilder();
-                page.forEach(x -> sb.append(x.getClient() + "\r\n"));
+                page.forEach(x -> {
+                    String format = String.format("%s (%s: %s%)", x.getClient(), x.getCurrentStage(), x.getCurrentSlider());
+                    sb.append(format);
+                });
                 team.setSummary(sb.toString());
             }
         }

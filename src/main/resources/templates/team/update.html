@@ -93,7 +93,7 @@
                                                 <div class="form-group">
                                                     <label>项目纪要</label>
                                                     <textarea name="summary" class="form-control" rows="5"
-                                                              maxlength="100"
+                                                              maxlength="200"
                                                               placeholder="项目纪要; 注意排版哦..">[[${team.summary}]]</textarea>
                                                 </div>
                                             </div>
@@ -165,6 +165,12 @@
                 tags: {
                     maxlength: 100,
                 },
+                summary: {
+                    maxlength: 200,
+                },
+                remarks: {
+                    maxlength: 100,
+                },
             },
             messages: {
                 pmName: {
@@ -191,6 +197,12 @@
                 },
                 tags: {
                     maxlength: "技能标签最大长度为100",
+                },
+                summary: {
+                    maxlength: "项目纪要最大长度为200",
+                },
+                remarks: {
+                    maxlength: "备注最大长度为100",
                 },
             },
             errorElement: 'span',

@@ -110,7 +110,7 @@
         <where>
             <if test="pc.likes!=null and pc.likes!=''">
                 and (`name` like #{pc.likes} or pm_name like #{pc.likes} or predecessor like #{pc.likes} or tags like
-                #{pc.likes} or summary like #{pc.likes})
+                #{pc.likes} or summary like #{pc.likes} or remarks like #{pc.likes})
             </if>
             <if test="pc.choose!=1">
                 and (status is null or status = 'on')

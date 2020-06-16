@@ -168,4 +168,16 @@
     <select id="selectById" resultMap="proMap" timeout="3000">
         select * from tb_project where id = #{id}
     </select>
+
+    <select id="onCount" resultType="int" timeout="3000">
+        select count(*) from tb_project
+        <where>
+            <if test="pmName!=null and pmName!=''">
+                and pm_name = #{pmName}
+            </if>
+            <if test="true">
+                and (status is null or status = 'on')
+            </if>
+        </where>
+    </select>
 </mapper>

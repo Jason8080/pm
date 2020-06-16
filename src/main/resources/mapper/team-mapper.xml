@@ -66,7 +66,7 @@
                 concurrency = #{concurrency},
             </if>
             <if test="onCount!=null">
-                on_count = (on_count + #{onCount}),
+                on_count = #{onCount},
             </if>
             <if test="acceptCount!=null">
                 accept_count = #{acceptCount},

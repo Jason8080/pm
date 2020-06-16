@@ -25,7 +25,7 @@ public interface ProjectMapper {
     /**
      * Select by page.
      *
-     * @param pc      the pc
+     * @param pc the pc
      * @return the page
      */
     Page selectBy(
@@ -55,4 +55,12 @@ public interface ProjectMapper {
      * @return the integer
      */
     Integer deleteById(Long id);
+
+    /**
+     * On count integer.
+     *
+     * @param pmName the pm name
+     * @return the integer
+     */
+    Integer onCount(String pmName);
 }

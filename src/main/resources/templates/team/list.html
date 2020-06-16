@@ -52,6 +52,11 @@
                                 <div class="input-group hidden-xs">
                                     <select name="choose" class="btn btn-default">
                                         <option th:selected="${pc.choose==0}" value="0">全部</option>
+                                        <option th:selected="${pc.choose==1}" value="1">全部已开启</option>
+                                        <option th:selected="${pc.choose==2}" value="2">全部已关闭</option>
+                                        <option th:selected="${pc.choose==5}" value="5">按项目排序</option>
+                                        <option th:selected="${pc.choose==6}" value="6">按验收排序</option>
+                                        <option th:selected="${pc.choose==7}" value="7">按并发排序</option>
                                     </select>
                                     <span style="width: 15px;"></span>
                                 </div>
@@ -69,13 +74,14 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 10px;">#</th>
-                                    <th>人员</th>
-                                    <th>前任</th>
-                                    <th>并发数</th>
-                                    <th>项目数</th>
+                                    <th style="width: 80px;">人员</th>
+                                    <th style="width: 80px;">前任</th>
+                                    <th style="width: 80px;">并发</th>
+                                    <th style="width: 80px;">项目</th>
+                                    <th style="width: 80px;">验收</th>
                                     <th style="width: 400px;">项目纪要</th>
-                                    <th>关闭时间</th>
-                                    <th>***</th>
+                                    <th style="width: 80px;">关闭时间</th>
+                                    <th style="width: 80px;">***</th>
                                     <th shiro:authenticated style="width: 160px">操作</th>
                                 </tr>
                                 </thead>
@@ -86,6 +92,7 @@
                                     <td th:title="${team.predecessor}">[[${team.predecessor}]]</td>
                                     <td>[[${team.concurrency}]]</td>
                                     <td>[[${team.onCount}]]</td>
+                                    <td>[[${team.acceptCount}]]</td>
                                     <td>
                                         <pre>[[${team.summary}]]</pre>
                                     </td>

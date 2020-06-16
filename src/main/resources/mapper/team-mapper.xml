@@ -103,12 +103,32 @@
     </delete>
 
     <select id="selectBy" resultMap="teamMap" timeout="3000">
+        <if test="pc.choose==5 or pc.choose==6 or pc.choose==7">
+            select * from(
+        </if>
         select * from tb_team
         <where>
             <if test="pc.likes!=null and pc.likes!=''">
-                and (`name` like #{pc.likes} or pm_name like #{pc.likes} or predecessor like #{pc.likes} or tags like #{pc.likes} or summary like #{pc.likes})
+                and (`name` like #{pc.likes} or pm_name like #{pc.likes} or predecessor like #{pc.likes} or tags like
+                #{pc.likes} or summary like #{pc.likes})
+            </if>
+            <if test="pc.choose!=1">
+                and (status is null or status = 'on')
+            </if>
+            <if test="pc.choose==2">
+                and (status = 'off')
             </if>
         </where>
+        order by offtime asc
+        <if test="pc.choose==5">
+            ) tab order by tab.on_count asc
+        </if>
+        <if test="pc.choose==6">
+            ) tab order by tab.accept_count desc
+        </if>
+        <if test="pc.choose==7">
+            ) tab order by tab.concurrency desc
+        </if>
     </select>
 
     <select id="selectById" resultMap="teamMap" timeout="3000">

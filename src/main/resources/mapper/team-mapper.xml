@@ -9,6 +9,7 @@
         <result property="pmName" column="pm_name"/>
         <result property="predecessor" column="predecessor"/>
         <result property="concurrency" column="concurrency"/>
+        <result property="onCount" column="on_count"/>
         <result property="acceptCount" column="accept_count"/>
         <result property="tags" column="tags"/>
         <result property="summary" column="summary"/>
@@ -21,7 +22,7 @@
 
     <insert id="insert">
         insert into tb_team (
-        id, `name`, pm_name, predecessor, concurrency, accept_count,
+        id, `name`, pm_name, predecessor, concurrency, on_count, accept_count,
         tags, summary, offtime,
         <if test="saturability!=null">
             saturability,
@@ -37,8 +38,8 @@
         <if test="id==null">
             null,
         </if>
-        #{name}, #{pmName}, #{predecessor}, #{concurrency}, #{acceptCount},
-        #{tags}, #{summary}, #{offtime},
+        #{name}, #{pmName}, #{predecessor}, #{concurrency}, #{onCount},
+        #{acceptCount}, #{tags}, #{summary}, #{offtime},
         <if test="saturability!=null">
             #{saturability},
         </if>
@@ -63,6 +64,9 @@
             </if>
             <if test="concurrency!=null">
                 concurrency = #{concurrency},
+            </if>
+            <if test="onCount!=null">
+                on_count = (on_count + #{onCount}),
             </if>
             <if test="acceptCount!=null">
                 accept_count = #{acceptCount},

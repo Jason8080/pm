@@ -16,6 +16,7 @@ public class Team {
     private String pmName;
     private String predecessor;
     private Integer concurrency;
+    private Integer onCount;
     private Integer acceptCount;
     private String tags;
     private String summary;

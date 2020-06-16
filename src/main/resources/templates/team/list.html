@@ -72,6 +72,7 @@
                                     <th>人员</th>
                                     <th>前任</th>
                                     <th>并发数</th>
+                                    <th>项目数</th>
                                     <th style="width: 400px;">项目纪要</th>
                                     <th>关闭时间</th>
                                     <th>***</th>
@@ -84,6 +85,7 @@
                                     <td th:title="${team.pmName}">[[${team.pmName}]]</td>
                                     <td th:title="${team.predecessor}">[[${team.predecessor}]]</td>
                                     <td>[[${team.concurrency}]]</td>
+                                    <td>[[${team.onCount}]]</td>
                                     <td>
                                         <pre>[[${team.summary}]]</pre>
                                     </td>

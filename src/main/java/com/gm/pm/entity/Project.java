@@ -1,12 +1,11 @@
 package com.gm.pm.entity;
 
-import com.gm.pm.kit.StageKit;
+import com.gm.pm.kit.DayKit;
 import lombok.Data;
 
 import java.util.Date;
 
 /**
- *
  * @author Jason
  */
 @Data
@@ -30,7 +29,7 @@ public class Project {
     private Long residualDay;
 
     public Long getResidualDay() {
-        return this.currentStage!=null?StageKit.getResidualDay(this):this.residualDay;
+        return DayKit.getDiffDays(this.currentTime, System.currentTimeMillis());
     }
 
     /**

@@ -12,8 +12,8 @@
         <result property="acceptCount" column="accept_count"/>
         <result property="tags" column="tags"/>
         <result property="summary" column="summary"/>
-        <result property="beginTime" column="begin_time"/>
-        <result property="idleDays" column="idle_days"/>
+        <result property="offtime" column="offtime"/>
+        <result property="saturability" column="saturability"/>
 
         <result property="status" column="status"/>
         <result property="remarks" column="remarks"/>
@@ -22,7 +22,14 @@
     <insert id="insert">
         insert into tb_team (
         id, `name`, pm_name, predecessor, concurrency, accept_count,
-        tags, summary, begin_time, idle_days, `status`, remarks
+        tags, summary, offtime,
+        <if test="saturability!=null">
+            saturability,
+        </if>
+        <if test="status!=null">
+            status,
+        </if>
+        remarks
         ) values (
         <if test="id!=null">
             #{id},
@@ -31,7 +38,14 @@
             null,
         </if>
         #{name}, #{pmName}, #{predecessor}, #{concurrency}, #{acceptCount},
-        #{tags}, #{summary}, #{beginTime}, #{idleDays}, #{status}, #{remarks}
+        #{tags}, #{summary}, #{offtime},
+        <if test="saturability!=null">
+            #{saturability},
+        </if>
+        <if test="status!=null">
+            #{status},
+        </if>
+        #{remarks}
         )
     </insert>
 
@@ -59,11 +73,11 @@
             <if test="summary!=null">
                 summary = #{summary},
             </if>
-            <if test="beginTime!=null">
-                begin_time = #{beginTime},
+            <if test="offtime!=null">
+                offtime = #{offtime},
             </if>
-            <if test="idleDays!=null">
-                idle_days = #{idleDays},
+            <if test="saturability!=null">
+                saturability = #{saturability},
             </if>
             <if test="status!=null">
                 `status` = #{status},

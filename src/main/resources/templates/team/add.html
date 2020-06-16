@@ -25,7 +25,7 @@
                             <input type="hidden" name="choose" th:value="${pc.choose}"/>
                             <input type="hidden" name="likes" th:value="${pc.likes}"/>
                             <div class="col-md-12">
-                                <div class="card card-warning">
+                                <div class="card card-secondary">
                                     <div class="card-header">
                                         <h3 class="card-title">团队信息</h3>
                                     </div>
@@ -62,27 +62,14 @@
                                                        placeholder="验收数">
                                             </div>
                                             <div class="form-group col-sm-2">
-                                                <label>持续时间</label>
-                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                    <input name="beginTime" type="text" class="form-control datetimepicker-input"
-                                                           data-target="#reservationdate"
-                                                           placeholder="持续时间"/>
-                                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-sm-2">
-                                                <label>续航能力</label>
+                                                <label>***</label>
                                                 <input onchange="this.value=this.value.replace('-','')"
-                                                       name="idleDays"
+                                                       name="saturability"
                                                        type="text"
                                                        class="form-control"
-                                                       placeholder="续航能力">
+                                                       placeholder="***">
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-12">
+                                            <div class="form-group col-sm-2">
                                                 <label>技能标签</label>
                                                 <input onchange="this.value=this.value.replace(/\s+/g,'')"
                                                        name="tags"
@@ -161,12 +148,9 @@
                     min: 0,
                     max: 99,
                 },
-                beginTime: {
-                    date: true,
-                },
-                idleDays: {
+                saturability: {
                     min: 0,
-                    max: 99,
+                    max: 100,
                 },
                 tags: {
                     maxlength: 100,
@@ -191,12 +175,9 @@
                     min: "验收数量为0-99个",
                     max: "验收数量为0-99个",
                 },
-                beginTime: {
-                    date: "请填写正确的持续时间",
-                },
-                idleDays: {
-                    min: "续航能力为0-99人天",
-                    max: "持续续航为0-99人天",
+                saturability: {
+                    min: "请输入0-100的范围",
+                    max: "请输入0-100的范围",
                 },
                 tags: {
                     maxlength: "技能标签最大长度为100",

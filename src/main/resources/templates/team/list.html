@@ -59,7 +59,7 @@
                             <div class="card-tools">
                                 <div class="input-group hidden-xs">
                                     <a th:href="@{'/team/add?start=' + ${start} + '&size=' + ${size}}"
-                                       class="btn btn-success btn-social-icon"><i class="fa fa-fw fa-plus"></i>添加</a>
+                                       class="btn btn-secondary btn-social-icon"><i class="fa fa-fw fa-plus"></i>添加</a>
                                     <span style="width: 20px;"></span>
                                 </div>
                             </div>
@@ -73,8 +73,8 @@
                                     <th>前任</th>
                                     <th>并发数</th>
                                     <th style="width: 400px;">项目纪要</th>
-                                    <th>持续时间</th>
-                                    <th>续航能力</th>
+                                    <th>停止时间</th>
+                                    <th>***</th>
                                     <th shiro:authenticated style="width: 165px">操作</th>
                                 </tr>
                                 </thead>
@@ -87,8 +87,19 @@
                                     <td>
                                         <pre>[[${team.summary}]]</pre>
                                     </td>
-                                    <td>[[${#dates.format(team.beginTime,'yyyy-MM-dd')}]]</td>
-                                    <td>[[${team.idleDays}]]</td>
+                                    <td>[[${team.offDay}]]</td>
+                                    <td class="project_progress">
+                                        <div class="progress progress-sm">
+                                            <div th:class="'progress-bar ' + ${team.saturability>80?'bg-success':(team.saturability>60?'bg-primary':(team.saturability>40?'bg-warning':'bg-danger'))}"
+                                                 role="progressbar"
+                                                 aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"
+                                                 th:style="'width: '+ ${team.saturability}+'%'">
+                                            </div>
+                                        </div>
+                                        <small>
+                                            ***: [[${team.saturability}]]%
+                                        </small>
+                                    </td>
                                     <td shiro:authenticated class="project-actions">
                                         <a class="btn btn-info btn-sm"
                                            th:href="@{'/team/update/'+${team.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">

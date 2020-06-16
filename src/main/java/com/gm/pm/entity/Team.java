@@ -1,5 +1,6 @@
 package com.gm.pm.entity;
 
+import com.gm.pm.kit.DayKit;
 import lombok.Data;
 
 import java.util.Date;
@@ -18,8 +19,13 @@ public class Team {
     private Integer acceptCount;
     private String tags;
     private String summary;
-    private Date beginTime;
-    private Integer idleDays;
+    private Date offtime;
+    private Long offDay;
+    private Integer saturability;
+
+    public Long getOffDay() {
+        return DayKit.getDiffDays(System.currentTimeMillis(), this.offtime);
+    }
 
     private String status;
     private String remarks;

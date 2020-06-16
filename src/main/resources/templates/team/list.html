@@ -83,10 +83,10 @@
                                     <th style="width: 10px;">#</th>
                                     <th style="width: 80px;">人员</th>
                                     <th style="width: 80px;">前任</th>
+                                    <th style="width: 400px;">项目纪要</th>
                                     <th style="width: 80px;">并发</th>
                                     <th style="width: 80px;">项目</th>
                                     <th style="width: 80px;">验收</th>
-                                    <th style="width: 400px;">项目纪要</th>
                                     <th style="width: 80px;">关闭时间</th>
                                     <th style="width: 80px;">***</th>
                                     <th shiro:authenticated style="width: 160px">操作</th>
@@ -97,12 +97,12 @@
                                     <td>[[${stat.count}]]</td>
                                     <td th:title="${team.pmName}">[[${team.pmName}]]</td>
                                     <td th:title="${team.predecessor}">[[${team.predecessor}]]</td>
-                                    <td>[[${team.concurrency}]]</td>
-                                    <td>[[${team.onCount}]]</td>
-                                    <td>[[${team.acceptCount}]]</td>
                                     <td>
                                         <pre>[[${team.summary}]]</pre>
                                     </td>
+                                    <td>[[${team.concurrency}]]</td>
+                                    <td>[[${team.onCount}]]</td>
+                                    <td>[[${team.acceptCount}]]</td>
                                     <td>[[${team.offDay}]]</td>
                                     <td class="project_progress">
                                         <div class="progress progress-sm">

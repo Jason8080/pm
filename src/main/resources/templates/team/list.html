@@ -130,6 +130,12 @@
                                                 </i>
                                                 [[${team.status=='off'?'开启':'关闭'}]]
                                             </a>
+                                            <!--leave: 状态改离职 -->
+                                            <a shiro:hasRole="sa" class="btn btn-danger btn-sm"
+                                               th:href="@{'/team/del/'+${team.id}+'?start='+${start}+'&size='+${size}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                                <i class="fas fa-trash"></i>
+                                                删除
+                                            </a>
                                         <!--fa-power-off: 电源按钮-->
                                         </div>
                                     </td>

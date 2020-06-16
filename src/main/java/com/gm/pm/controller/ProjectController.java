@@ -90,7 +90,7 @@ public class ProjectController extends PermissionController {
         }else {
             pc.likeRecover();
             String msg = URLEncoder.encode("盘点完成!", "UTF-8");
-            String likes = URLEncoder.encode(pc.getLikes(), "UTF-8");
+            String likes = URLEncoder.encode(pc.getLikes()!=null?pc.getLikes():"", "UTF-8");
             return "redirect:/project/list?choose="+pc.getChoose()+"&likes="+likes+"&msg="+msg;
         }
     }

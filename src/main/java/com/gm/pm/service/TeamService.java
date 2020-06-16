@@ -3,10 +3,7 @@ package com.gm.pm.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.gm.pm.entity.Project;
-import com.gm.pm.entity.ProjectCondition;
-import com.gm.pm.entity.Team;
-import com.gm.pm.entity.TeamCondition;
+import com.gm.pm.entity.*;
 import com.gm.pm.kit.ExKit;
 import com.gm.pm.mapper.ProjectMapper;
 import com.gm.pm.mapper.TeamMapper;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Jason
@@ -64,22 +62,20 @@ public class TeamService {
     }
 
 
-
-
     private void autoData(Team team, boolean... bs) {
         String pmName = team.getPmName();
-        if(StringUtils.isEmpty(pmName)){
+        if (StringUtils.isEmpty(pmName)) {
             Team db = teamMapper.selectById(team.getId());
             pmName = db.getPmName();
         }
-        if(bs.length>0 && bs[0]){
+        if (bs.length > 0 && bs[0]) {
             /* 统计项目数 */
             Integer onCount = projectMapper.onCount(pmName);
             team.setOnCount(onCount);
         }
-        if(bs.length>1 && bs[1]){
+        if (bs.length > 1 && bs[1]) {
             /* 追加项目纪要 */
-            if(StringUtils.isEmpty(team.getSummary())) {
+            if (StringUtils.isEmpty(team.getSummary())) {
                 ProjectCondition pc = new ProjectCondition();
                 pc.setLikes(pmName);
                 Page<Project> page = projectMapper.selectBy(pc);
@@ -91,5 +87,16 @@ public class TeamService {
                 team.setSummary(sb.toString());
             }
         }
+    }
+
+    public Team in(TeamCondition pc, Inventory in) {
+        List<Team> list = teamMapper.selectBy(pc);
+        int current = in.getCurrent();
+        in.setPrev(current - 1);
+        in.setNext(current + 1);
+        if (current >= 0 && current < list.size()) {
+            return list.get(current);
+        }
+        return null;
     }
 }

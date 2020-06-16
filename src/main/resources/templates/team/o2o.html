@@ -1,0 +1,219 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="common/head::head"/>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light" th:include="common/top::top"/>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:include="common/side::side(currentPage='团队管理')"/>
+
+
+    <div class="content-wrapper">
+        <div class="content-header"
+             th:include="common/navbar::navbar(menu='团队管理', menuUrl='/team/list', currentPage='更新团队')"/>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="container-fluid">
+                        <form action="/team/o2o" method="post" role="form" id="addForm">
+                            <input type="hidden" name="id" th:value="${team.id}"/>
+                            <input type="hidden" name="choose" th:value="${pc.choose}"/>
+                            <input type="hidden" name="likes" th:value="${pc.likes}"/>
+                            <input type="hidden" name="current" th:value="${in.current}"/>
+                            <div class="col-md-12">
+                                <div class="card card-secondary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">团队信息</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group col-sm-2">
+                                                <label>项目经理</label>
+                                                <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                       name="pmName"
+                                                       type="text"
+                                                       th:value="${team.pmName}"
+                                                       class="form-control" placeholder="项目经理"
+                                                       disabled/>
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>前任经理</label>
+                                                <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                       name="predecessor"
+                                                       type="text"
+                                                       th:value="${team.predecessor}"
+                                                       class="form-control" placeholder="前任经理"/>
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>并发数</label>
+                                                <input onchange="this.value=this.value.replace('-','')"
+                                                       name="concurrency"
+                                                       type="text"
+                                                       th:value="${team.concurrency}"
+                                                       class="form-control"
+                                                       placeholder="并发数">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>验收数</label>
+                                                <input onchange="this.value=this.value.replace('-','')"
+                                                       name="acceptCount"
+                                                       type="text"
+                                                       th:value="${team.acceptCount}"
+                                                       class="form-control"
+                                                       placeholder="验收数">
+                                            </div>
+                                            <div shiro:hasRole="DM" class="form-group col-sm-2">
+                                                <label>***</label>
+                                                <input onchange="this.value=this.value.replace('-','')"
+                                                       name="saturability"
+                                                       type="text"
+                                                       th:value="${team.saturability}"
+                                                       class="form-control"
+                                                       placeholder="***">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-12">
+                                                <label>技能标签</label>
+                                                <input onchange="this.value=this.value.replace(/\s+/g,'')"
+                                                       name="tags"
+                                                       type="text"
+                                                       th:value="${team.tags}"
+                                                       class="form-control"
+                                                       placeholder="技能标签">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>项目纪要</label>
+                                                    <textarea name="summary" class="form-control" rows="5"
+                                                              maxlength="100"
+                                                              placeholder="项目纪要; 注意排版哦..">[[${team.summary}]]</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>备注</label>
+                                                    <textarea name="remarks" class="form-control" rows="5"
+                                                              maxlength="100"
+                                                              placeholder="需要备注吗; 注意排版哦..">[[${team.remarks}]]</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="card-footer">
+                                    <a class="btn btn-default float-left"
+                                       th:if="${in.prev>=0}"
+                                       th:href="@{'/team/o2o?current='+${in.prev}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                        上一条
+                                    </a>
+                                    <input type="reset" value="重置" class="btn btn-default float-left"/>
+                                    <a class="btn btn-default float-left"
+                                       th:href="@{'/team/o2o?current='+${in.next}+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}">
+                                        下一条
+                                    </a>
+                                    <input type="submit" value="保存并下一条" class="btn btn-primary float-right"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <footer class="main-footer" th:include="common/footer::footer"/>
+    <aside class="control-sidebar control-sidebar-dark" th:include="common/control::control"/>
+</div>
+<th:block th:include="common/js::js"/>
+<script>
+    $(function () {
+        $('#reservationdate').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn'),
+        });
+        $.validator.setDefaults({
+            submitHandler: function () {
+                return true;
+            }
+        });
+
+        $('#addForm').validate({
+            rules: {
+                pmName: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 6,
+                },
+                predecessor: {
+                    maxlength: 100,
+                },
+                concurrency: {
+                    required: true,
+                    min: 0,
+                    max: 99,
+                },
+                acceptCount: {
+                    min: 0,
+                    max: 99,
+                },
+                saturability: {
+                    min: 0,
+                    max: 100,
+                },
+                tags: {
+                    maxlength: 100,
+                },
+            },
+            messages: {
+                pmName: {
+                    required: "请填写项目经理名称",
+                    minlength: "项目经理名称为2-6个字符",
+                    maxlength: "项目经理名称为2-6个字符",
+                },
+                predecessor: {
+                    maxlength: "前任经理最大长度为100",
+                },
+                concurrency: {
+                    required: "请填写当前并发数量",
+                    min: "并发数量为0-99个",
+                    max: "并发数量为0-99个",
+                },
+                acceptCount: {
+                    required: "请填写预估验收数量",
+                    min: "验收数量为0-99个",
+                    max: "验收数量为0-99个",
+                },
+                saturability: {
+                    min: "请输入0-100的范围",
+                    max: "请输入0-100的范围",
+                },
+                tags: {
+                    maxlength: "技能标签最大长度为100",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    })
+</script>
+</body>
+</html>

@@ -11,8 +11,8 @@ import org.springframework.util.StringUtils;
 @Data
 public class Condition {
 
-    private Integer choose;
-    private String likes;
+    private Integer choose = 0;
+    private String likes = "";
 
     public void likeEndless() {
         if (!StringUtils.isEmpty(this.likes)) {

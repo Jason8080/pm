@@ -61,6 +61,13 @@
                                     <span style="width: 15px;"></span>
                                 </div>
                             </div>
+                            <div shiro:hasRole="DM" class="card-tools">
+                                <div class="input-group hidden-xs">
+                                    <a th:href="@{'/team/o2o?'+${pc.choose!=null?('&choose='+pc.choose):''}+${!#strings.isEmpty(pc.likes)?('&likes='+pc.likes):''}}"
+                                       class="btn btn-info btn-social-icon"><i class="fa fa-fw fa-magnet"></i>盘点</a>
+                                    <span style="width: 20px;"></span>
+                                </div>
+                            </div>
                             <div class="card-tools">
                                 <div class="input-group hidden-xs">
                                     <a th:href="@{'/team/add?start=' + ${start} + '&size=' + ${size}}"

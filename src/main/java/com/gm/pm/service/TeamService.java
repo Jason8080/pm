@@ -5,10 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gm.pm.entity.Team;
 import com.gm.pm.entity.TeamCondition;
-import com.gm.pm.kit.StageKit;
 import com.gm.pm.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * @author Jason
@@ -38,6 +39,12 @@ public class TeamService {
     }
 
     public void state(Team team) {
+        String status = team.getStatus();
+        if ("off".equalsIgnoreCase(status)) {
+            team.setOfftime(new Date());
+        } else if ("on".equalsIgnoreCase(status)) {
+//            team.setOfftime(null);
+        }
         teamMapper.update(team);
     }
 

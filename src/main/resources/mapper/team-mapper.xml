@@ -76,6 +76,9 @@
             <if test="offtime!=null">
                 offtime = #{offtime},
             </if>
+            <if test="offtime==null">
+                offtime = null,
+            </if>
             <if test="saturability!=null">
                 saturability = #{saturability},
             </if>

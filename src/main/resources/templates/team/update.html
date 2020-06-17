@@ -74,13 +74,22 @@
                                                        placeholder="验收数">
                                             </div>
                                             <div shiro:hasRole="DM" class="form-group col-sm-2">
-                                                <label>***</label>
+                                                <label>饱和度</label>
                                                 <input onchange="this.value=this.value.replace('-','')"
                                                        name="saturability"
                                                        type="text"
                                                        th:value="${team.saturability}"
                                                        class="form-control"
-                                                       placeholder="***">
+                                                       placeholder="饱和度">
+                                            </div>
+                                            <div shiro:hasRole="sa" class="form-group col-sm-2">
+                                                <label>业绩权重</label>
+                                                <input onchange="this.value=this.value.replace('-','')"
+                                                       name="weight"
+                                                       type="text"
+                                                       th:value="${team.weight}"
+                                                       class="form-control"
+                                                       placeholder="业绩权重">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -168,6 +177,10 @@
                     min: 0,
                     max: 100,
                 },
+                weight: {
+                    min: 50,
+                    max: 150,
+                },
                 tags: {
                     maxlength: 100,
                 },
@@ -200,6 +213,10 @@
                 saturability: {
                     min: "请输入0-100的范围",
                     max: "请输入0-100的范围",
+                },
+                weight: {
+                    min: "请输入50-150的范围",
+                    max: "请输入50-150的范围",
                 },
                 tags: {
                     maxlength: "技能标签最大长度为100",

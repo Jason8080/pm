@@ -23,6 +23,7 @@ public class Team {
     private Date offtime;
     private Long offDay;
     private Integer saturability;
+    private Integer weight;
 
     public Long getOffDay() {
         return DayKit.getDiffDays(System.currentTimeMillis(), this.offtime);

@@ -35,6 +35,7 @@ public class CustomRealm extends AuthorizingRealm {
             if("Jason".equalsIgnoreCase(login.getName())) {
                 info.addRole("sa");
                 info.addStringPermission("sa");
+                info.addStringPermission("del");
             }
         }
         return info;

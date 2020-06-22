@@ -48,6 +48,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/logout", "anon");
         filterChainDefinitionMap.put("/lockscreen", "anon");
         filterChainDefinitionMap.put("/400", "anon");
+        filterChainDefinitionMap.put("/403", "anon");
         filterChainDefinitionMap.put("/404", "anon");
         filterChainDefinitionMap.put("/500", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
@@ -59,7 +60,7 @@ public class ShiroConfig {
 
 
         filterChainDefinitionMap.put("/admin**/**", "roles[jason]");
-        filterChainDefinitionMap.put("/**/del**/**","perms['del']");
+        filterChainDefinitionMap.put("/**/del**/**","perms[user:del]");
         //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截 剩余的都需要认证
         filterChainDefinitionMap.put("/**", "authc");
 
